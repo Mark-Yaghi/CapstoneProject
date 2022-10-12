@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace capstone_HRAgency.Controllers;
-
-[Authorize]
+//[Authorize(Roles = "Administrator")]
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
+    public IActionResult Index() =>
+       Content("Administrator");
+
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
