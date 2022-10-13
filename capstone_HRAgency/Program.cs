@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using capstone_HRAgency.Data;
 using capstone_HRAgency.Models;
+using IdentityModel;
+using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +20,20 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>().AddProfileService<ProfileService>();
+    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>().AddProfileService<ProfileService>(); /*(x =>
+    {
+        x.IdentityResources.Add(new IdentityResource() { Name = "roles", DisplayName = "Roles" });
+        foreach (var c in x.Clients)
+        {
+            c.AllowedScopes.Add("roles");
+        }
+        foreach (var a in x.ApiResources)
+        {
+            a.UserClaims.Add(JwtClaimTypes.Role);
+        
+    }); }*/
+
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();

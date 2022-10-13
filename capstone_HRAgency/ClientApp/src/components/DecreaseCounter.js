@@ -8,7 +8,7 @@ export class DecreaseCounter extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { currentCount: 100, isAuthenticated:false, userName:null };
+        this.state = { currentCount: 100, isAuthenticated:false, user:null, loading:false, AspNetRoles:[] };
         this.incrementCounter = this.incrementCounter.bind(this);
         this.populateUserData();
     }
@@ -20,24 +20,30 @@ export class DecreaseCounter extends Component {
     }
 
     async populateCount() {
-        const responseCount = await fetch('AspNetRoles/count');
+        const token = await authService.getAccessToken();
+        const responseCount = await fetch('decreasecounter/list', {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        console.log(responseCount);
         const dataCount = await responseCount.json();
+        console.log(dataCount);
         this.setState({ count: dataCount, loading: false });
 
     }
 
     // 5. Fetch the strings and update the state with the new data and turn off loading when the data gets back.
     async populateDealerships() {
-        const responseList = await fetch('AspNetRoles/list');
+        const responseList = await fetch('decreasecounter/list');
         const dataList = await responseList.json();
         this.setState({ AspNetRoles: dataList, loading: false });
     }
 
     async populateUserData() {
         const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
+        console.log(user);
         this.setState({
             isAuthenticated,
-            userName: user && user.name
+            user: user 
         });
 
 
@@ -47,7 +53,7 @@ export class DecreaseCounter extends Component {
 
     render() {
 
-      /*  let contents = this.state.loadingList || this.state.loadingCount
+      let contents = this.state.loading 
             ? <p><em>Loading...</em></p>
             : <ul>
                 {this.state.AspNetRoles.map(item =>
@@ -67,7 +73,7 @@ export class DecreaseCounter extends Component {
                 )
                     // When we click either the delete or update button, it passes "item" (the string in question) into the method. This allows the method to target a specific list item based on which button was clicked.
                 }
-            </ul>;*/
+            </ul>;
        
         return (
             <div>
@@ -85,14 +91,16 @@ export class DecreaseCounter extends Component {
                     this.populateCount();
                     // Start thread B.
                     // (Thread A continues)
-                    this.populateDealerships();
+                    //this.populateDealerships();
                     // Start thread C.
                     // (Thread A continues)
                 }).bind(this)
 
                 }>Display Dealership List</button>
-                <p> {this.state.userName } </p>
-                {/* {contents} */}
+
+                <p> {this.state.user === null ? "Huh?" : this.state.user.role} </p>
+
+                {contents}
             </div>
         );
     }

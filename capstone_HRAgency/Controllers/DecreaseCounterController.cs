@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using capstone_HRAgency.Models;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace capstone_HRAgency.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("[controller]")]
 
@@ -14,7 +15,7 @@ namespace capstone_HRAgency.Controllers
     public class DecreaseCounterController : ControllerBase
     {
         public IActionResult Index() =>
-        Content("Administrator");
+        Content("Admin");
 
         private readonly ApplicationDbContext _context;
         public DecreaseCounterController(ApplicationDbContext context)
@@ -24,18 +25,21 @@ namespace capstone_HRAgency.Controllers
 
         [HttpGet]
         [Route("list")]
-      //  public IEnumerable<AspNetRoles> GetRoles()
-        //{
-          //  return _context.AspNetRoles.ToString();
-       // }
-
-        [HttpGet]
-        [Route("count")]
-        public int Count()
+       public IEnumerable<IdentityRole> GetRoles()
         {
-            Console.WriteLine(_context.UserRoles.Count());
-            return _context.UserRoles.Count();
+            var roleStore = new RoleStore<IdentityRole>(_context);
+            List<IdentityRole> roles = roleStore.Roles.ToList();
+            return roles;
         }
+
+       // [HttpGet]
+       // [Route("count")]
+
+       //// public int Count()
+       // {
+        //    Console.WriteLine(_context.UserRoles.Count());
+        //    return _context.UserRoles.Count();
+        //}
 
     }
 }
