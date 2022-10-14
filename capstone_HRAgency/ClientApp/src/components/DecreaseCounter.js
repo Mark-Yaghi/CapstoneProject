@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService';
-//import { ApplicationPaths } from './ApiAuthorizationConstants';
+
 
 
 export class DecreaseCounter extends Component {
@@ -8,7 +8,7 @@ export class DecreaseCounter extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { currentCount: 100, isAuthenticated:false, user:null, loading:false, AspNetRoles:[] };
+        this.state = { currentCount: 100, isAuthenticated:false, user:null, loading:false, AspNetRoles:[], id: "", name: "", normalizedName: "", concurrencyStamp: "" };
         this.incrementCounter = this.incrementCounter.bind(this);
         this.populateUserData();
     }
@@ -19,23 +19,36 @@ export class DecreaseCounter extends Component {
         });
     }
 
-    async populateCount() {
+    async populateRoles() {
         const token = await authService.getAccessToken();
-        const responseCount = await fetch('decreasecounter/list', {
-            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        console.log(token);
+            const responseList = await fetch('decreasecounter/list', {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }//Admin
         });
-        console.log(responseCount);
-        const dataCount = await responseCount.json();
-        console.log(dataCount);
-        this.setState({ count: dataCount, loading: false });
+        console.log(responseList);
+        if (responseList.ok)
+        {
+            const dataList = await responseList.json();
+            console.log(dataList);
+            this.setState({ AspNetRoles: dataList, loading: false });
+
+        }
+        else {
+            console.log(await responseList.text());
+
+        }
+       
 
     }
 
     // 5. Fetch the strings and update the state with the new data and turn off loading when the data gets back.
-    async populateDealerships() {
-        const responseList = await fetch('decreasecounter/list');
-        const dataList = await responseList.json();
-        this.setState({ AspNetRoles: dataList, loading: false });
+    async populateCount() {
+        /*const token = await authService.getAccessToken();
+        const responseCount = await fetch('decreasecounter/count', {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }//Admin
+        });
+        const dataCount = await responseCount.json();
+        this.setState({ AspNetRoles: dataCount, loading: false });*/
     }
 
     async populateUserData() {
@@ -45,25 +58,21 @@ export class DecreaseCounter extends Component {
             isAuthenticated,
             user: user 
         });
-
-
-
     }
   
 
     render() {
 
       let contents = this.state.loading 
-            ? <p><em>Loading...</em></p>
+            ? <p><em>Hold on, it's loading...</em></p>
             : <ul>
                 {this.state.AspNetRoles.map(item =>
                     <li key={item.id}>
 
-                        <li className="flex-li"> ID Number: {item.id}</li>   <br />
-                        <li className="flex-li"> Name: {item.name}</li> <br />
-                        <li className="flex-li">NormalizedName:{item.normalizedname}</li>   <br />
-                        <li className="flex-li">Concurrency Stamp: {item.ConcurrencyStamp}</li>   <br />
-                       
+                        <li > ID Number: {item.id}</li>   <br />
+                        <li > Name: {item.name}</li> <br />
+                        <li className="flex-li">NormalizedName:{item.normalizedName}</li>   <br />
+                        <li className="flex-li">Concurrency Stamp: {item.concurrencyStamp == "" ? "No data to display. " : item.concurrencyStamp}</li>   <br />                       
 
                         <button className="btnDelete" >Delete</button>&nbsp;&nbsp;
                         <button className="btnUpdate" >Update</button>
@@ -83,24 +92,27 @@ export class DecreaseCounter extends Component {
 
                 <p aria-live="polite">Current count: <strong>{this.state.currentCount}</strong></p>
 
-                <button className="btn btn-primary" onClick={this.incrementCounter}>Decrement</button>
+                <button className="btn btn-primary" onClick={this.incrementCounter}>Decrement</button>&nbsp;&nbsp;
 
-                <button className="btnDisplay" onClick={(() => {
+                <button className="btn btn-primary" onClick={(() => {
                     // 3. When the button is clicked, set the state loading to true and begin the fetch method. Changing state triggers render to fire.
                     this.setState({ loading: true });
                     this.populateCount();
                     // Start thread B.
                     // (Thread A continues)
-                    //this.populateDealerships();
+                    this.populateRoles();
                     // Start thread C.
                     // (Thread A continues)
                 }).bind(this)
 
-                }>Display Dealership List</button>
+                }>Display Roles</button>
 
-                <p> {this.state.user === null ? "Huh?" : this.state.user.role} </p>
+                <p><br/> User Role: {this.state.user === null ? "Huh?" : this.state.user.role} </p><br />
 
-                {contents}
+                <p> This is the contents of the AspNetRoles table:   </p>
+                <br />{contents}
+
+                <p>This is the count: {this.state.AspNetRoles.length }</p>
             </div>
         );
     }

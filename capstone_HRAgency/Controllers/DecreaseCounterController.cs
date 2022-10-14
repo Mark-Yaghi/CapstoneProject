@@ -7,15 +7,15 @@ using Microsoft.AspNetCore.Identity;
 
 namespace capstone_HRAgency.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]  //(Roles = "Admin", AuthenticationSchemes = "Bearer")
     [ApiController]
     [Route("[controller]")]
 
     
     public class DecreaseCounterController : ControllerBase
     {
-        public IActionResult Index() =>
-        Content("Admin");
+       // public IActionResult Index() =>
+        //Content("Admin");
 
         private readonly ApplicationDbContext _context;
         public DecreaseCounterController(ApplicationDbContext context)
@@ -32,14 +32,14 @@ namespace capstone_HRAgency.Controllers
             return roles;
         }
 
-       // [HttpGet]
-       // [Route("count")]
+        [HttpGet]
+        [Route("count")]
 
-       //// public int Count()
-       // {
-        //    Console.WriteLine(_context.UserRoles.Count());
-        //    return _context.UserRoles.Count();
-        //}
+        public int getCount()
+        {
+            Console.WriteLine(_context.UserRoles.Count());
+            return _context.UserRoles.Count();
+        }
 
     }
 }

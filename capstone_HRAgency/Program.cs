@@ -44,7 +44,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("RequireAdministratorRole",
-         policy => policy.RequireRole("Administrator"));
+         policy => policy.RequireRole("admin"));
 });
 
 var app = builder.Build();
