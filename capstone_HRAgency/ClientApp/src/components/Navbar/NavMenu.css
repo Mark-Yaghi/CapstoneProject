@@ -6,10 +6,11 @@
 	color: white;
 }
 .navbar nav {
-	width: 1800px;
+	/* width: 1800px; */
+	width: 100%;
 	margin-inline: auto;
-	padding-inline: 1em;
-	padding-block: 2.4em;
+	padding-inline: 3em;
+	padding-block: 3.3em;
 	align-items: center;
 	justify-content: space-between;
 	gap: 1rem;
@@ -17,24 +18,28 @@
 .navbar ul {
 	display: flex;
 	list-style: none;
-	gap: 1.8rem;
+	gap: 1rem;
+}
+.navbar ul li a {
+	padding: 0.5rem;
 }
 .navbar a {
 	text-decoration: none;
 	color: white;
-	font-weight: 200;
+	font-weight: 400;
+	font-size: 16px;
 	letter-spacing: 1px;
 }
 
 .active {
-	border-bottom: 1px solid white;
+	border-bottom: 2px solid white;
 }
 .navbar .nav-link {
 	/* height: 24px; */
 	padding-block: 1em;
 	justify-content: center;
 	align-items: center;
-	gap: 2.6rem;
+	gap: 2rem;
 }
 /* 
 a.navbar-brand {

@@ -7,34 +7,29 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]capstone_HRAgency</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <title>@ViewData["Title"] - capstone_HRAgency</title>
+
     <environment include="Development">
-        @* <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.css" /> *@
-        @* <link rel="stylesheet" href="~/Identity/css/site.css" /> *@
-        @* <link rel="stylesheet" href=""../../src/components/Navbar/NavMenu.css" /> *@
-        <link rel="stylesheet" href=""../../../css/NavMenu.css" />
+        <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/Identity/css/site.css" />
     </environment>
     <environment exclude="Development">
-        @* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
               integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"
               asp-fallback-href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" /> *@
-        <link rel="stylesheet" href=""../../../css/NavMenu.css" />
-        @* <link rel="stylesheet" href="~/Identity/css/site.css" asp-append-version="true" /> *@
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/Identity/css/site.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
-        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"> *@
-    <header class="navbar">
-        <nav class="flex-center nav-container">
-            <div class="flex-center">
-                <a href="~/"><img src="../../../images/Logo.png" alt="Logo" /></a>
-                @* <a class="navbar-brand" href="~/"><img src="/images/Logo.png" alt="Logo" /></a> *@
-                @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-toggleable-sm bg-black border-bottom box-shadow mb-3">
+            <div class="container-fluid p-5">
+                <a class="navbar-brand" href="~/"><img src="../../../images/Logo.png" alt="Logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button> *@
-                <div class="">
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     @{
                         var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
                     }
@@ -61,7 +56,7 @@
     </div>
     <footer class="footer border-top pl-3 text-muted">
         <div class="container">
-            &copy; 2022 - capstone_HRAgency
+        &copy; 2022 - capstone_HRAgency
             @{
                 var foundPrivacy = Url.Page("/Privacy", new { area = "" });
             }
@@ -73,21 +68,23 @@
     </footer>
 
     <environment include="Development">
-        @* <script src="~/Identity/lib/jquery/dist/jquery.js"></script>
-            <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.js"></script> *@
+        <script src="~/Identity/lib/jquery/dist/jquery.js"></script>
+        <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script src="~/Identity/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
-        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-            asp-fallback-src="~/Identity/lib/jquery/dist/jquery.min.js"
-            asp-fallback-test="window.jQuery"
-            crossorigin="anonymous"
-            integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"></script>*@
-        @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-            asp-fallback-src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-            crossorigin="anonymous"
-            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"></script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+                asp-fallback-src="~/Identity/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj">
+        </script>
         <script src="~/Identity/js/site.js" asp-append-version="true"></script>
     </environment>
 

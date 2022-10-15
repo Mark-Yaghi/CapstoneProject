@@ -12,7 +12,7 @@
     }
 }
 
-<ul class="navbar-nav">
+<ul class="navbar-nav navbar-expand-lg">
     @if (SignInManager.IsSignedIn(User))
     {
         @* <li class="nav-item">
@@ -29,8 +29,18 @@
         @* <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@returnUrl">Register</a>
         </li> *@
+        @* <li class="nav-item">
+            <a class="nav-link text-white" href="~/">Home</a>
+        </li> *@
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Login</a>
+            <a class="nav-link text-white border-bottom border-white" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Login</a>
+        </li>
+        <li class="nav-item my-auto ">
+            <a class="navlink" href="https://ca.linkedin.com" target="_blank" >
+            <div class="container" >
+                <img src="../../../images/LinkedInLogo.png" alt="LinkedInLogo">
+            </div> 
+            </a>
         </li>
     }
 </ul>
