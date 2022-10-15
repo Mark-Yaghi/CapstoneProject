@@ -12,7 +12,7 @@
     }
 }
 
-<ul class="navbar-nav navbar-expand-lg">
+<ul class="navbar-nav me-4" style="flex-direction: row; gap: 3rem;" >
     @if (SignInManager.IsSignedIn(User))
     {
         @* <li class="nav-item">
@@ -37,9 +37,7 @@
         </li>
         <li class="nav-item my-auto ">
             <a class="navlink" href="https://ca.linkedin.com" target="_blank" >
-            <div class="container" >
-                <img src="../../../images/LinkedInLogo.png" alt="LinkedInLogo">
-            </div> 
+                <img class="d-inline-block" src="../../../images/LinkedInLogo.png" alt="LinkedInLogo">
             </a>
         </li>
     }

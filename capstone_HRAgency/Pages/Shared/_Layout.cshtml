@@ -23,13 +23,14 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-toggleable-sm bg-black border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-xxl navbar-toggleable-sm bg-black border-bottom box-shadow mb-3">
             <div class="container-fluid p-5">
                 <a class="navbar-brand" href="~/"><img src="../../../images/Logo.png" alt="Logo"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                </button> *@
+                @* <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"> *@
+                <div>
                     @{
                         var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
                     }
