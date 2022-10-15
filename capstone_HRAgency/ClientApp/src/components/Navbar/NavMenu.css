@@ -10,7 +10,7 @@
 	width: 100%;
 	margin-inline: auto;
 	padding-inline: 3em;
-	padding-block: 3.3em;
+	padding-block: 2.8em;
 	align-items: center;
 	justify-content: space-between;
 	gap: 1rem;
@@ -18,10 +18,10 @@
 .navbar ul {
 	display: flex;
 	list-style: none;
-	gap: 1rem;
+	gap: 2.5rem;
 }
 .navbar ul li a {
-	padding: 0.5rem;
+	padding-block: 0.5rem;
 }
 .navbar a {
 	text-decoration: none;

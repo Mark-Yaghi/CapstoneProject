@@ -23,8 +23,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-xxl navbar-toggleable-sm bg-black border-bottom box-shadow mb-3">
-            <div class="container-fluid p-5">
+        @* <nav class="container-fluid d-flex navbar navbar-expand-xxl navbar-toggleable-sm bg-black border-bottom box-shadow mb-3"> *@
+        <nav class="container-fluid d-flex bg-black justify-content-between align-items-center flex-wrap align-content-center mb-3 p-5">
+            @* <div class="p-5 align-content-center"> *@
                 <a class="navbar-brand" href="~/"><img src="../../../images/Logo.png" alt="Logo"></a>
                 @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -45,7 +46,7 @@
                             $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
                     }
                 </div>
-            </div>
+            @* </div> *@
         </nav>
     </header>
 
