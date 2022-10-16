@@ -8,7 +8,7 @@
             UsersInfo = new HashSet<UserInfo>();
 
         }
-        public int ID { get; set; }
+        public int CompanyID { get; set; }
         public string CompanyName { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
