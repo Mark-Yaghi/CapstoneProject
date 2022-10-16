@@ -53,7 +53,7 @@ export class DecreaseCounter extends Component {
 
     async populateUserData() {
         const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
-        console.log(user);
+        console.log(user.role);
         this.setState({
             isAuthenticated,
             user: user 

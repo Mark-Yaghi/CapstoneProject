@@ -4,14 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using capstone_HRAgency.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using System.Net.Http.Headers;
+using System.Security.Principal;
+
+
 
 namespace capstone_HRAgency.Controllers
 {
-    [Authorize]  //(Roles = "Admin", AuthenticationSchemes = "Bearer")
+    [IdentityBasicAuthentication] // Enable Basic authentication for this controller.
+   // [Authorize(Roles = "Admin")]  //(Roles = "Admin", AuthenticationSchemes = "Bearer")
     [ApiController]
     [Route("[controller]")]
 
     
+
     public class DecreaseCounterController : ControllerBase
     {
        // public IActionResult Index() =>
@@ -35,7 +41,7 @@ namespace capstone_HRAgency.Controllers
         [HttpGet]
         [Route("count")]
 
-        public int getCount()
+        public int GetCount()
         {
             Console.WriteLine(_context.UserRoles.Count());
             return _context.UserRoles.Count();
