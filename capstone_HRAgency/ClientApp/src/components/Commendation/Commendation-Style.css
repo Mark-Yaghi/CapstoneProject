@@ -1,0 +1,44 @@
+.main-container {
+	max-width: 1800px;
+	margin: 0 auto;
+	padding-inline: 1.5rem;
+	padding-block: 2rem;
+}
+
+.flex-option {
+	justify-content: space-between;
+	align-items: center;
+}
+
+.flex-xtra-option {
+	flex-wrap: wrap;
+	gap: 3rem;
+}
+
+.but-general {
+	border: none;
+	padding-inline: 3em;
+	padding-block: 1.2em;
+	border-radius: 50px;
+	letter-spacing: 1px;
+	font-size: 18px;
+}
+
+.but-col-prim {
+	background-color: #175e52;
+	transition: background-color 0.3s ease-in-out;
+}
+.but-col-prim:hover {
+	background-color: #1f7d6d;
+}
+
+button a {
+	color: white;
+}
+button a:hover {
+	color: white;
+}
+
+.bg-color-prim {
+	background-color: #eaf6f4;
+}

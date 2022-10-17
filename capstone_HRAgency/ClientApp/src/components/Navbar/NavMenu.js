@@ -33,9 +33,9 @@ export const NavMenu = () => {
 								Let's Chat
 							</NavLink>
 						</li>
-						<li>
+						{/* <li>
 							<LoginMenu></LoginMenu>
-						</li>
+						</li> */}
 					</ul>
 					<ul>
 						<li>

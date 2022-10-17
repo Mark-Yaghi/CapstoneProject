@@ -140,6 +140,7 @@ table {
 
 main {
 	flex-grow: 1;
+	/* margin-inline: 2rem; */
 }
 h1 {
 	font-size: 40px;
@@ -154,6 +155,7 @@ h3 {
 a {
 	text-decoration: none;
 }
+
 /* a {
 	color: #0366d6;
 }
