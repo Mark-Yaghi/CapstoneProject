@@ -5,7 +5,7 @@
         public Company()
         {
             Packages = new HashSet<Package>();
-            UsersInfo = new HashSet<UserInfo>();
+            UserInfos = new HashSet<UserInfo>();
         }
         public int CompanyID { get; set; }
         public string CompanyName { get; set; }
@@ -18,9 +18,9 @@
         public DateOnly EndDate { get; set; }
         public bool SubscriptionStatus { get; set; }
 
-        public virtual UserInfo UserInfo { get; set; }
+       public virtual ICollection<UserInfo>UserInfos { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
        //public List<UserInfo> UserInfos { get; set; }
-         public HashSet<UserInfo> UsersInfo { get; }
+        
     }
 }

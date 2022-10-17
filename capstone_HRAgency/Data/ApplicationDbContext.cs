@@ -18,6 +18,8 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
     }
     public virtual DbSet<Company> Companies { get; set; }
     public virtual DbSet<Package>Packages { get; set; }
+
+    public virtual DbSet<UserInfo>UserInfos { get; set; }
     public object AspNetRoles { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -42,9 +44,9 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
             entity.Property(e => e.CPFirstName).HasColumnType("char(20)").HasColumnName("CPFirstName").HasMaxLength(20);
             entity.Property(e => e.CPLastName).HasColumnType("char(20)").HasColumnName("CPLastName").HasMaxLength(20);
             entity.Property(e => e.CPEmail).HasColumnType("char(20)").HasColumnName("CPEmail").HasMaxLength(20);
-            entity.Property(e => e.StartDate).HasColumnType("DateOnly").HasColumnName("StartDate");
-            entity.Property(e => e.EndDate).HasColumnType("DateOnly").HasColumnName("EndDate");
-            entity.Property(e => e.SubscriptionStatus).HasColumnType("bool").HasColumnName("SubscriptionStatus");
+            entity.Property(e => e.StartDate).HasColumnType("date").HasColumnName("StartDate");
+            entity.Property(e => e.EndDate).HasColumnType("date").HasColumnName("EndDate");
+            entity.Property(e => e.SubscriptionStatus).HasColumnType("int(1)").HasColumnName("SubscriptionStatus");
             entity.HasData(new Company[]
             {
                 new Company(){CompanyID = 1, CompanyName= "The HR Agency", Address = "12345-145 street, Edmonton, Ab, T5X6V8", Phone="7809848855", CPFirstName ="Carol", CPLastName="Clinton", CPEmail= "bClinton@arkansas.com", StartDate=DateOnly.Parse("2022-10-01"), EndDate=DateOnly.Parse("2023-10-01"), SubscriptionStatus = true},
@@ -72,7 +74,7 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
             // entity.HasOne(userinfo => userinfo.Company).WithOne(Company => Company.UserInfo).HasForeignKey(UserInfo => UserInfo.CompanyID).OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_UserInfo_Company");
             // entity.HasOne(userinfo => userinfo.Company).WithOne(Company => Company.UserInfo).HasForeignKey<Company>(UserInfo => UserInfo.CompanyID).OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_UserInfo_Company");//
             entity.HasOne(a => a.Company)
-                  .WithMany(Company => Company.UsersInfo )
+                  .WithMany(Company => Company.UserInfos )
                   .HasForeignKey (UserInfo => UserInfo.CompanyID)
                   .HasConstraintName("FK_UserInfo_Company")
                   .OnDelete(DeleteBehavior.Restrict);

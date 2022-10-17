@@ -11,15 +11,18 @@ using capstone_HRAgency.Data;
 namespace capstone_HRAgency.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221012225458_initialMigration")]
-    partial class initialMigration
+    [Migration("20221017162535_secondMigration")]
+    partial class secondMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .UseCollation("utf8mb4_general_ci")
                 .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb4");
 
             modelBuilder.Entity("capstone_HRAgency.Models.ApplicationUser", b =>
                 {
@@ -83,6 +86,243 @@ namespace capstone_HRAgency.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("capstone_HRAgency.Models.Company", b =>
+                {
+                    b.Property<int>("CompanyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int(11)")
+                        .HasColumnName("CompanyID");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("char(50)")
+                        .HasColumnName("Address");
+
+                    b.Property<string>("CPEmail")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("char(20)")
+                        .HasColumnName("CPEmail");
+
+                    b.Property<string>("CPFirstName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("char(20)")
+                        .HasColumnName("CPFirstName");
+
+                    b.Property<string>("CPLastName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("char(20)")
+                        .HasColumnName("CPLastName");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("char(30)")
+                        .HasColumnName("CompanyName");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date")
+                        .HasColumnName("EndDate");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("char(10)")
+                        .HasColumnName("Phone");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date")
+                        .HasColumnName("StartDate");
+
+                    b.Property<int>("SubscriptionStatus")
+                        .HasColumnType("int(1)")
+                        .HasColumnName("SubscriptionStatus");
+
+                    b.HasKey("CompanyID");
+
+                    b.ToTable("company", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CompanyID = 1,
+                            Address = "12345-145 street, Edmonton, Ab, T5X6V8",
+                            CPEmail = "bClinton@arkansas.com",
+                            CPFirstName = "Carol",
+                            CPLastName = "Clinton",
+                            CompanyName = "The HR Agency",
+                            EndDate = new DateOnly(2023, 10, 1),
+                            Phone = "7809848855",
+                            StartDate = new DateOnly(2022, 10, 1),
+                            SubscriptionStatus = 1
+                        },
+                        new
+                        {
+                            CompanyID = 2,
+                            Address = "14545-173 street, Edmonton, Ab, T5X6V8",
+                            CPEmail = "jdoe@anonymous.com",
+                            CPFirstName = "John",
+                            CPLastName = "Doe",
+                            CompanyName = "Zellers, Inc.",
+                            EndDate = new DateOnly(2023, 9, 1),
+                            Phone = "8255872233",
+                            StartDate = new DateOnly(2021, 9, 1),
+                            SubscriptionStatus = 1
+                        },
+                        new
+                        {
+                            CompanyID = 3,
+                            Address = "145 Fir Street, Detroit, Mi, 90251",
+                            CPEmail = "fsmith@gm.com",
+                            CPFirstName = "Frank",
+                            CPLastName = "Smith",
+                            CompanyName = "General Motors, Inc.",
+                            EndDate = new DateOnly(2023, 10, 1),
+                            Phone = "7809841155",
+                            StartDate = new DateOnly(2022, 10, 1),
+                            SubscriptionStatus = 1
+                        },
+                        new
+                        {
+                            CompanyID = 4,
+                            Address = "800 Ford Street,Dearborn, MI, 95874",
+                            CPEmail = "hFord@ford.com",
+                            CPFirstName = "Henry",
+                            CPLastName = "Ford",
+                            CompanyName = "Ford, Inc.",
+                            EndDate = new DateOnly(2022, 10, 1),
+                            Phone = "15558792225",
+                            StartDate = new DateOnly(2019, 2, 1),
+                            SubscriptionStatus = 0
+                        },
+                        new
+                        {
+                            CompanyID = 5,
+                            Address = "8524-99 street, Edmonton, Ab, T6X7Y3",
+                            CPEmail = "frankF@ffe.com",
+                            CPFirstName = "Joe",
+                            CPLastName = "Rogan",
+                            CompanyName = "Frank's Food Emporium",
+                            EndDate = new DateOnly(2022, 10, 1),
+                            Phone = "4032454875",
+                            StartDate = new DateOnly(2021, 10, 1),
+                            SubscriptionStatus = 0
+                        });
+                });
+
+            modelBuilder.Entity("capstone_HRAgency.Models.Package", b =>
+                {
+                    b.Property<int>("PackageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int(11)")
+                        .HasColumnName("PackageID");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int(11)")
+                        .HasColumnName("CompanyID");
+
+                    b.Property<string>("PackageName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("PackageName");
+
+                    b.HasKey("PackageID");
+
+                    b.HasIndex(new[] { "CompanyID" }, "FK_Model_Company");
+
+                    b.ToTable("package", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            PackageID = 1,
+                            CompanyID = 2,
+                            PackageName = "Micro Company"
+                        },
+                        new
+                        {
+                            PackageID = 2,
+                            CompanyID = 3,
+                            PackageName = "Small Company"
+                        },
+                        new
+                        {
+                            PackageID = 3,
+                            CompanyID = 4,
+                            PackageName = "Medium Company"
+                        },
+                        new
+                        {
+                            PackageID = 4,
+                            CompanyID = 5,
+                            PackageName = "Large Company"
+                        },
+                        new
+                        {
+                            PackageID = 5,
+                            CompanyID = 6,
+                            PackageName = "Small Company"
+                        });
+                });
+
+            modelBuilder.Entity("capstone_HRAgency.Models.UserInfo", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int(11)")
+                        .HasColumnName("UserID");
+
+                    b.Property<int>("CompanyID")
+                        .HasColumnType("int(11)")
+                        .HasColumnName("CompanyID");
+
+                    b.Property<int>("PermissionLevel")
+                        .HasColumnType("int(1)")
+                        .HasColumnName("PermissionLevel");
+
+                    b.HasKey("UserID");
+
+                    b.HasIndex(new[] { "CompanyID" }, "FK_UserInfo_Company");
+
+                    b.ToTable("userinfo", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            CompanyID = 1,
+                            PermissionLevel = 1
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            CompanyID = 2,
+                            PermissionLevel = 2
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            CompanyID = 3,
+                            PermissionLevel = 2
+                        },
+                        new
+                        {
+                            UserID = 4,
+                            CompanyID = 4,
+                            PermissionLevel = 2
+                        },
+                        new
+                        {
+                            UserID = 5,
+                            CompanyID = 5,
+                            PermissionLevel = 2
+                        });
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -358,6 +598,29 @@ namespace capstone_HRAgency.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("capstone_HRAgency.Models.Package", b =>
+                {
+                    b.HasOne("capstone_HRAgency.Models.Company", "Company")
+                        .WithMany("Packages")
+                        .HasForeignKey("PackageID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("capstone_HRAgency.Models.UserInfo", b =>
+                {
+                    b.HasOne("capstone_HRAgency.Models.Company", "Company")
+                        .WithMany("UserInfos")
+                        .HasForeignKey("CompanyID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_UserInfo_Company");
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -407,6 +670,13 @@ namespace capstone_HRAgency.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("capstone_HRAgency.Models.Company", b =>
+                {
+                    b.Navigation("Packages");
+
+                    b.Navigation("UserInfos");
                 });
 #pragma warning restore 612, 618
         }

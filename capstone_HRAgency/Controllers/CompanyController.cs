@@ -119,7 +119,64 @@ namespace capstone_HRAgency.Controllers
             }
 
         }
+       // [HttpPut]
+       // public ActionResult Put(int id)
+       // {
 
+
+       // }
+        
+        
+        
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            int tempID;
+            Company found;
+            try
+            {
+                tempID = id;
+            }
+            catch
+            {
+                return BadRequest("No Company ID number was provided. Please provide a Company ID number.");
+            }
+
+            try
+            {
+                found = _context.Companies.Where(x => x.CompanyID == tempID).Single();
+            }
+
+            catch
+            {
+                return NotFound("Sorry, that Company ID wasn't found in the database.");
+            }
+
+            try
+            {
+                int childRec = _context.UserInfos.Where(x => x.CompanyID == tempID).Count();
+                //check to see if there is/are associated record(s) in the vehicle table..
+
+                if (childRec == 0)
+                {
+                    _context.Companies.Remove(found);         // no child records, then delete.
+                    _context.SaveChanges();
+                    return Ok("The record was deleted successfully.");
+                }
+
+                else
+                {
+                    return BadRequest("Sorry, there appears to be some associated records in the Vehicle Table. Once those are deleted, the model ID you identified can be safely deleted.");
+                }
+            }
+
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+            
+        
         public bool IsValid(string emailaddress)
         {
             try
