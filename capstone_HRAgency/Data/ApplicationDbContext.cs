@@ -38,7 +38,7 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
             entity.Property(e => e.CompanyID).HasColumnType("int(11)").HasColumnName("CompanyID").ValueGeneratedOnAdd();
             entity.Property(e => e.CompanyName).HasColumnType("char(30)").HasColumnName("CompanyName").HasMaxLength(30);
             entity.Property(e => e.Address).HasColumnType("char(50)").HasColumnName("Address").HasMaxLength(50);
-            entity.Property(e => e.Phone).HasColumnType("char(13)").HasColumnName("Phone").HasMaxLength(13);
+            entity.Property(e => e.Phone).HasColumnType("char(10)").HasColumnName("Phone").HasMaxLength(10);
             entity.Property(e => e.CPFirstName).HasColumnType("char(20)").HasColumnName("CPFirstName").HasMaxLength(20);
             entity.Property(e => e.CPLastName).HasColumnType("char(20)").HasColumnName("CPLastName").HasMaxLength(20);
             entity.Property(e => e.CPEmail).HasColumnType("char(20)").HasColumnName("CPEmail").HasMaxLength(20);
@@ -65,11 +65,18 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
         {
             entity.HasKey(e => e.UserID);
             entity.ToTable("userinfo");
-            entity.HasIndex(e => e.CompanyID, "FK_UserInfo_Company");
+            entity.HasIndex(e => e.CompanyID , "FK_UserInfo_Company");
             entity.Property(e => e.UserID).HasColumnType("int(11)").HasColumnName("UserID").ValueGeneratedOnAdd();
             entity.Property(e => e.CompanyID).HasColumnType("int(11)").HasColumnName("CompanyID");           
             entity.Property(e => e.PermissionLevel).HasColumnType("int(1)").HasColumnName("PermissionLevel");
-            entity.HasOne(userinfo => userinfo.Company).WithOne(Company => Company.UserInfo).HasForeignKey(UserInfo => UserInfo.CompanyID).OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_UserInfo_Company");
+            // entity.HasOne(userinfo => userinfo.Company).WithOne(Company => Company.UserInfo).HasForeignKey(UserInfo => UserInfo.CompanyID).OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_UserInfo_Company");
+            // entity.HasOne(userinfo => userinfo.Company).WithOne(Company => Company.UserInfo).HasForeignKey<Company>(UserInfo => UserInfo.CompanyID).OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_UserInfo_Company");//
+            entity.HasOne(a => a.Company)
+                  .WithMany(Company => Company.UsersInfo )
+                  .HasForeignKey (UserInfo => UserInfo.CompanyID)
+                  .HasConstraintName("FK_UserInfo_Company")
+                  .OnDelete(DeleteBehavior.Restrict);
+
             entity.HasData(new UserInfo[]
            {
                 new UserInfo() {UserID = 1, CompanyID=1,  PermissionLevel=1 },
