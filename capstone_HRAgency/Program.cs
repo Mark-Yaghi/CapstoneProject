@@ -7,6 +7,7 @@ using capstone_HRAgency.Models;
 using IdentityModel;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,21 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
-    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>().AddProfileService<ProfileService>(); /*(x =>
+    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>().AddProfileService<ProfileService>();
+
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy("Policy1", builder => 
+    {
+        builder.WithOrigins("http://localhost:3000")
+        .WithMethods("POST", "GET", "PUT", "DELETE")
+        .WithHeaders(HeaderNames.ContentType);
+    });
+
+});
+
+
+/*(x =>
     {
         x.IdentityResources.Add(new IdentityResource() { Name = "roles", DisplayName = "Roles" });
         foreach (var c in x.Clients)
@@ -53,11 +68,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    app.UseCors("Policy1");
 }
 
 app.UseHttpsRedirection();
