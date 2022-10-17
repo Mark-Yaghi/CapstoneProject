@@ -4,8 +4,9 @@
 .navbar {
 	background-color: black;
 	color: white;
+	width: 100vw;
 }
-.navbar nav {
+.navbar .nav-container {
 	/* width: 1800px; */
 	width: 100%;
 	margin-inline: auto;

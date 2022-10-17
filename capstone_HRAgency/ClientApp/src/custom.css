@@ -131,6 +131,29 @@ table {
 	font-family: "Source Sans Pro", sans-serif;
 	font-size: 18px;
 }
+
+.body-flex {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+main {
+	flex-grow: 1;
+}
+h1 {
+	font-size: 40px;
+}
+h2 {
+	font-size: 32px;
+}
+h3 {
+	font-size: 28px;
+}
+
+a {
+	text-decoration: none;
+}
 /* a {
 	color: #0366d6;
 }

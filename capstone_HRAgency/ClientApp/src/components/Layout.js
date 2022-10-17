@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+// import { Container } from "reactstrap";
+import Footer from "./Footer/Footer";
+import "../custom.css";
 import { NavMenu } from "./Navbar/NavMenu";
 
 export class Layout extends Component {
@@ -7,9 +9,10 @@ export class Layout extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="body-flex">
 				<NavMenu />
-				<Container>{this.props.children}</Container>
+				<main>{this.props.children}</main>
+				<Footer />
 			</div>
 		);
 	}
