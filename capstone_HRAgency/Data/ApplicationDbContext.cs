@@ -87,9 +87,6 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
                 new UserInfo() {UserID = 4, CompanyID=4,  PermissionLevel=2 },
                 new UserInfo() {UserID = 5, CompanyID=5,  PermissionLevel=2 },
            });
-
-
-            // entity.HasOne(model => model.VehicleManufacturer).WithMany(manufacturer => manufacturer.VehicleModels).HasForeignKey(model => model.ManufacturerID)
             //     .OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_Model_Manufacturer");
 
         });

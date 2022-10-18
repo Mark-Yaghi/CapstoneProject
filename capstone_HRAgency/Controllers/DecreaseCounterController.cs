@@ -8,14 +8,12 @@ using System.Net.Http.Headers;
 using System.Security.Principal;
 
 
-
 namespace capstone_HRAgency.Controllers
 {
     [IdentityBasicAuthentication] // Enable Basic authentication for this controller.
    // [Authorize(Roles = "Admin")]  //(Roles = "Admin", AuthenticationSchemes = "Bearer")
     [ApiController]
     [Route("[controller]")]
-
     
 
     public class DecreaseCounterController : ControllerBase
