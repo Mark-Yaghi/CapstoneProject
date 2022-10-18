@@ -12,6 +12,7 @@
 
 .flex-xtra-option {
 	flex-wrap: wrap;
+	justify-content: space-evenly;
 	gap: 3rem;
 }
 
@@ -41,4 +42,25 @@ button a:hover {
 
 .bg-color-prim {
 	background-color: #eaf6f4;
+}
+.heading-card {
+	color: #d21f3c;
+	font-weight: 300;
+}
+.img-container {
+	max-width: 1200px;
+	margin: 8rem auto;
+}
+.position-declare {
+	position: relative;
+}
+.position-center-align {
+	position: absolute;
+	border: 1px solid black;
+	padding-inline: 2em;
+	padding-block: 1em;
+	background-color: rgba(255, 210, 210, 0.8);
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }

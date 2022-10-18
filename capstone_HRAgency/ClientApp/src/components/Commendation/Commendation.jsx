@@ -13,9 +13,8 @@ const Commendation = () => {
 					<LoginMenu></LoginMenu>
 				</button>
 			</section>
-			<section className="bg-color-prim">
-				<CardSelect />
-			</section>
+
+			<CardSelect />
 		</>
 	);
 };
