@@ -71,7 +71,7 @@ export class Company extends Component
                 <p>This is a simple example of a React component.</p>
                
 
-                <p aria-live="polite">Current count: <strong>{this.state.currentCount}</strong></p>
+                <p aria-live="polite">Current count: <strong>{this.state.Companies.length}</strong></p>
 
                 <button className="btn btn-primary" >Decrement</button>&nbsp;&nbsp;
 
@@ -86,8 +86,9 @@ export class Company extends Component
                     // (Thread A continues)
                 }).bind(this)
 
-                }>Display Roles</button><br />
-                 {contents}
+                }>Display Companies</button><br />
+                {contents}
+                <p>There are currently {this.state.Companies.length} companies in the database. </p>
             </div>
 
 

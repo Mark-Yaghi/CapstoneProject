@@ -46,8 +46,8 @@ namespace capstone_HRAgency.Controllers
 
         public int GetCount()
         {
-            Console.WriteLine(_context.UserRoles.Count());
-            return _context.UserRoles.Count();
+            Console.WriteLine(_context.Companies.Count());
+            return _context.Companies.Count();
 
         }
 
