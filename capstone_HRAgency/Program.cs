@@ -7,6 +7,11 @@ using capstone_HRAgency.Models;
 using IdentityModel;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
+using Microsoft.AspNetCore.Http.Json;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using capstone_HRAgency.Controllers;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +37,12 @@ builder.Services.AddIdentityServer()
             a.UserClaims.Add(JwtClaimTypes.Role);
         
     }); }*/
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+    });
+
 
 builder.Services.AddScoped<IProfileService, ProfileService>();
 

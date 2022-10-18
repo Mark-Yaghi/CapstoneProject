@@ -59,7 +59,6 @@ export class DecreaseCounter extends Component {
             user: user 
         });
     }
-  
 
     render() {
 
@@ -69,10 +68,10 @@ export class DecreaseCounter extends Component {
                 {this.state.AspNetRoles.map(item =>
                     <li key={item.id}>
 
-                        <li > ID Number: {item.id}</li>   <br />
-                        <li > Name: {item.name}</li> <br />
+                        <li className="flex-li"> ID Number: {item.id}</li>   <br />
+                        <li className="flex-li"> Name: {item.name}</li> <br />
                         <li className="flex-li">NormalizedName:{item.normalizedName}</li>   <br />
-                        <li className="flex-li">Concurrency Stamp: {item.concurrencyStamp == "" ? "No data to display. " : item.concurrencyStamp}</li>   <br />                       
+                        <li className="flex-li">Concurrency Stamp: {item.concurrencyStamp === "" ? "No data to display. " : item.concurrencyStamp}</li>   <br />                       
 
                         <button className="btnDelete" >Delete</button>&nbsp;&nbsp;
                         <button className="btnUpdate" >Update</button>
@@ -107,7 +106,7 @@ export class DecreaseCounter extends Component {
 
                 }>Display Roles</button>
 
-                <p><br/> User Role: {this.state.user === null ? "Huh?" : this.state.user.role} </p><br />
+                <p><br/> User Role: {this.state.user === null ? "No User Role To Display." : this.state.user.role} </p><br />
 
                 <p> This is the contents of the AspNetRoles table:   </p>
                 <br />{contents}
