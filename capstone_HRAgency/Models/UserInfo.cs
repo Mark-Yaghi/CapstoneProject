@@ -1,4 +1,4 @@
-﻿namespace capstone_HRAgency.Models
+namespace capstone_HRAgency.Models
 {
     public class UserInfo
     {

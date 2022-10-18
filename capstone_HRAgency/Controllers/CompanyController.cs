@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using capstone_HRAgency.Data;
 using capstone_HRAgency.Models;
 using Microsoft.AspNetCore.Authorization;

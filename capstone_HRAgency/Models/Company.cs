@@ -1,4 +1,4 @@
-﻿using capstone_HRAgency.Controllers;
+using capstone_HRAgency.Controllers;
 using System.Text.Json.Serialization;
 
 namespace capstone_HRAgency.Models

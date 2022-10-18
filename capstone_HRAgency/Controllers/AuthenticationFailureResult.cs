@@ -1,4 +1,4 @@
-﻿namespace capstone_HRAgency.Controllers
+namespace capstone_HRAgency.Controllers
 {
     internal class AuthenticationFailureResult
     {
