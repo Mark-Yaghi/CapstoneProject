@@ -3,6 +3,7 @@ import { LoginMenu } from "../api-authorization/LoginMenu";
 import CardSelect from "./CardSelect";
 
 import "./Commendation-Style.css";
+import { CommendationForm } from "./CommendationForm";
 
 const Commendation = () => {
 	return (
@@ -13,8 +14,10 @@ const Commendation = () => {
 					<LoginMenu></LoginMenu>
 				</button>
 			</section>
-
-			<CardSelect />
+			<section className="bg-color-prim">
+				<CardSelect />
+			</section>
+			<CommendationForm />
 		</>
 	);
 };
