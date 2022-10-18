@@ -14,17 +14,7 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
     public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
         : base(options, operationalStoreOptions)
     {
-    }
 
-    public virtual DbSet<Company> Companies { get; set; }
-    public virtual DbSet<Package> Packages { get; set; }
-    public object AspNetRoles { get; internal set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseMySql("server=localhost;user=root;database=HR_Agency_Demo",
-                ServerVersion.Parse("10.4.24-mariadb"));
     }
     public virtual DbSet<Company> Companies { get; set; }
     public virtual DbSet<Package>Packages { get; set; }
@@ -123,8 +113,5 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
         });
         OnModelCreatingPartial(modelBuilder);
     }
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-}
-
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
