@@ -44,16 +44,17 @@ footer a:hover {
 	top: 50%;
 	transform: translateY(-50%);
 }
-.input-holder input {
+.input-holder .input-footer {
 	padding: 0.8rem;
 	padding-inline-start: 3rem;
 	width: 100%;
 	background-color: rgb(0, 0, 0);
-	color: white;
 	border: white 1px solid;
 }
-
-.input-holder input:focus {
+.input-footer::placeholder {
+	color: rgba(250, 250, 250, 0.5);
+}
+.input-holder .input-footer:focus {
 	outline: 2px solid white;
 	outline-offset: 6px;
 }

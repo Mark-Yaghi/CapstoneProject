@@ -16,7 +16,7 @@ const Footer = () => {
 				<div className="input-holder">
 					{/* <img className="footer-search-icon" src="./images/Search_Icon.png" alt="Search Icon" /> */}
 					<FaSearch className="footer-search-icon" />
-					<input type="text" placeholder="Search" />
+					<input className="input-footer" type="text" placeholder="Search" />
 				</div>
 
 				<div className="footer-small">
