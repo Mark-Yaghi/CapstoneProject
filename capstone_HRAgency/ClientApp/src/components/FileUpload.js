@@ -17,7 +17,7 @@ export const FileUpload = () => {
         formData.append("formFile", file);
         formData.append("fileName", fileName);
         try {
-            const res = await axios.post("http://localhost:44323/api/file", formData);
+            const res = await axios.post("api/file", formData);
             console.log(res);
         } catch (ex) {
             console.log(ex);
