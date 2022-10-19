@@ -11,10 +11,7 @@ const AppRoutes = [
     index: true,
     element: <Home />
   },
-  {
-    path: '/counter',
-    element: <Counter />
-  },
+  
   {
     path: '/fetch-data',
     requireAuth: true,
@@ -26,7 +23,7 @@ const AppRoutes = [
         element: <DecreaseCounter />
     },
     {
-        path: '/company',
+        path: '/companyinfo',
         requireAuth: true,
         element: <Company />
     },
