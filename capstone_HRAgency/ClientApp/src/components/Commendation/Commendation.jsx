@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { LoginMenu } from "../api-authorization/LoginMenu";
-import { Link, NavLink } from "react-router-dom";
-import authService from "../api-authorization/AuthorizeService";
+import { NavLink } from "react-router-dom";
+// import authService from "../api-authorization/AuthorizeService";
 import CardSelect from "./CardSelect";
 
 import "./Commendation-Style.css";
 import { CommendationForm } from "./CommendationForm";
 
 const Commendation = () => {
-	const [userInfo, setUserInfo] = useState(null);
+	const [userSelImg, setUserSelImg] = useState({ id: "", image: "" });
+	// const [userInfo, setUserInfo] = useState({ userName: "" });
 
-	console.log(authService.isAuthenticated());
-	useEffect(() => {
-		const userInfomation = async () => {
-			const user = await Promise(authService.getUser());
-			setUserInfo(user);
-		};
-	});
+	// console.log(authService.isAuthenticated());
+	// useEffect(() => {
+	// 	const userInfomation = async () => {
+	// 		const user = await Promise.all(authService.getUser());
+	// 		setUserInfo((prev) => ({ ...prev, userName: user && user.name }));
+	// 	};
+	// 	userInfomation();
+	// });
+	const imageSelectInfo = (selectedImage) => {
+		const { id, image } = selectedImage;
+		setUserSelImg((prev) => ({ ...prev, id, image }));
+	};
+
+	const formValues = (inputValues) => {
+		console.log(inputValues);
+	};
 
 	return (
 		<>
 			<section className="main-container flex-center flex-option">
-				<h3>Welcome, {}</h3>
+				<h3>Welcome, userName</h3>
 				<div className="flex-center">
 					<NavLink className="but-general but-col-prim" to="/authentication/register">
 						Register
@@ -32,9 +42,9 @@ const Commendation = () => {
 				</div>
 			</section>
 			<section className="bg-color-prim">
-				<CardSelect />
+				<CardSelect onSelectImage={imageSelectInfo} />
 			</section>
-			<CommendationForm />
+			<CommendationForm onFormInformation={formValues} userImage={userSelImg} />
 		</>
 	);
 };
