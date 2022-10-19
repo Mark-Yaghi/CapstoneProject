@@ -14,7 +14,7 @@ const context =  [
   "/_framework",
   "/decreasecounter",
   "/api/file",
-  "/company/list"
+  "/company"
 ];
 
 module.exports = function(app) {
