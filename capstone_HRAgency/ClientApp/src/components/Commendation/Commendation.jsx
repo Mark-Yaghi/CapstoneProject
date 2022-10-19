@@ -36,6 +36,9 @@ const Commendation = () => {
 					<NavLink className="but-general but-col-prim" to="/authentication/register">
 						Register
 					</NavLink>
+					{/* <NavLink className="but-general but-col-prim" to="/authentication/login">
+						Login
+					</NavLink> */}
 					<button className="but-general but-col-prim marg-left">
 						<LoginMenu></LoginMenu>
 					</button>
