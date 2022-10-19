@@ -20,7 +20,6 @@ namespace capstone_HRAgency.Controllers
     [Route("[controller]")]
 
     public class CompanyController : ControllerBase
-
     {
         private readonly ApplicationDbContext _context;
 
@@ -122,7 +121,6 @@ namespace capstone_HRAgency.Controllers
                     return Ok("The new company was successfully added to the database.");
 
                 }
-
             }
             catch
             {
@@ -194,7 +192,6 @@ namespace capstone_HRAgency.Controllers
                         });
                         _context.SaveChanges();
                         return Ok("The new company was successfully updated in the database.");
-
                     }
 
                 }
@@ -244,7 +241,7 @@ namespace capstone_HRAgency.Controllers
 
                 else
                 {
-                    return BadRequest("Sorry, there appears to be some associated records in the Vehicle Table. Once those are deleted, the model ID you identified can be safely deleted.");
+                    return BadRequest("Sorry, there appears to be some associated records in the UserInfo Table. Once those are deleted, the model ID you identified can be safely deleted.");
                 }
             }
 
@@ -267,7 +264,6 @@ namespace capstone_HRAgency.Controllers
             {
                 return false;
             }
-        }
-       
+        }       
     }
 }

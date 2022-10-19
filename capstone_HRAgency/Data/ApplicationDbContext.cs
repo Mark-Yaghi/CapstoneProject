@@ -38,12 +38,12 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
             entity.ToTable("company");
 
             entity.Property(e => e.CompanyID).HasColumnType("int(11)").HasColumnName("CompanyID").ValueGeneratedOnAdd();
-            entity.Property(e => e.CompanyName).HasColumnType("char(30)").HasColumnName("CompanyName").HasMaxLength(30);
-            entity.Property(e => e.Address).HasColumnType("char(50)").HasColumnName("Address").HasMaxLength(50);
+            entity.Property(e => e.CompanyName).HasColumnType("varchar(30)").HasColumnName("CompanyName").HasMaxLength(30);
+            entity.Property(e => e.Address).HasColumnType("varchar(50)").HasColumnName("Address").HasMaxLength(50);
             entity.Property(e => e.Phone).HasColumnType("char(10)").HasColumnName("Phone").HasMaxLength(10);
-            entity.Property(e => e.CPFirstName).HasColumnType("char(20)").HasColumnName("CPFirstName").HasMaxLength(20);
-            entity.Property(e => e.CPLastName).HasColumnType("char(20)").HasColumnName("CPLastName").HasMaxLength(20);
-            entity.Property(e => e.CPEmail).HasColumnType("char(20)").HasColumnName("CPEmail").HasMaxLength(20);
+            entity.Property(e => e.CPFirstName).HasColumnType("varchar(20)").HasColumnName("CPFirstName").HasMaxLength(20);
+            entity.Property(e => e.CPLastName).HasColumnType("varchar(20)").HasColumnName("CPLastName").HasMaxLength(20);
+            entity.Property(e => e.CPEmail).HasColumnType("varchar(40)").HasColumnName("CPEmail").HasMaxLength(40);
             entity.Property(e => e.StartDate).HasColumnType("date").HasColumnName("StartDate");
             entity.Property(e => e.EndDate).HasColumnType("date").HasColumnName("EndDate");
             entity.Property(e => e.SubscriptionStatus).HasColumnType("int(1)").HasColumnName("SubscriptionStatus");

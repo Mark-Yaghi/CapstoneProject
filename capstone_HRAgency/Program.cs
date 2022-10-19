@@ -39,19 +39,11 @@ builder.Services.AddCors(options =>
 
 });
 
+builder.Services
+    .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
+    .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
 
-/*(x =>
-    {
-        x.IdentityResources.Add(new IdentityResource() { Name = "roles", DisplayName = "Roles" });
-        foreach (var c in x.Clients)
-        {
-            c.AllowedScopes.Add("roles");
-        }
-        foreach (var a in x.ApiResources)
-        {
-            a.UserClaims.Add(JwtClaimTypes.Role);
-        
-    }); }*/
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
