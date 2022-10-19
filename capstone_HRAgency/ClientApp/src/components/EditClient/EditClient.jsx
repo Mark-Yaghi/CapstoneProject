@@ -1,10 +1,9 @@
 import React from "react";
 import { LoginMenu } from "../api-authorization/LoginMenu";
-import CardSelect from "./CardSelect";
-import "./Commendation-Style.css";
-import { CommendationForm } from "./CommendationForm";
+import "./EditClient-Style.css";
+import { EditClientForm } from "./EditClientForm";
 
-const Commendation = () => {
+const EditClient = () => {
 	return (
 		<>
 			<section className="main-container flex-center flex-option">
@@ -13,12 +12,9 @@ const Commendation = () => {
 					<LoginMenu></LoginMenu>
 				</button>
 			</section>
-			<section className="bg-color-prim">
-				<CardSelect />
-			</section>
-			<CommendationForm />
+			<EditClientForm />
 		</>
 	);
 };
 
-export default Commendation;
+export default EditClient;

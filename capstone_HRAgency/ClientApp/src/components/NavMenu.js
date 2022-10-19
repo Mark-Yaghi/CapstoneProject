@@ -1,3 +1,4 @@
+/// <reference path="fetchdata.js" />
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -47,6 +48,12 @@ export class NavMenu extends Component {
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/fileupload">FileUpload</NavLink>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/fileupload">FileUpload</NavLink>
+              </NavItem>
               </NavItem>
               <LoginMenu>
               </LoginMenu>
