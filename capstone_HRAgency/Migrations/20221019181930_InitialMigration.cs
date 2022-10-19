@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace capstone_HRAgency.Migrations
 {
-    public partial class Init : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -75,17 +75,17 @@ namespace capstone_HRAgency.Migrations
                 {
                     CompanyID = table.Column<int>(type: "int(11)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CompanyName = table.Column<string>(type: "char(30)", maxLength: 30, nullable: false, collation: "utf8mb4_general_ci")
+                    CompanyName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Address = table.Column<string>(type: "char(50)", maxLength: 50, nullable: false, collation: "utf8mb4_general_ci")
+                    Address = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "char(10)", maxLength: 10, nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CPFirstName = table.Column<string>(type: "char(20)", maxLength: 20, nullable: false, collation: "utf8mb4_general_ci")
+                    CPFirstName = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CPLastName = table.Column<string>(type: "char(20)", maxLength: 20, nullable: false, collation: "utf8mb4_general_ci")
+                    CPLastName = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CPEmail = table.Column<string>(type: "char(20)", maxLength: 20, nullable: false, collation: "utf8mb4_general_ci")
+                    CPEmail = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     StartDate = table.Column<DateOnly>(type: "date", nullable: false),
                     EndDate = table.Column<DateOnly>(type: "date", nullable: false),

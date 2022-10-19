@@ -1,7 +1,4 @@
-import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
-
 import ApiAuthorzationRoutes from "./components/api-authorization/ApiAuthorizationRoutes";
-import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { DecreaseCounter } from "./components/DecreaseCounter";
@@ -35,7 +32,6 @@ const AppRoutes = [
         requireAuth: true,
         element: <FileUpload />
     },
-  ...ApiAuthorzationRoutes
 	{
 		index: true,
 		element: <Home />,
@@ -43,16 +39,6 @@ const AppRoutes = [
 	{
 		path: "/expert-solution",
 		element: <ExpertSolution />,
-	},
-	{
-		path: "/fetch-data",
-		requireAuth: true,
-		element: <FetchData />,
-	},
-	{
-		path: "/decreasecounter",
-		requireAuth: true,
-		element: <DecreaseCounter />,
 	},
 	{
 		path: "/company",

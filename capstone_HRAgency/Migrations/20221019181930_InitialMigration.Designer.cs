@@ -11,8 +11,8 @@ using capstone_HRAgency.Data;
 namespace capstone_HRAgency.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221018230929_Init")]
-    partial class Init
+    [Migration("20221019181930_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,31 +98,31 @@ namespace capstone_HRAgency.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("char(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("Address");
 
                     b.Property<string>("CPEmail")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("char(20)")
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
                         .HasColumnName("CPEmail");
 
                     b.Property<string>("CPFirstName")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("char(20)")
+                        .HasColumnType("varchar(20)")
                         .HasColumnName("CPFirstName");
 
                     b.Property<string>("CPLastName")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("char(20)")
+                        .HasColumnType("varchar(20)")
                         .HasColumnName("CPLastName");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("char(30)")
+                        .HasColumnType("varchar(30)")
                         .HasColumnName("CompanyName");
 
                     b.Property<DateOnly>("EndDate")
