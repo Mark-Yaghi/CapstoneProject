@@ -27,6 +27,9 @@ export const NavMenu = () => {
 						<li>
 							<NavLink to="/fileupload">File Upload</NavLink>
 						</li>
+						<li>
+							<NavLink to="/companyinfo">Company Info</NavLink>
+						</li>
 						{/* <li>
 							<LoginMenu></LoginMenu>
 						</li> */}
