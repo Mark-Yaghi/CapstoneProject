@@ -6,8 +6,6 @@ import authService from './api-authorization/AuthorizeService';
 
 export class Company extends Component
 {
-    
-
     static displayName = Company.name;
 
     constructor(props) {
@@ -84,10 +82,6 @@ export class Company extends Component
         );
     }
 
-    async fireMessage()
-    {
-       alert("The fireMessage function has been invoked.");
-    }
 
     render()
     { 
@@ -123,15 +117,11 @@ export class Company extends Component
             <div className = "body" >
                 <h1>This is the Company Information Page.</h1>
 
-                <p>On this page you can view the companies currently in the database, and select one to edit or delete.</p>
-               
-
-                <p aria-live="polite">Current count: <strong>{this.state.Companies.length}</strong></p>
+                <p>On this page you can view the companies currently in the database, and select one to edit or delete.</p>               
 
                 <button className="btn btn-primary" onClick={(() => {
                     // 3. When the button is clicked, set the state loading to true and begin the fetch method. Changing state triggers render to fire.
                     this.setState({ loading: true });
-                    this.fireMessage();
                     this.populateCount();
                     // Start thread B.
                     // (Thread A continues)
@@ -146,9 +136,7 @@ export class Company extends Component
                
             </div>
 
-
         );
-
     }
 
 }
