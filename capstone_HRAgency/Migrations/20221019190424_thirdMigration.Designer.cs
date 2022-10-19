@@ -11,8 +11,8 @@ using capstone_HRAgency.Data;
 namespace capstone_HRAgency.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221019181930_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221019190424_thirdMigration")]
+    partial class thirdMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,7 +196,7 @@ namespace capstone_HRAgency.Migrations
                             CPLastName = "Ford",
                             CompanyName = "Ford, Inc.",
                             EndDate = new DateOnly(2022, 10, 1),
-                            Phone = "15558792225",
+                            Phone = "5558792225",
                             StartDate = new DateOnly(2019, 2, 1),
                             SubscriptionStatus = 0
                         },

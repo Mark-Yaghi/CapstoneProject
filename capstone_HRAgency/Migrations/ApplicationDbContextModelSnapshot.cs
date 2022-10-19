@@ -194,7 +194,7 @@ namespace capstone_HRAgency.Migrations
                             CPLastName = "Ford",
                             CompanyName = "Ford, Inc.",
                             EndDate = new DateOnly(2022, 10, 1),
-                            Phone = "15558792225",
+                            Phone = "5558792225",
                             StartDate = new DateOnly(2019, 2, 1),
                             SubscriptionStatus = 0
                         },

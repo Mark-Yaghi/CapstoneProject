@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace capstone_HRAgency.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class thirdMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -363,7 +363,7 @@ namespace capstone_HRAgency.Migrations
                     { 1, "12345-145 street, Edmonton, Ab, T5X6V8", "bClinton@arkansas.com", "Carol", "Clinton", "The HR Agency", new DateOnly(2023, 10, 1), "7809848855", new DateOnly(2022, 10, 1), 1 },
                     { 2, "14545-173 street, Edmonton, Ab, T5X6V8", "jdoe@anonymous.com", "John", "Doe", "Zellers, Inc.", new DateOnly(2023, 9, 1), "8255872233", new DateOnly(2021, 9, 1), 1 },
                     { 3, "145 Fir Street, Detroit, Mi, 90251", "fsmith@gm.com", "Frank", "Smith", "General Motors, Inc.", new DateOnly(2023, 10, 1), "7809841155", new DateOnly(2022, 10, 1), 1 },
-                    { 4, "800 Ford Street,Dearborn, MI, 95874", "hFord@ford.com", "Henry", "Ford", "Ford, Inc.", new DateOnly(2022, 10, 1), "15558792225", new DateOnly(2019, 2, 1), 0 },
+                    { 4, "800 Ford Street,Dearborn, MI, 95874", "hFord@ford.com", "Henry", "Ford", "Ford, Inc.", new DateOnly(2022, 10, 1), "5558792225", new DateOnly(2019, 2, 1), 0 },
                     { 5, "8524-99 street, Edmonton, Ab, T6X7Y3", "frankF@ffe.com", "Joe", "Rogan", "Frank's Food Emporium", new DateOnly(2022, 10, 1), "4032454875", new DateOnly(2021, 10, 1), 0 }
                 });
 
