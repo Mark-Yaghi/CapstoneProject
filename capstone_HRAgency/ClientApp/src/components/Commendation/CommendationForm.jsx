@@ -10,10 +10,11 @@ export const CommendationForm = () => {
 		setInputValue({ senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "" });
 	};
 	const handleChange = (e) => {
-		console.log(`${e.target.name}: ${e.target.value}`);
+		// console.log(`${e.target.name}: ${e.target.value}`);
+		const { name, value } = e.target;
 		setInputValue((prevState) => ({
 			...prevState,
-			[e.target.name]: e.target.value,
+			[name]: value,
 		}));
 	};
 	return (
