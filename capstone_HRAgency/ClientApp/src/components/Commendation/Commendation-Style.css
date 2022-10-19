@@ -33,6 +33,11 @@
 }
 .but-col-prim:hover {
 	background-color: #1f7d6d;
+	color: white;
+}
+
+.marg-left {
+	margin-left: 2rem;
 }
 
 button a {

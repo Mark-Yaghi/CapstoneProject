@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import "./Commendation-Style.css";
 
-export const CommendationForm = () => {
+export const CommendationForm = ({ onFormInformation, userImage }) => {
 	const formInputValue = { senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "" };
 	const [inputValue, setInputValue] = useState(formInputValue);
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log(inputValue);
 		setInputValue({ senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "" });
 	};
 	const handleChange = (e) => {
-		console.log(`${e.target.name}: ${e.target.value}`);
+		// console.log(`${e.target.name}: ${e.target.value}`);
+		const { name, value } = e.target;
 		setInputValue((prevState) => ({
 			...prevState,
-			[e.target.name]: e.target.value,
+			[name]: value,
 		}));
 	};
 	return (
 		<section className="main-container">
 			{/* <h1 className="heading-card">Commendation Form</h1> */}
+			{/* <div className="form-container">
+				<button className="but-general but-col-prim" onClick={() => onFormInformation(inputValue)}>
+					Preview
+				</button>
+			</div> */}
 			<form onSubmit={submitHandler} className="form-container">
 				<div>
 					<label htmlFor="sender">Sender *</label>
