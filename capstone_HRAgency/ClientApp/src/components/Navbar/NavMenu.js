@@ -19,24 +19,19 @@ export const NavMenu = () => {
 							<NavLink to="/">Home</NavLink>
 						</li>
 						<li>
-							<NavLink to="https://www.google.com/" target="_blank">
-								Expert Solutions
-							</NavLink>
+							<NavLink to="/expert-solution">Expert Solutions</NavLink>
 						</li>
 						<li>
-							<NavLink to="https://www.blogger.com" target="_blank">
-								Blog
-							</NavLink>
+							<NavLink to="/fetch-data">Fetch Data</NavLink>
 						</li>
 						<li>
-							<NavLink to="https://www.chatiw.com/" target="_blank">
-								Let's Chat
-							</NavLink>
+							<NavLink to="/fileupload">File Upload</NavLink>
 						</li>
 						{/* <li>
 							<LoginMenu></LoginMenu>
 						</li> */}
 					</ul>
+
 					<ul>
 						<li>
 							<a href="https://ca.linkedin.com" target="_blank" rel="noreferrer">
