@@ -1,17 +1,51 @@
 ﻿import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import authService from "../api-authorization/AuthorizeService";
+import axios from "axios";
 import "./AddNewClient-Style.css";
 
 export const AddNewClientForm = () => {
-	const formInputValue = { senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "" };
+	// const formInputValue = { companyName: "", firstName: "", lastName: "", clientEmail: "", phoneNumber: "", packageType: "", startDate: "", endDate: "", subStatus: "", permissionLevel: "" };
+	const formInputValue = { CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "" };
 	const [inputValue, setInputValue] = useState(formInputValue);
-	const submitHandler = (e) => {
+
+	// const fetchData = async () => {
+	// 	try {
+	// 		const res = await axios.post("company/list", { inputValue });
+	// 		console.log(res);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
+
+	const submitHandler = async (e) => {
 		e.preventDefault();
-		console.log(inputValue);
-		setInputValue({ senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "" });
+		// console.log(inputValue);
+		// try {
+		// 	const token = await authService.getAccessToken();
+		// const res = await axios("company/list", { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
+		// const resp = await axios("/package/list", { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
+		// const resu = await axios("userinfo/", { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
+		// console.log(res.data);
+		// console.log(resp.data);
+		// console.log(resu.data);
+		// } catch (error) {
+		// console.log(error.response);
+		// }
+		// try {
+		// 	const token = await authService.getAccessToken();
+		// 	const res = await axios.post("company/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
+		// 	// const resp = await fetch("company/?" + new URLSearchParams(inputValue), { method: "POST" });
+		// 	console.log(res);
+		// 	console.log(res.data);
+		// } catch (error) {
+		// 	console.log(error.response);
+		// }
+		setInputValue({ CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "" });
+		// setInputValue({ companyName: "", firstName: "", lastName: "", clientEmail: "", phoneNumber: "", packageType: "", startDate: "", endDate: "", subStatus: "", permissionLevel: "" });
 	};
 	const handleChange = (e) => {
-		console.log(`${e.target.name}: ${e.target.value}`);
+		// console.log(`${e.target.name}: ${e.target.value}`);
 		setInputValue((prevState) => ({
 			...prevState,
 			[e.target.name]: e.target.value,
@@ -24,51 +58,55 @@ export const AddNewClientForm = () => {
 				<h1 className="heading-form">Add New Client Form</h1>
 				<div>
 					<label htmlFor="companyName">Company Name *</label>
-					<input type="text" name="companyName" id="company" placeholder="Company Name" value={inputValue.companyName} onChange={handleChange} />
+					<input type="text" name="companyName" id="companyName" placeholder="Company Name" value={inputValue.companyName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="firstName">Contacts First Name *</label>
-					<input type="text" name="firstName" id="firstname" placeholder="First Name" value={inputValue.firstName} onChange={handleChange} />
+					<label htmlFor="address">Address *</label>
+					<input type="text" name="Address" id="address" placeholder="Address" value={inputValue.Address} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="lastName">Contacts Last Name *</label>
-					<input type="text" name="lastName" id="lastname" placeholder="Last Name" value={inputValue.lastName} onChange={handleChange} />
+					<label htmlFor="first-name">Contacts First Name *</label>
+					<input type="text" name="CPFirstName" id="first-name" placeholder="First Name" value={inputValue.CPFirstName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="email">Contacts Email *</label>
-					<input type="email" name="clientEmail" id="clientemail" placeholder="Client Email" value={inputValue.clientEmail} onChange={handleChange} />
+					<label htmlFor="lastname">Contacts Last Name *</label>
+					<input type="text" name="CPLastName" id="lastname" placeholder="Last Name" value={inputValue.CPLastName} onChange={handleChange} />
+				</div>
+				<div>
+					<label htmlFor="clientemail">Contacts Email *</label>
+					<input type="email" name="CPEMail" id="clientemail" placeholder="Client Email" value={inputValue.CPEMail} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="phonenumber">Phone Number *</label>
-					<input type="phone" name="phoneNumber" id="phonenumber" placeholder="000-000-0000" value={inputValue.phoneNumber} onChange={handleChange} />
+					<input type="phone" name="Phone" id="phonenumber" placeholder="000-000-0000" value={inputValue.Phone} onChange={handleChange} />
 				</div>
-				<div>
+				{/* <div>
 					<label htmlFor="package">Package Type *</label>
-					<select name="packageType" id="packagetype">
+					<select name="packageType" id="packagetype" value={inputValue.packageType} onChange={handleChange}>
 						<option value="microcompany">Micro Company</option>
 						<option value="smallcompany">Small Company</option>
 						<option value="mediumcompany">Medium Company</option>
 						<option value="largecompany">Large Company</option>
 					</select>
+				</div> */}
+				<div>
+					<label htmlFor="startdate">Start Date *</label>
+					<input type="date" name="StartDate" id="startdate" placeholder="yyyy-mm-dd" value={inputValue.StartDate} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="Start Date">Start Date *</label>
-					<input type="date" name="startDate" id="startdate" placeholder="yyyy-mm-dd" value={inputValue.startDate} onChange={handleChange} />
+					<label htmlFor="enddate">End Date *</label>
+					<input type="date" name="EndDate" id="enddate" placeholder="yyyy-mm-dd" value={inputValue.EndDate} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="End Date">End Date *</label>
-					<input type="date" name="endDate" id="enddate" placeholder="yyyy-mm-dd" value={inputValue.endDate} onChange={handleChange} />
-				</div>
-				<div>
-					<label htmlFor="subStatus">Subscription Status *</label>
-					<select name="subStatus" id="substatus">
+					<label htmlFor="sub-status">Subscription Status *</label>
+					<select name="SubscriptionStatus" id="sub-status" value={inputValue.SubscriptionStatus} onChange={handleChange}>
 						<option value="active">Active</option>
 						<option value="inactive">Inactive</option>
 					</select>
 				</div>
 				<div>
-					<label htmlFor="permissionLevel">Permission Level *</label>
-					<select name="permissionLevel" id="permissionlevel">
+					<label htmlFor="permission-level">Permission Level *</label>
+					<select name="permissionLevel" id="permission-level" value={inputValue.permissionLevel} onChange={handleChange}>
 						<option value="one">1</option>
 						<option value="two">2</option>
 						<option value="three">3</option>
