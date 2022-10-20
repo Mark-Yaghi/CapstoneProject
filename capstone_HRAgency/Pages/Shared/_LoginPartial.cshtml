@@ -12,31 +12,34 @@
     }
 }
 
-<ul class="navbar-nav me-4" style="flex-direction: row; gap: 2.5rem;" >
+<ul class="navbar-nav me-4" style="flex-direction: row; gap: 2.5rem;">
     @if (SignInManager.IsSignedIn(User))
     {
         @* <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity!.Name!</a>
-        </li> *@
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello
+            @User.Identity!.Name!</a>
+            </li> *@
         @* <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
-        </li> *@
+            </li> *@
     }
     else
     {
         @* <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@returnUrl">Register</a>
-        </li> *@
-        @* <li class="nav-item">
-            <a class="nav-link text-white" href="~/">Home</a>
-        </li> *@
+            <a class="nav-link text-white border-bottom border-white" asp-area="Identity" asp-page="/Account/Register"
+            asp-route-returnUrl="@returnUrl">Register</a>
+            </li> *@
         <li class="nav-item">
-            <a class="nav-link text-white border-bottom border-white" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Login</a>
+            <a class="nav-link text-white" href="~/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white border-bottom border-white" asp-area="Identity" asp-page="/Account/Login"
+            asp-route-returnUrl="@returnUrl">Login</a>
         </li>
         <li class="nav-item my-auto ">
-            <a class="navlink" href="https://ca.linkedin.com" target="_blank" >
+            <a class="navlink" href="https://ca.linkedin.com" target="_blank">
                 <img class="d-inline-block" src="../../../images/LinkedInLogo.png" alt="LinkedInLogo">
             </a>
         </li>
@@ -45,22 +48,24 @@
 @* <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity!.Name!</a>
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-        </li>
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello
+    @User.Identity!.Name!</a>
+    </li>
+    <li class="nav-item">
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
+    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    </form>
+    </li>
     }
     else
     {
-       // <li class="nav-item">
-          //  <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@returnUrl">Register</a>
-       // </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Login</a>
-        </li>
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"
+    asp-route-returnUrl="@returnUrl">Register</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Login</a>
+    </li>
     }
-</ul> *@
+    </ul> *@

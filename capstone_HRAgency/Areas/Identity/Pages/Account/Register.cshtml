@@ -41,9 +41,16 @@
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="mt-5">
+                <div class="d-flex flex-column align-items-center mt-5">
                     <button id="registerSubmit" type="submit" class="btn btn-lg btn-primary rounded-pill"
-                        style="padding-inline: 3rem ; background-color: #175E52;">Register</button>
+                        style="padding-inline: 3em ; padding-block: 1rem ;background-color: #175E52;">Register</button>
+                    <div class="btn btn-lg btn-primary rounded-pill mt-5"
+                        style="padding-inline: 3em ; background-color: black;">
+                        <a class="nav-link text-white" href="~/">Home</a>
+                    </div>
+                    @* <button id="registerSubmit" type="submit" class=" btn btn-lg btn-primary rounded-pill"
+                        style="padding-inline: 2rem ; background-color: #175E52;">
+                        </button> *@
                     @* <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
                     *@
                 </div>

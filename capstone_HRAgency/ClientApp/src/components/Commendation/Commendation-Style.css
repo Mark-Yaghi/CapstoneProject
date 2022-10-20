@@ -63,11 +63,34 @@ button a:hover {
 	margin: 8rem auto;
 }
 
+/* .img-container ul li {
+	border: transparent solid 2px;
+	transition: all 0.25s ease-out;
+}
+.img-container ul li:hover {
+	border: #d21f3c solid 2px;
+} */
+
 .img-container-height {
 	padding-block: 2rem;
 	max-height: 36rem;
 	overflow-y: scroll;
 }
+
+.img-resize {
+	width: 330px;
+	height: auto;
+	border: transparent solid 1px;
+	transition: all 0.25s ease-out;
+}
+
+.img-resize:hover {
+	border: #d21f3c solid 1px;
+}
+.img-resize.selected {
+	border: #d21f3c solid 1px;
+}
+
 .position-declare {
 	position: relative;
 }

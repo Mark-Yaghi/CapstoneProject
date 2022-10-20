@@ -22,6 +22,7 @@ const Commendation = () => {
 		const { id, image } = selectedImage;
 		setUserSelImg((prev) => ({ ...prev, id, image }));
 	};
+	// console.log(userSelImg);
 
 	const formValues = (inputValues) => {
 		console.log(inputValues);
