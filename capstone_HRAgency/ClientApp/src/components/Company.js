@@ -1,21 +1,41 @@
-﻿import React, { Component } from 'react';
+﻿import React, { Component, useState, useEffect, useRef } from 'react';
 import authService from './api-authorization/AuthorizeService';
+import { useNavigate, navigate } from 'react-router-dom';
 //import '../../src/custom.css';
 
+
+/*
+ * @{
+    ViewData["Title"] = "Create";
+}
+ * */
+
+
+/* if (ViewData["Exceptions"] != null)
+{
+    <ul>
+        @foreach (Exception sub in (ViewData["Exceptions"] as BLLValidationException).SubExceptions)
+        {
+            <li>@sub.Message</li>
+        }
+    </ul>
+
+} */
 
 
 export class Company extends Component
 {
     static displayName = Company.name;
-
+   
     constructor(props) {
         super(props);
-        this.state = { isAuthenticated: false, user: null, loading: false, Companies: [], CompanyID: "", CompanyName: "", Address: "", Phone: "", CPFirstName : "", CPLastName : "", CPEMail : "", StartDate : "", EndDate : "", SubscriptionStatus : "", CompanyCount:"" };
+        this.state = { navigateTo:"", isAuthenticated: false, user: null, loading: false, Companies: [], CompanyID: "", CompanyName: "", Address: "", Phone: "", CPFirstName : "", CPLastName : "", CPEMail : "", StartDate : "", EndDate : "", SubscriptionStatus : "", CompanyCount:"" };
        // this.incrementCounter = this.incrementCounter.bind(this);
         this.populateRoles();
-        this.populateCount();
-    }
+        this.populateCount();       
 
+    }
+    
     async populateRoles() {
         const token = await authService.getAccessToken();
         console.log(token);
@@ -43,10 +63,11 @@ export class Company extends Component
         const dataCount = await responseCount.json();
         this.setState({ CompanyCount: dataCount, loading: false });
         console.log("This is the data count; the number of companies: " + {dataCount });
-
     }
-
-    static renderCompaniesTable(CompanyList) {
+    
+     static renderCompaniesTable(CompanyList)
+     {
+       
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
@@ -68,19 +89,20 @@ export class Company extends Component
                             <td>{Companies.cpFirstName}</td>
                             <td>{Companies.cpLastName}</td>
                             <td>{Companies.cpEmail}</td>
-                            <td> <button className="btn btn-primary" onClick={(() => {
+                            <td>
+                              <button className="btn btn-primary" onClick={(() => {
                                 this.setState({ loading: true });
-                                this.fireMessage();
-                            }).bind(this)}>Select Company</button><br /> </td>
+                                
+                            }).bind(this)} >Select Company</button>
+                            </td>
 
-
-                        </tr>
+                        </tr>// {/* onClick={(() => { this.setState({ loading: true }); { navigate('/EditClientForm',  { CompanyID: Companies.companyID }); } }).bind(this)} */}
                     )}
                 </tbody>
             </table>
             
         );
-    }
+     }
 
 
     render()
@@ -119,24 +141,11 @@ export class Company extends Component
 
                 <p>On this page you can view the companies currently in the database, and select one to edit or delete.</p>               
 
-                <button className="btn btn-primary" onClick={(() => {
-                    // 3. When the button is clicked, set the state loading to true and begin the fetch method. Changing state triggers render to fire.
-                    this.setState({ loading: true });
-                    this.populateCount();
-                    // Start thread B.
-                    // (Thread A continues)
-                    this.populateRoles();
-                    // Start thread C.
-                    // (Thread A continues)
-                }).bind(this)
-
-                }>Display Companies</button><br /><br />
+                <br /><br />
                 <p>There are currently {this.state.CompanyCount} companies in the database. </p>
                 {contents}
                
             </div>
-
         );
     }
-
 }

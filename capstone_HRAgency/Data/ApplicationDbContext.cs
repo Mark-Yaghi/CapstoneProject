@@ -55,7 +55,7 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
 
                 new Company(){CompanyID = 3, CompanyName= "General Motors, Inc.", Address = "145 Fir Street, Detroit, Mi, 90251", Phone="7809841155", CPFirstName ="Frank", CPLastName="Smith", CPEmail= "fsmith@gm.com", StartDate=DateOnly.Parse("2022-10-01"), EndDate=DateOnly.Parse("2023-10-01"), SubscriptionStatus = true},
 
-                new Company(){CompanyID = 4, CompanyName= "Ford, Inc.", Address = "800 Ford Street,Dearborn, MI, 95874", Phone="15558792225", CPFirstName ="Henry", CPLastName="Ford", CPEmail= "hFord@ford.com", StartDate=DateOnly.Parse("2019-02-01"), EndDate=DateOnly.Parse("2022-10-01"), SubscriptionStatus = false},
+                new Company(){CompanyID = 4, CompanyName= "Ford, Inc.", Address = "800 Ford Street,Dearborn, MI, 95874", Phone="5558792225", CPFirstName ="Henry", CPLastName="Ford", CPEmail= "hFord@ford.com", StartDate=DateOnly.Parse("2019-02-01"), EndDate=DateOnly.Parse("2022-10-01"), SubscriptionStatus = false},
 
                 new Company(){CompanyID = 5, CompanyName= "Frank's Food Emporium", Address = "8524-99 street, Edmonton, Ab, T6X7Y3", Phone="4032454875", CPFirstName ="Joe", CPLastName="Rogan", CPEmail= "frankF@ffe.com", StartDate=DateOnly.Parse("2021-10-01"), EndDate=DateOnly.Parse("2022-10-01"), SubscriptionStatus = false}
             });

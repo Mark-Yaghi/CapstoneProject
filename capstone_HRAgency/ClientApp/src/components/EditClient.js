@@ -5,7 +5,7 @@ import EditClient from './EditClient/EditClient';
 
 
 export class EditClient extends Component {
-	static displayName = AddNewClient.name;
+	static displayName = EditClient.name;
 
 	render() {
 		return (
