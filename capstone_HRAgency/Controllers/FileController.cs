@@ -16,7 +16,7 @@ namespace capstone_HRAgency.Controllers
         {
             try
             {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.FileName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", file.FileName);
 
                 using (Stream stream = new FileStream(path, FileMode.Create)) 
                 {
