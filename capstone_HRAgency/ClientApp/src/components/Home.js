@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { LoginMenu } from "../api-authorization/LoginMenu";
+
 import Commendation from "./Commendation/Commendation";
 
 export class Home extends Component {

@@ -50,6 +50,21 @@ namespace capstone_HRAgency.Controllers
             return _context.Companies.Count();
         }
 
+    [HttpGet("{companyid}")]
+    public ActionResult<Company> Get(int companyid)
+    {
+      try
+      {
+        Company found = _context.Companies.Where(x => x.CompanyID == companyid).Single();
+        return found;
+      }
+      catch
+      {
+        return NotFound("Sorry, that Company ID Number wasn't found in the database. ");
+      }
+    }
+
+
 
         [HttpGet("{companyid}")]
         public ActionResult<Company> Get(int companyid)
