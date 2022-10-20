@@ -26,6 +26,14 @@ export const EditClientForm = () => {
 					<input type="text" name="companyName" id="company" placeholder="Company Name" value={inputValue.companyName} onChange={handleChange} />
 				</div>
 				<div>
+					<label htmlFor="companyName">Company Address *</label>
+					<input type="text" name="companyName" id="address" placeholder="Address" value={inputValue.Address} />
+				</div>
+				<div>
+					<label htmlFor="companyName">Company Phone *</label>
+					<input type="text" name="companyName" id="phone" placeholder="Phone" value={inputValue.Phone} />
+				</div>
+				<div>
 					<label htmlFor="firstName">Contacts First Name *</label>
 					<input type="text" name="firstName" id="firstname" placeholder="First Name" value={inputValue.firstName} onChange={handleChange} />
 				</div>
@@ -39,38 +47,38 @@ export const EditClientForm = () => {
 				</div>
 				<div>
 					<label htmlFor="phonenumber">Phone Number *</label>
-					<input type="phone" name="phoneNumber" id="phonenumber" placeholder="000-000-0000" value={inputValue.phoneNumber} onChange={handleChange} />
+					<input type="phone" name="phoneNumber" maxLength="10" id="phonenumber" placeholder="000-000-0000" value={inputValue.phoneNumber} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="package">Package Type *</label>
 					<select name="packageType" id="packagetype">
-						<option value="microcompany">Micro Company</option>
-						<option value="smallcompany">Small Company</option>
-						<option value="mediumcompany">Medium Company</option>
-						<option value="largecompany">Large Company</option>
+						<option value="1">Micro Company</option>
+						<option value="2">Small Company</option>
+						<option value="3">Medium Company</option>
+						<option value="4">Large Company</option>
 					</select>
 				</div>
 				<div>
 					<label htmlFor="Start Date">Start Date *</label>
-					<input type="date" name="startDate" id="startdate" placeholder="yyyy-mm-dd" value={inputValue.startDate} onChange={handleChange} />
+					<input type="date" maxlength="10" name="startDate" id="startdate" placeholder="yyyy-mm-dd" value={inputValue.startDate} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="End Date">End Date *</label>
-					<input type="date" name="endDate" id="enddate" placeholder="yyyy-mm-dd" value={inputValue.endDate} onChange={handleChange} />
+					<input type="date" maxlength="10" name="endDate" id="enddate" placeholder="yyyy-mm-dd" value={inputValue.endDate} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="subStatus">Subscription Status *</label>
 					<select name="subStatus" id="substatus">
-						<option value="active">Active</option>
-						<option value="inactive">Inactive</option>
+						<option value="1">Active</option>
+						<option value="2">Inactive</option>
 					</select>
 				</div>
 				<div>
 					<label htmlFor="permissionLevel">Permission Level *</label>
 					<select name="permissionLevel" id="permissionlevel">
-						<option value="one">1</option>
-						<option value="two">2</option>
-						<option value="three">3</option>
+						<option value="1">1 - Full Administrative Permissions</option>
+						<option value="2">2 - Client Level Permissions Only</option>
+						
 					</select>
 				</div>
 				<button className="but-general but-col-prim">Accept Changes</button>

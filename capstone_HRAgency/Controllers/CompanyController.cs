@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using capstone_HRAgency.Data;
 using capstone_HRAgency.Models;
+using capstone_HRAgency.Models.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
@@ -43,23 +44,37 @@ namespace capstone_HRAgency.Controllers
     [HttpGet]
     [Route("count")]
 
-    public int GetCount()
-    {
-      Console.WriteLine(_context.Companies.Count());
-      return _context.Companies.Count();
-
-    }
-
-
-    [HttpPost]
-    public ActionResult Post(string newCompanyName, string newAddress, string newPhone, string newCPFirstName, string newCPLastName, string newCPEmail, string newStartDate, string newEndDate, string newSubscriptionStatus)
-    {
+        public int GetCount()
+        {
+            Console.WriteLine(_context.Companies.Count());
+            return _context.Companies.Count();
+        }
 
 
-      if (string.IsNullOrWhiteSpace(newCompanyName.Trim()) || string.IsNullOrWhiteSpace(newAddress.Trim()) || string.IsNullOrWhiteSpace(newPhone.Trim()) || string.IsNullOrWhiteSpace(newCPFirstName.Trim()) || string.IsNullOrWhiteSpace(newCPLastName.Trim()) || string.IsNullOrWhiteSpace(newCPEmail.Trim()) || string.IsNullOrWhiteSpace(newStartDate.Trim()) || string.IsNullOrWhiteSpace(newEndDate.Trim()) || string.IsNullOrWhiteSpace(newSubscriptionStatus.Trim()))
-      {
-        return BadRequest("Please ensure that all fields have all been entered.");
-      }
+        [HttpGet("{companyid}")]
+        public ActionResult<Company> Get(int companyid)
+        {
+
+            try
+            {
+                Company found = _context.Companies.Where(x => x.CompanyID == companyid).Single();
+                return found;
+            }
+            catch
+            {
+                return NotFound("Sorry, that Company ID Number wasn't found in the database. ");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Post(string newCompanyName, string newAddress, string newPhone, string newCPFirstName, string newCPLastName, string newCPEmail, string newStartDate, string newEndDate, string newSubscriptionStatus)
+        {
+
+            if (string.IsNullOrWhiteSpace(newCompanyName.Trim()) || string.IsNullOrWhiteSpace(newAddress.Trim()) || string.IsNullOrWhiteSpace(newPhone.Trim()) || string.IsNullOrWhiteSpace(newCPFirstName.Trim()) || string.IsNullOrWhiteSpace(newCPLastName.Trim()) || string.IsNullOrWhiteSpace(newCPEmail.Trim()) || string.IsNullOrWhiteSpace(newStartDate.Trim()) || string.IsNullOrWhiteSpace(newEndDate.Trim()) || string.IsNullOrWhiteSpace(newSubscriptionStatus.Trim()))
+            {               
+                return BadRequest("Please ensure that all fields have all been entered.");
+            }
 
       try
       {
