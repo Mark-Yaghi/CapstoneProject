@@ -27,9 +27,9 @@ export const NavMenu = () => {
 						<li>
 							<NavLink to="/companyinfo">Company Info</NavLink>
 						</li>
-						{/* <li>
+						<li>
 							<LoginMenu></LoginMenu>
-						</li> */}
+						</li>
 					</ul>
 
 					<ul>

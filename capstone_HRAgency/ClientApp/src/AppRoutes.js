@@ -4,6 +4,7 @@ import { Company } from "./components/Company";
 import { FileUpload } from "./components/FileUpload";
 import ExpertSolution from "./components/ExpertSolution";
 import AddNewClient from "./components/AddNewClient/AddNewClient";
+import EditClient from "./components/EditClient/EditClient";
 
 const AppRoutes = [
 	{
@@ -30,6 +31,11 @@ const AppRoutes = [
 		path: "/addClient",
 		requireAuth: true,
 		element: <AddNewClient />,
+	},
+	{
+		path: "/editClient",
+		requireAuth: true,
+		element: <EditClient />,
 	},
 
 	...ApiAuthorzationRoutes,

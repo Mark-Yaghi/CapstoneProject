@@ -7,14 +7,20 @@ const ButtonLink = () => {
 		<section className="main-container flex-center flex-option  flex-right">
 			<div className="flex-center">
 				<NavLink className="but-general but-col-prim" to="/">
-					Commendation
+					Commendations 
+				</NavLink>
+				<NavLink className="but-general but-col-prim" to="/companyInfo">
+					Company Info
 				</NavLink>
 				<NavLink className="but-general but-col-prim marg-left" to="/addClient">
 					Add New Client
 				</NavLink>
-				<button className="but-general but-col-prim marg-left">
+				<NavLink className="but-general but-col-prim marg-left" to="/editClient">
+					Edit Client
+				</NavLink>
+				{/* <button className="but-general but-col-prim marg-left">
 					<LoginMenu></LoginMenu>
-				</button>
+				</button>*/}
 			</div>
 		</section>
 	);
