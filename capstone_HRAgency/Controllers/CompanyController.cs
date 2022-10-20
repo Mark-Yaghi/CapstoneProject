@@ -65,23 +65,6 @@ namespace capstone_HRAgency.Controllers
     }
 
 
-
-        [HttpGet("{companyid}")]
-        public ActionResult<Company> Get(int companyid)
-        {
-
-            try
-            {
-                Company found = _context.Companies.Where(x => x.CompanyID == companyid).Single();
-                return found;
-            }
-            catch
-            {
-                return NotFound("Sorry, that Company ID Number wasn't found in the database. ");
-            }
-
-        }
-
         [HttpPost]
         public ActionResult Post(string newCompanyName, string newAddress, string newPhone, string newCPFirstName, string newCPLastName, string newCPEmail, string newStartDate, string newEndDate, string newSubscriptionStatus)
         {

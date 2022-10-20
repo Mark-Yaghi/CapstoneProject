@@ -1,11 +1,9 @@
 import ApiAuthorzationRoutes from "./components/api-authorization/ApiAuthorizationRoutes";
 import { Home } from "./components/Home";
-import { DecreaseCounter } from "./components/DecreaseCounter";
-import { Company } from "./components/Company";
+import Company from "./components/Company";
 import { FileUpload } from "./components/FileUpload";
 import ExpertSolution from "./components/ExpertSolution";
 import AddNewClient from "./components/AddNewClient/AddNewClient";
-import Company from "./components/Company";
 import CompanyDetail from "./components/CompanyDetail";
 import EditClient from "./components/EditClient/EditClient";
 
