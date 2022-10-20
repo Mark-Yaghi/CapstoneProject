@@ -6,6 +6,7 @@ import { DecreaseCounter } from "./components/DecreaseCounter";
 import { Company } from "./components/Company";
 import { FileUpload } from "./components/FileUpload";
 import ExpertSolution from "./components/ExpertSolution";
+import AddNewClient from "./components/AddNewClient/AddNewClient";
 
 const AppRoutes = [
 	{
@@ -38,6 +39,11 @@ const AppRoutes = [
 		path: "/expert-solution",
 		requireAuth: true,
 		element: <ExpertSolution />,
+	},
+	{
+		path: "/addClient",
+		requireAuth: true,
+		element: <AddNewClient />,
 	},
 
 	...ApiAuthorzationRoutes,

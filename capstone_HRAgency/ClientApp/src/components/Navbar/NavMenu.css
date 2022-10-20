@@ -31,7 +31,9 @@
 	font-size: 16px;
 	letter-spacing: 1px;
 }
-
+.flex-right {
+	justify-content: right;
+}
 .active {
 	border-bottom: 1px solid white;
 }
@@ -42,6 +44,41 @@
 	align-items: center;
 	gap: 2rem;
 }
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 8rem;
+}
+
+th,
+td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+tr td {
+	/* background-color: hsla(281, 57%, 47%, 0.074); */
+	vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
+	background-color: #eaf6f4;
+}
+tbody tr:nth-child(odd) {
+	background-color: rgba(23, 94, 82, 0.3);
+}
+
+thead {
+	background-color: hsla(170, 61%, 23%, 0.7);
+}
+
+thead tr th {
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+	padding: 1rem;
+}
+
 /* 
 a.navbar-brand {
 	white-space: normal;
