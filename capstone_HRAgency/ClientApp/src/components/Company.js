@@ -3,6 +3,7 @@ import authService from "./api-authorization/AuthorizeService";
 import { NavLink } from "react-router-dom";
 import { LoginMenu } from "./api-authorization/LoginMenu";
 import "../custom.css";
+import ButtonLink from "./Button/ButtonLink";
 
 export class Company extends Component {
 	static displayName = Company.name;
@@ -93,19 +94,9 @@ export class Company extends Component {
 
 		return (
 			<div className="body">
-				<section className="main-container flex-center flex-option  flex-right">
-					<div className="flex-center">
-						<NavLink className="but-general but-col-prim" to="/">
-							Commendation
-						</NavLink>
-						<NavLink className="but-general but-col-prim marg-left" to="/addClient">
-							Add New Client
-						</NavLink>
-						<button className="but-general but-col-prim marg-left">
-							<LoginMenu></LoginMenu>
-						</button>
-					</div>
-				</section>
+				<>
+					<ButtonLink />
+				</>
 				<section className="main-container">{contents}</section>
 			</div>
 		);

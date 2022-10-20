@@ -1,8 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { LoginMenu } from "../api-authorization/LoginMenu";
+import { NavLink } from "react-router-dom";
 
-export const ButtonLink = ({ to }) => {
-	console.log(to);
-
-	return <div>Hello</div>;
+const ButtonLink = () => {
+	return (
+		<section className="main-container flex-center flex-option  flex-right">
+			<div className="flex-center">
+				<NavLink className="but-general but-col-prim" to="/">
+					Commendation
+				</NavLink>
+				<NavLink className="but-general but-col-prim marg-left" to="/addClient">
+					Add New Client
+				</NavLink>
+				<button className="but-general but-col-prim marg-left">
+					<LoginMenu></LoginMenu>
+				</button>
+			</div>
+		</section>
+	);
 };
+
+export default ButtonLink;

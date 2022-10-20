@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./AddNewClient-Style.css";
 
 export const AddNewClientForm = () => {
@@ -74,9 +75,12 @@ export const AddNewClientForm = () => {
 					</select>
 				</div>
 				<button className="but-general but-col-prim">Accept Changes</button>
-				<br></br>
-				<br></br>
-				<button className="but-back but-col-sec">Back</button>
+				<div className="marg-top">
+					<NavLink to="/companyinfo" className="but-back but-col-sec">
+						Back
+					</NavLink>
+				</div>
+				{/* <button className="but-back but-col-sec">Back</button> */}
 			</form>
 		</section>
 	);
