@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from "react";
 import authService from "./api-authorization/AuthorizeService";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../custom.css";
 import ButtonLink from "./Button/ButtonLink";
 
@@ -46,11 +46,9 @@ const Company = () => {
 							<td>{company.cpLastName}</td>
 							<td>{company.cpEmail}</td>
 							<td>
-								<button className="but-general but-col-sec">
-									<Link to={`/companyDetail/${company.companyID}`} {...company}>
-										Select
-									</Link>
-								</button>
+								<NavLink to={`/companyDetail/${company.companyID}`} {...company} className="but-general but-col-sec">
+									Select
+								</NavLink>
 							</td>
 						</tr>
 					))}
