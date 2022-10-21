@@ -22,7 +22,7 @@ export const NavMenu = () => {
 							<NavLink to="/expert-solution">Expert Solutions</NavLink>
 						</li>*/}
 						<li>
-							<NavLink to="/fileupload">File Upload</NavLink>
+							<NavLink to="/fileupload">Card Upload</NavLink>
 						</li>
 						<li>
 							<NavLink to="/company">Company Info</NavLink>

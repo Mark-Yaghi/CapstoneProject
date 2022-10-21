@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import axios from "axios";
+import "./FileUpload/FileUpload-Style.css";
 
 export const FileUpload = () => {
     const [file, setFile] = useState();
@@ -26,8 +27,16 @@ export const FileUpload = () => {
 
     return (
         <>
-            <input type="file" onChange={saveFile} />
-            <input type="button" value="upload" onClick={uploadFile} />
+            <section className="main-container center">
+                <div>
+                    <input class="file-upload" type="file" onChange={saveFile} />
+                </div>
+            </section>
+            <section className="main-container center">
+                <div>
+                    <input class="but-general but-col-prim" type="button" value="Upload Card" onClick={uploadFile} />
+                </div>
+            </section>
         </>
     );
 };

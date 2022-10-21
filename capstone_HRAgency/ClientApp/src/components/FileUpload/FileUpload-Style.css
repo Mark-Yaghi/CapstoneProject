@@ -1,0 +1,87 @@
+.main-container {
+	max-width: 1800px;
+	margin: auto;
+	padding-inline: 1.5rem;
+	padding-block: 2rem;
+
+}
+
+.but-general {
+	display: block;
+	border: none;
+	padding-inline: 3em;
+	padding-block: 1.2em;
+	border-radius: 50px;
+	letter-spacing: 1px;
+	font-size: 18px;
+}
+
+.but-col-prim {
+	background-color: #175e52;
+	color: #eaf6f4;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.but-col-sec {
+	background-color: black;
+	color: #eaf6f4;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.but-col-prim:hover {
+	background-color: #1f7d6d;
+}
+
+.but-col-sec:hover {
+	background-color: #2c2c2c;
+}
+
+button a {
+	color: white;
+}
+button a:hover {
+	color: white;
+}
+
+.bg-color-prim {
+	padding: 75px;
+	background-color: #eaf6f4;
+	margin-block: 8rem;
+
+}
+
+.form-container > div > input,
+.form-container > div > select,
+.form-container > div > textarea {
+	padding: 0.8rem 1.8rem;
+	border: #1f7d6d 1px solid;
+	outline: none;
+	transition: all 0.3s ease-in-out;
+}
+
+.form-container > div > input:focus,
+.form-container > div > select:focus,
+.form-container > div > textarea:focus {
+	border: 1px solid #1f7d6d;
+	border-style: dashed;
+}
+	.form-container > div > input:hover,
+	.form-container > div > select:hover,
+	.form-container > div > textarea:hover {
+		border: hsla(170, 60%, 31%, 0.5) 1px solid;
+	}
+
+.form-container .but-general, .but-back {
+	margin: auto;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.file-upload {
+	padding-top: 60px;
+	padding-left: 90px;
+}
