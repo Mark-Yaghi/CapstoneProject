@@ -1,7 +1,9 @@
 import React from "react";
-// import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
+import { AdminDropDownMenu } from "../../components/DropDownMenu";
+//import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem} from "reactstrap";
+import {  Link,NavLink } from "react-router-dom";
 import { LoginMenu } from "../api-authorization/LoginMenu";
+import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import "./NavMenu.css";
 
 export const NavMenu = () => {
@@ -28,7 +30,21 @@ export const NavMenu = () => {
 							<NavLink to="/company">Company Info</NavLink>
 						</li>
 						<li>
-							<LoginMenu></LoginMenu>
+							
+							<NavLink to="/companyinfo">Company Administration</NavLink>
+								
+							{/*<button >Company Administration</button>
+							{...buttonProps}<div className={isOpen ? 'visible' : ''} role='menu'>
+								<a {...itemProps[0]} href=''>Commendations</a>
+								<a {...itemProps[1]} href=''>File Upload</a>
+								<a {...itemProps[2]} href=''>Add Company</a>
+								<a {...itemProps[3]} href=''>Edit Company</a><NavLink to="/dropdownmenu">Company Administration</NavLink>
+
+							</div> */}
+							
+						</li>
+						 <li>
+							<LoginMenu></LoginMenu>   {/* <NavLink to="/companyinfo">Company Administration</NavLink>*/}
 						</li>
 					</ul>
 
