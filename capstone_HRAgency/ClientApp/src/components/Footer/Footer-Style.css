@@ -4,6 +4,7 @@ footer h3 {
 .footer {
 	background-color: black;
 	color: white;
+	margin-top: 8rem;
 }
 
 .footer .flex-center {
@@ -14,6 +15,7 @@ footer h3 {
 	max-width: 1800px;
 	width: 100%;
 	margin-inline: auto;
+	margin-top: ;
 	padding-inline: 3em;
 	padding-block: 6em;
 	align-items: center;

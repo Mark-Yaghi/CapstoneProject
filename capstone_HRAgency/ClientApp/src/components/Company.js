@@ -46,7 +46,7 @@ const Company = () => {
 							<td>{company.cpLastName}</td>
 							<td>{company.cpEmail}</td>
 							<td>
-								<NavLink to={`/companyDetail/${company.companyID}`} {...company} className="but-general but-col-sec">
+								<NavLink to={`/companyDetail/${company.companyID}`} className="but-general but-col-sec">
 									Select
 								</NavLink>
 							</td>

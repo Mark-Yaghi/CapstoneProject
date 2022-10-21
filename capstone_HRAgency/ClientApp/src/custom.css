@@ -169,3 +169,37 @@ code {
 	background-color: #1b6ec2;
 	border-color: #1861ac;
 } */
+.cd-container {
+	max-width: 1024px;
+	border: 1px solid royalblue;
+	margin-inline: auto;
+	margin-top: 6rem;
+	/* margin-bottom: 8rem; */
+}
+.cd-flex {
+	display: flex;
+	/* gap: 5rem; */
+}
+
+.cd-flex > ul:first-child {
+	background-color: rgba(23, 94, 82, 0.3);
+	padding: 1rem;
+	flex: 1 1 50px;
+	font-weight: 700;
+	letter-spacing: 0.03rem;
+}
+.cd-flex > ul:last-child {
+	background-color: #eaf6f4;
+	padding: 1rem;
+	flex: 1 1 500px;
+}
+.cd-flex ul {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.cd-flex ul li {
+	padding: 1rem;
+	border-bottom: 1px solid rgba(23, 94, 82, 0.3);
+}

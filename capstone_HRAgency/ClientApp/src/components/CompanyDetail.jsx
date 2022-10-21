@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import authService from "./api-authorization/AuthorizeService";
+import ButtonLink from "./Button/ButtonLink";
+import "../custom.css";
 
 const CompanyDetail = () => {
 	const [singleCompnayDetail, setSingleCompanyDetail] = useState([]);
@@ -25,9 +27,10 @@ const CompanyDetail = () => {
 	}, []);
 
 	return (
-		<div>
-			<h1>CompanyDetail:- {companyID}</h1>
-			<div className="flex-center">
+		<section className="main-container">
+			<ButtonLink />
+
+			<div className="cd-flex cd-container">
 				<ul>
 					<li>Company Name</li>
 					<li>Address</li>
@@ -49,12 +52,12 @@ const CompanyDetail = () => {
 					<li>{`${cpFirstName} ${cpLastName}`}</li>
 					<li>{startDate}</li>
 					<li>{endDate}</li>
-					<li>{singleCompnayDetail.subscriptionStatus.toString()}</li>
+					{/* <li></li>
 					<li></li>
-					<li></li>
+					<li></li> */}
 				</ul>
 			</div>
-		</div>
+		</section>
 	);
 };
 
