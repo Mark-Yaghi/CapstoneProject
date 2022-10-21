@@ -6,6 +6,7 @@ import ButtonLink from "./Button/ButtonLink";
 
 const Company = () => {
 	const [companiesList, setCompaniesList] = useState([]);
+	const [companyCount, setCompanyCount] = useState([]);
 	useEffect(() => {
 		const populateRoles = async () => {
 			const token = await authService.getAccessToken();
@@ -15,16 +16,27 @@ const Company = () => {
 			if (responseList.ok) {
 				const dataList = await responseList.json();
 				setCompaniesList(dataList);
-			} else {
+			}
+			else {
 				console.log(await responseList.text());
 			}
 		};
+		const populateCount = async () => {
+			const token = await authService.getAccessToken();
+			const responseCount = await fetch('company/count', {
+				headers: !token ? {} : { 'Authorization': `Bearer ${token}` }//Admin
+			});
+			const dataCount = await responseCount.json();
+			setCompanyCount(dataCount);
+		}
 		populateRoles();
+		populateCount();
 	}, []);
 	return (
 		<div>
 			<ButtonLink />
 			<div className="main-container">
+				<p>There are currently {companyCount} companies in the database. </p>
 				<table className="table table-striped " aria-labelledby="tabelLabel">
 					<thead>
 						<tr>
