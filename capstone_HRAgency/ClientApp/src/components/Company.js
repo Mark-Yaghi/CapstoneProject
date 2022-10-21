@@ -24,36 +24,38 @@ const Company = () => {
 	return (
 		<div>
 			<ButtonLink />
-			<table className="table table-striped" aria-labelledby="tabelLabel">
-				<thead>
-					<tr>
-						<th>Company Name</th>
-						<th>Address</th>
-						<th>Phone</th>
-						<th>CP First Name</th>
-						<th>CP Last Name</th>
-						<th>CP Email</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					{companiesList.map((company) => (
-						<tr key={company.companyID}>
-							<td>{company.companyName}</td>
-							<td>{company.address}</td>
-							<td>{company.phone}</td>
-							<td>{company.cpFirstName}</td>
-							<td>{company.cpLastName}</td>
-							<td>{company.cpEmail}</td>
-							<td>
-								<NavLink to={`/companyDetail/${company.companyID}`} className="but-general but-col-sec">
-									Select
-								</NavLink>
-							</td>
+			<div className="main-container">
+				<table className="table table-striped " aria-labelledby="tabelLabel">
+					<thead>
+						<tr>
+							<th>Company Name</th>
+							<th>Address</th>
+							<th>Phone</th>
+							<th>CP First Name</th>
+							<th>CP Last Name</th>
+							<th>CP Email</th>
+							<th></th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{companiesList.map((company) => (
+							<tr key={company.companyID}>
+								<td>{company.companyName}</td>
+								<td>{company.address}</td>
+								<td>{company.phone}</td>
+								<td>{company.cpFirstName}</td>
+								<td>{company.cpLastName}</td>
+								<td>{company.cpEmail}</td>
+								<td>
+									<NavLink to={`/companyDetail/${company.companyID}`} className="but-general but-col-sec">
+										Select
+									</NavLink>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 };

@@ -171,9 +171,8 @@ code {
 } */
 .cd-container {
 	max-width: 1024px;
-	border: 1px solid royalblue;
 	margin-inline: auto;
-	margin-top: 6rem;
+	margin-top: 4rem;
 	/* margin-bottom: 8rem; */
 }
 .cd-flex {
@@ -202,4 +201,10 @@ code {
 .cd-flex ul li {
 	padding: 1rem;
 	border-bottom: 1px solid rgba(23, 94, 82, 0.3);
+}
+
+.cd-container-but-grp {
+	max-width: 1024px;
+	margin-inline: auto;
+	margin-top: 8rem;
 }

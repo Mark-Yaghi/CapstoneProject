@@ -7,10 +7,7 @@ const ButtonLink = () => {
 		<section className="main-container flex-center flex-option  flex-right">
 			<div className="flex-center">
 				<NavLink className="but-general but-col-prim" to="/">
-					Commendations 
-				</NavLink>
-				<NavLink className="but-general but-col-prim" to="/companyInfo">
-					Company Info
+					Commendations
 				</NavLink>
 				<NavLink className="but-general but-col-prim marg-left" to="/addClient">
 					Add New Client

@@ -47,6 +47,11 @@
 	color: #eaf6f4;
 	transition: all 0.3s ease-out;
 }
+.but-col-red {
+	background-color: #d21f3c;
+	color: #eaf6f4;
+	transition: all 0.3s ease-out;
+}
 
 .but-col-prim:hover {
 	background-color: #1f7d6d;
@@ -54,6 +59,10 @@
 
 .but-col-sec:hover {
 	background-color: #646464;
+	color: rgb(255, 255, 255);
+}
+.but-col-red:hover {
+	background-color: rgba(210, 31, 61, 0.8);
 	color: rgb(255, 255, 255);
 }
 
