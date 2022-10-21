@@ -52,10 +52,10 @@ export const EditClientForm = () => {
 				<div>
 					<label htmlFor="package">Package Type *</label>
 					<select name="packageType" id="packagetype">
-						<option value="1">Micro Company</option>
-						<option value="2">Small Company</option>
-						<option value="3">Medium Company</option>
-						<option value="4">Large Company</option>
+						<option value="1">Micro Company (1-9)</option>
+						<option value="2">Small Company (10-49)</option>
+						<option value="3">Medium Company (50-249)</option>
+						<option value="4">Large Company (250 +)</option>
 					</select>
 				</div>
 				<div>
@@ -77,7 +77,7 @@ export const EditClientForm = () => {
 					<label htmlFor="permissionLevel">Permission Level *</label>
 					<select name="permissionLevel" id="permissionlevel">
 						<option value="1">1 - Full Administrative Permissions</option>
-						<option value="2">2 - Client Level Permissions Only</option>
+						<option value="2">2 - Client Access Level</option>
 						
 					</select>
 				</div>

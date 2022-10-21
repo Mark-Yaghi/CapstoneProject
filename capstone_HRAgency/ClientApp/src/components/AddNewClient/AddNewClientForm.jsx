@@ -80,15 +80,15 @@ export const AddNewClientForm = () => {
 					<label htmlFor="phonenumber">Phone Number *</label>
 					<input type="phone" name="Phone" id="phonenumber" placeholder="000-000-0000" value={inputValue.Phone} onChange={handleChange} />
 				</div>
-				{/* <div>
+				 <div>
 					<label htmlFor="package">Package Type *</label>
 					<select name="packageType" id="packagetype" value={inputValue.packageType} onChange={handleChange}>
-						<option value="microcompany">Micro Company</option>
-						<option value="smallcompany">Small Company</option>
-						<option value="mediumcompany">Medium Company</option>
-						<option value="largecompany">Large Company</option>
+						<option value="1">Micro Company (1-9)</option>
+						<option value="2">Small Company (10-49)</option>
+						<option value="3">Medium Company (50-249)</option>
+						<option value="4">Large Company (250 +)</option>
 					</select>
-				</div> */}
+				</div>
 				<div>
 					<label htmlFor="startdate">Start Date *</label>
 					<input type="date" name="StartDate" id="startdate" placeholder="yyyy-mm-dd" value={inputValue.StartDate} onChange={handleChange} />
@@ -100,16 +100,16 @@ export const AddNewClientForm = () => {
 				<div>
 					<label htmlFor="sub-status">Subscription Status *</label>
 					<select name="SubscriptionStatus" id="sub-status" value={inputValue.SubscriptionStatus} onChange={handleChange}>
-						<option value="active">Active</option>
-						<option value="inactive">Inactive</option>
+						<option value="1">Active</option>
+						<option value="2">Inactive</option>
 					</select>
 				</div>
 				<div>
 					<label htmlFor="permission-level">Permission Level *</label>
 					<select name="permissionLevel" id="permission-level" value={inputValue.permissionLevel} onChange={handleChange}>
-						<option value="one">1</option>
-						<option value="two">2</option>
-						<option value="three">3</option>
+						<option value="1">Full Administrative Access</option>
+						<option value="2">Client Access Level </option>
+						
 					</select>
 				</div>
 				<button className="but-general but-col-prim">Accept Changes</button>
