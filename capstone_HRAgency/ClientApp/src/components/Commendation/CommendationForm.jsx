@@ -18,7 +18,7 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	};
 	return (
 		<section className="main-container">
-			{/* <h1 className="heading-card">Commendation Form</h1> */}
+			{/* <h1 className="heading-card">Appreciation! Form</h1> */}
 			{/* <div className="form-container">
 				<button className="but-general but-col-prim" onClick={() => onFormInformation(inputValue)}>
 					Preview

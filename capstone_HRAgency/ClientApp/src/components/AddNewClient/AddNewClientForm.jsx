@@ -112,7 +112,7 @@ export const AddNewClientForm = () => {
 						
 					</select>
 				</div>
-				<button className="but-general but-col-prim">Accept Changes</button>
+				<button className="but-general but-col-prim">Submit</button>
 				<div className="marg-top">
 					<NavLink to="/companyinfo" className="but-back but-col-sec">
 						Back

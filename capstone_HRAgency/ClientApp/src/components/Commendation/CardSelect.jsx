@@ -14,7 +14,7 @@ const CardSelect = ({ onSelectImage }) => {
 	// };
 	return (
 		<div className="main-container">
-			<h1 className="heading-card">Commendation Cards</h1>
+			<h1 className="heading-card">Appreciation! Cards</h1>
 			<div className="img-container">
 				<ul className="flex-center flex-option flex-xtra-option img-container-height ">
 					{Images.map((image) => {
