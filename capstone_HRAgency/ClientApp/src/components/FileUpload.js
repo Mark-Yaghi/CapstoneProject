@@ -20,8 +20,12 @@ export const FileUpload = () => {
         try {
             const res = await axios.post("api/file", formData);
             console.log(res);
+            alert("Your file has been successfully uploaded to the database.");
+            document.getElementById("fileUpload").value = "";
+
         } catch (ex) {
             console.log(ex);
+            alert("An error occurred uploading your image." + ex);
         }
     };
 
@@ -29,7 +33,7 @@ export const FileUpload = () => {
         <>
             <section className="main-container center">
                 <div>
-                    <input class="file-upload" type="file" onChange={saveFile} />
+                    <input id="fileUpload" class="file-upload" type="file" onChange={saveFile} />
                 </div>
             </section>
             <section className="main-container center">

@@ -88,7 +88,7 @@ export const AddNewClientForm = () => {
 						<option value="3">Medium Company (50-249)</option>
 						<option value="4">Large Company (250 +)</option>
 					</select>
-				</div> 
+				</div>
 				<div>
 					<label htmlFor="startdate">Start Date *</label>
 					<input type="date" name="StartDate" id="startdate" placeholder="yyyy-mm-dd" value={inputValue.StartDate} onChange={handleChange} />
@@ -107,12 +107,12 @@ export const AddNewClientForm = () => {
 				<div>
 					<label htmlFor="permission-level">Permission Level *</label>
 					<select name="permissionLevel" id="permission-level" value={inputValue.permissionLevel} onChange={handleChange}>
-						<option value="1">1 - Full Administrative Access</option>
-						<option value="2">2 - Client Access</option>
+						<option value="1">Full Administrative Access</option>
+						<option value="2">Client Access Level </option>
 						
 					</select>
 				</div>
-				<button className="but-general but-col-prim">Accept Changes</button>
+				<button className="but-general but-col-prim">Submit</button>
 				<div className="marg-top">
 					<NavLink to="/companyinfo" className="but-back but-col-sec">
 						Back

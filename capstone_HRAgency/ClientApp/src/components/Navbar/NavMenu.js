@@ -12,9 +12,13 @@ export const NavMenu = () => {
 		<header className="navbar">
 			<nav className="flex-center nav-container">
 				<div>
-					<Link to="/">
+					 <a href="https://www.thehragency.ca/">
+					   <img alt="Go Back to Home Page" src="./images/Logo.png"></img> 
+					 </a>
+
+					{/*<Link to="https://www.thehragency.ca/">
 						<img src="./images/Logo.png" alt="Logo" />
-					</Link>
+					</Link>*/}
 				</div>
 				<div className="flex-center nav-link">
 					<ul>
