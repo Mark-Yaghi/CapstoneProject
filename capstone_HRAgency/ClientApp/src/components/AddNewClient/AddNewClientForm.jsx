@@ -6,7 +6,9 @@ import "./AddNewClient-Style.css";
 
 export const AddNewClientForm = () => {
 	// const formInputValue = { companyName: "", firstName: "", lastName: "", clientEmail: "", phoneNumber: "", packageType: "", startDate: "", endDate: "", subStatus: "", permissionLevel: "" };
-	const formInputValue = { CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "" };
+	const formInputValue = {
+		CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", PackageType:"", PermissionLevel:""
+			};
 	const [inputValue, setInputValue] = useState(formInputValue);
 
 	// const fetchData = async () => {
@@ -17,10 +19,10 @@ export const AddNewClientForm = () => {
 	// 		console.log(error);
 	// 	}
 	// };
-
+	console.log(inputValue);
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		// console.log(inputValue);
+		 console.log("Inside the submit handler routine. "+ inputValue);
 		// try {
 		// 	const token = await authService.getAccessToken();
 		// const res = await axios("company/list", { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
@@ -32,17 +34,19 @@ export const AddNewClientForm = () => {
 		// } catch (error) {
 		// console.log(error.response);
 		// }
-		// try {
-		// 	const token = await authService.getAccessToken();
-		// 	const res = await axios.post("company/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-		// 	// const resp = await fetch("company/?" + new URLSearchParams(inputValue), { method: "POST" });
-		// 	console.log(res);
-		// 	console.log(res.data);
-		// } catch (error) {
-		// 	console.log(error.response);
-		// }
-		setInputValue({ CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "" });
+		setInputValue({ CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", PackageType: "", PermissionLevel: "" });
 		// setInputValue({ companyName: "", firstName: "", lastName: "", clientEmail: "", phoneNumber: "", packageType: "", startDate: "", endDate: "", subStatus: "", permissionLevel: "" });
+		console.log(setInputValue);
+		try {
+		 	const token = await authService.getAccessToken();
+		 	//const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
+		  const resp = await fetch(`registeredit/?` + new URLSearchParams(inputValue), { method: "POST" });
+		 	console.log(resp);
+		 	console.log(resp.data);
+		 } catch (error) {
+		 	console.log(error.response);
+		 }
+		
 	};
 	const handleChange = (e) => {
 		// console.log(`${e.target.name}: ${e.target.value}`);
@@ -57,36 +61,37 @@ export const AddNewClientForm = () => {
 			<form onSubmit={submitHandler} className="form-container bg-color-prim">
 				<h1 className="heading-form">Add New Client Form</h1>
 				<div>
-					<label htmlFor="companyName">Company Name *</label>
-					<input type="text" name="companyName" id="companyName" placeholder="Company Name" value={inputValue.companyName} onChange={handleChange} />
+					<label htmlFor="CompanyName">Company Name *</label>
+					<input type="text" name="CompanyName" id="CompanyName" placeholder="Company Name" value={inputValue.CompanyName} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="address">Address *</label>
 					<input type="text" name="Address" id="address" placeholder="Address" value={inputValue.Address} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="first-name">Contacts First Name *</label>
-					<input type="text" name="CPFirstName" id="first-name" placeholder="First Name" value={inputValue.CPFirstName} onChange={handleChange} />
+					<label htmlFor="phoneNumber">Phone Number *</label>
+					<input type="phone" name="Phone" id="phoneNumber" placeholder="000-000-0000" value={inputValue.Phone} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="lastname">Contacts Last Name *</label>
-					<input type="text" name="CPLastName" id="lastname" placeholder="Last Name" value={inputValue.CPLastName} onChange={handleChange} />
+					<label htmlFor="firstName">Contacts First Name *</label>
+					<input type="text" name="CPFirstName" id="firstName" placeholder="First Name" value={inputValue.CPFirstName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="clientemail">Contacts Email *</label>
-					<input type="email" name="CPEMail" id="clientemail" placeholder="Client Email" value={inputValue.CPEMail} onChange={handleChange} />
+					<label htmlFor="lastName">Contacts Last Name *</label>
+					<input type="text" name="CPLastName" id="lastName" placeholder="Last Name" value={inputValue.CPLastName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="phonenumber">Phone Number *</label>
-					<input type="phone" name="Phone" id="phonenumber" placeholder="000-000-0000" value={inputValue.Phone} onChange={handleChange} />
+					<label htmlFor="CPEMail">Contacts Email *</label>
+					<input type="email" name="CPEMail" id="CPEMail" placeholder="Client Email" value={inputValue.CPEMail} onChange={handleChange} />
 				</div>
+				
 				 <div>
-					<label htmlFor="package">Package Type *</label>
-					<select name="packageType" id="packagetype" value={inputValue.packageType} onChange={handleChange}>
-						<option value="1">Micro Company (1-9)</option>
-						<option value="2">Small Company (10-49)</option>
-						<option value="3">Medium Company (50-249)</option>
-						<option value="4">Large Company (250 +)</option>
+					<label htmlFor="PackageType">Package Type *</label>
+					<select name="PackageType" id="PackageType" value={inputValue.PackageType} onChange={handleChange}>
+						<option value="Micro Company (1-9)">Micro Company (1-9)</option>
+						<option value="Small Company (10-49)">Small Company (10-49)</option>
+						<option value="Medium Company (50-249)">Medium Company (50-249)</option>
+						<option value="Large Company (250 +)">Large Company (250 +)</option>
 					</select>
 				</div>
 				<div>
@@ -98,15 +103,15 @@ export const AddNewClientForm = () => {
 					<input type="date" name="EndDate" id="enddate" placeholder="yyyy-mm-dd" value={inputValue.EndDate} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="sub-status">Subscription Status *</label>
-					<select name="SubscriptionStatus" id="sub-status" value={inputValue.SubscriptionStatus} onChange={handleChange}>
+					<label htmlFor="SubscriptionStatus">Subscription Status *</label>
+					<select name="SubscriptionStatus" id="SubscriptionStatus" value={inputValue.SubscriptionStatus} onChange={handleChange}>
+						<option value="0">Inactive</option>
 						<option value="1">Active</option>
-						<option value="2">Inactive</option>
 					</select>
 				</div>
 				<div>
-					<label htmlFor="permission-level">Permission Level *</label>
-					<select name="permissionLevel" id="permission-level" value={inputValue.permissionLevel} onChange={handleChange}>
+					<label htmlFor="PermissionLevel">Permission Level *</label>
+					<select name="PermissionLevel" id="PermissionLevel" value={inputValue.PermissionLevel} onChange={handleChange}>
 						<option value="1">Full Administrative Access</option>
 						<option value="2">Client Access Level </option>
 						
