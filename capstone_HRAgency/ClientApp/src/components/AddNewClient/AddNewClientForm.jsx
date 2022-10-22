@@ -22,7 +22,7 @@ export const AddNewClientForm = () => {
 	console.log(inputValue);
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		 console.log("Inside the submit handler routine. "+ inputValue);
+		console.log("Inside the submit handler routine. " + inputValue);
 		// try {
 		// 	const token = await authService.getAccessToken();
 		// const res = await axios("company/list", { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
@@ -34,7 +34,86 @@ export const AddNewClientForm = () => {
 		// } catch (error) {
 		// console.log(error.response);
 		// }
-		setInputValue({ CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", PackageType: "", PermissionLevel: "" });
+
+		var tempDate = new Date();
+		tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate();
+
+		var todaysDate = new Date();
+		todaysDate = (todaysDate.getFullYear() + 1) + "-" + (todaysDate.getMonth() + 1) + "-" + todaysDate.getDate();
+		//alert("This is Date.now: " + Date.now()); //returns milliseconds
+
+		//alert("This is inputvalue.startdate: "+ inputValue.StartDate+ " ; this is tempdate: "+ tempDate); //returns date
+		//alert("Future year: " + todaysDate + " Start Year: " + inputValue.StartDate);
+		if ((inputValue.CompanyName).trim() === "") {
+			alert("Please enter a name for the company.");
+			document.getElementById("CompanyName").focus();
+		}
+		
+		else if ((inputValue.Address).trim() === "") {
+			alert("Please enter an address for the company.");
+			document.getElementById("address").focus();
+		}
+	
+		else if ((inputValue.Address).length <= 10) {
+			alert("Please enter an address with at least 10 characters for the company.");
+			document.getElementById("address").focus();
+		}
+		else if((inputValue.Phone).trim() === "")
+		{
+			alert("Please enter a 10 digit phone number for the company.");
+			document.getElementById("phoneNumber").focus();
+		}
+		else if (isNaN(inputValue.Phone)) {
+			alert("Please enter a 10 digit phone number for the company consisting of only numbers.");
+			document.getElementById("phoneNumber").focus();
+		}
+		else if ((inputValue.CPFirstName).trim() === "") {
+			alert("Please enter a Contact Person first name for the company.");
+			document.getElementById("firstName").focus();
+		}
+		else if ((inputValue.CPLastName).trim() === "") {
+			alert("Please enter a Contact Person last name for the company.");
+			document.getElementById("lastName").focus();
+		}
+		else if ((inputValue.CPEMail).trim() === "") {
+			alert("Please enter a Contact Person email for the company.");
+			document.getElementById("CPEMail").focus();
+		}
+		
+		else if ((inputValue.PackageType.length) == 0) {
+			alert("Please select a Package Type for the company");
+			document.getElementById("PackageType").focus();
+		}
+		else if ((inputValue.StartDate).trim() === "") {
+			alert("Please select a Start Date for the company");
+			document.getElementById("StartDate").focus();
+		}
+		else if ((inputValue.EndDate).trim() === "") {
+			alert("Please select an End Date for the company");
+			document.getElementById("EndDate").focus();
+		}
+		else if ((inputValue.StartDate).trim() >= (inputValue.EndDate).trim()) {
+			alert("Please enter an end date that is AFTER the start date.");
+			document.getElementById("EndDate").focus();
+		}
+		else if ((inputValue.StartDate) < tempDate) {
+			alert("Please select a Start Date equal to or later than today's date of " + tempDate );
+			document.getElementById("StartDate").focus();
+		}
+		else if ((inputValue.StartDate) > todaysDate) {
+			alert("Please select a Start Date no more than 1 year into the future from today's date of " + tempDate);
+			document.getElementById("StartDate").focus();
+		}
+		else if ((inputValue.SubscriptionStatus).trim() === "") {
+			alert("Please select a Subscription Status for the company");
+			document.getElementById("SubscriptionStatus").focus();
+		}
+		else if ((inputValue.PermissionLevel).trim() === "") {
+			alert("Please select a Permission Level for the company");
+			document.getElementById("PermissionLevel").focus();
+		}
+
+		setInputValue({ CompanyName: inputValue.CompanyName, Address: inputValue.Address, Phone: inputValue.Phone, CPFirstName: inputValue.CPFirstName, CPLastName: inputValue.CPLastName, CPEMail: inputValue.CPEMail, StartDate: inputValue.StartDate, EndDate: inputValue.EndDate, SubscriptionStatus: inputValue.SubscriptionStatus, PackageType: inputValue.PackageType, PermissionLevel: inputValue.PermissionLevel });
 		// setInputValue({ companyName: "", firstName: "", lastName: "", clientEmail: "", phoneNumber: "", packageType: "", startDate: "", endDate: "", subStatus: "", permissionLevel: "" });
 		console.log(setInputValue);
 		try {
@@ -70,7 +149,7 @@ export const AddNewClientForm = () => {
 				</div>
 				<div>
 					<label htmlFor="phoneNumber">Phone Number *</label>
-					<input type="phone" name="Phone" id="phoneNumber" placeholder="000-000-0000" value={inputValue.Phone} onChange={handleChange} />
+					<input type="phone" name="Phone" id="phoneNumber" maxlength="10" placeholder="0000000000" value={inputValue.Phone} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="firstName">Contacts First Name *</label>
@@ -88,6 +167,7 @@ export const AddNewClientForm = () => {
 				 <div>
 					<label htmlFor="PackageType">Package Type *</label>
 					<select name="PackageType" id="PackageType" value={inputValue.PackageType} onChange={handleChange}>
+						<option value="">Please select a Package Type</option>
 						<option value="Micro Company (1-9)">Micro Company (1-9)</option>
 						<option value="Small Company (10-49)">Small Company (10-49)</option>
 						<option value="Medium Company (50-249)">Medium Company (50-249)</option>
@@ -96,15 +176,16 @@ export const AddNewClientForm = () => {
 				</div>
 				<div>
 					<label htmlFor="startdate">Start Date *</label>
-					<input type="date" name="StartDate" id="startdate" placeholder="yyyy-mm-dd" value={inputValue.StartDate} onChange={handleChange} />
+					<input type="date" name="StartDate" id="StartDate" placeholder="yyyy-mm-dd" value={inputValue.StartDate} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="enddate">End Date *</label>
-					<input type="date" name="EndDate" id="enddate" placeholder="yyyy-mm-dd" value={inputValue.EndDate} onChange={handleChange} />
+					<input type="date" name="EndDate" id="EndDate" placeholder="yyyy-mm-dd" value={inputValue.EndDate} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="SubscriptionStatus">Subscription Status *</label>
 					<select name="SubscriptionStatus" id="SubscriptionStatus" value={inputValue.SubscriptionStatus} onChange={handleChange}>
+						<option value="">Please assign a Subscription Status</option>
 						<option value="0">Inactive</option>
 						<option value="1">Active</option>
 					</select>
@@ -112,8 +193,9 @@ export const AddNewClientForm = () => {
 				<div>
 					<label htmlFor="PermissionLevel">Permission Level *</label>
 					<select name="PermissionLevel" id="PermissionLevel" value={inputValue.PermissionLevel} onChange={handleChange}>
+						<option value="">Please assign a Permission Level</option>
 						<option value="1">Full Administrative Access</option>
-						<option value="2">Client Access Level </option>
+						<option value="2">Client Level Access </option>
 						
 					</select>
 				</div>
