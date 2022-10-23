@@ -21,7 +21,7 @@ namespace capstone_HRAgency.Controllers
         }
 
         [HttpPost]
-        [Route("POST")]
+       // [Route("POST")]
         public ActionResult Post(string newCompanyName, string newAddress, string newPhone, string newCPFirstName, string newCPLastName, string newCPEmail, string newStartDate, string newEndDate, string newSubscriptionStatus, string newPackageName, int newPermissionLevel)
         {
 
@@ -83,7 +83,7 @@ namespace capstone_HRAgency.Controllers
                         CPEmail = newCPEmail,
                         StartDate = DateOnly.Parse(newStartDate),
                         EndDate = DateOnly.Parse(newEndDate),
-                        SubscriptionStatus = bool.Parse(newSubscriptionStatus)
+                        SubscriptionStatus =  newSubscriptionStatus == "1" //if value returned is a one->true; anything else is a false
 
                     });
                     _context.SaveChanges();
@@ -117,8 +117,9 @@ namespace capstone_HRAgency.Controllers
 
             }
 
-            catch
+            catch (Exception e)
             {
+
                 return StatusCode(500);
             }
         }

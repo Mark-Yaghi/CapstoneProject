@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace capstone_HRAgency.Migrations
 {
-    public partial class thirdMigration : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -315,7 +315,8 @@ namespace capstone_HRAgency.Migrations
                 name: "package",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int(11)", nullable: false),
+                    PackageID = table.Column<int>(type: "int(11)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CompanyID = table.Column<int>(type: "int(11)", nullable: false),
                     PackageName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -324,11 +325,11 @@ namespace capstone_HRAgency.Migrations
                 {
                     table.PrimaryKey("PK_package", x => x.PackageID);
                     table.ForeignKey(
-                        name: "FK_package_company_PackageID",
-                        column: x => x.PackageID,
+                        name: "FK_package_company_CompanyID",
+                        column: x => x.CompanyID,
                         principalTable: "company",
                         principalColumn: "CompanyID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .Annotation("Relational:Collation", "utf8mb4_general_ci");
@@ -372,11 +373,11 @@ namespace capstone_HRAgency.Migrations
                 columns: new[] { "PackageID", "CompanyID", "PackageName" },
                 values: new object[,]
                 {
-                    { 1, 2, "Micro Company" },
-                    { 2, 3, "Small Company" },
-                    { 3, 4, "Medium Company" },
-                    { 4, 5, "Large Company" },
-                    { 5, 6, "Small Company" }
+                    { 1, 1, "Micro Company" },
+                    { 2, 2, "Small Company" },
+                    { 3, 3, "Medium Company" },
+                    { 4, 4, "Large Company" },
+                    { 5, 5, "Small Company" }
                 });
 
             migrationBuilder.InsertData(

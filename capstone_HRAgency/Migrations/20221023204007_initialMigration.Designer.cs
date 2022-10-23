@@ -11,8 +11,8 @@ using capstone_HRAgency.Data;
 namespace capstone_HRAgency.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221019190424_thirdMigration")]
-    partial class thirdMigration
+    [Migration("20221023204007_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -242,31 +242,31 @@ namespace capstone_HRAgency.Migrations
                         new
                         {
                             PackageID = 1,
-                            CompanyID = 2,
+                            CompanyID = 1,
                             PackageName = "Micro Company"
                         },
                         new
                         {
                             PackageID = 2,
-                            CompanyID = 3,
+                            CompanyID = 2,
                             PackageName = "Small Company"
                         },
                         new
                         {
                             PackageID = 3,
-                            CompanyID = 4,
+                            CompanyID = 3,
                             PackageName = "Medium Company"
                         },
                         new
                         {
                             PackageID = 4,
-                            CompanyID = 5,
+                            CompanyID = 4,
                             PackageName = "Large Company"
                         },
                         new
                         {
                             PackageID = 5,
-                            CompanyID = 6,
+                            CompanyID = 5,
                             PackageName = "Small Company"
                         });
                 });
@@ -602,8 +602,8 @@ namespace capstone_HRAgency.Migrations
                 {
                     b.HasOne("capstone_HRAgency.Models.Company", "Company")
                         .WithMany("Packages")
-                        .HasForeignKey("PackageID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CompanyID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Company");
