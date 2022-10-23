@@ -3,7 +3,7 @@ const { env } = require("process");
 
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` : env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(";")[0] : "http://localhost:5189";
 
-const context = [ "/_configuration", "/.well-known", "/Identity", "/connect", "/ApplyDatabaseMigrations", "/_framework", "/api/file", "/company", "/userinfo", "/package"];
+const context = [ "/_configuration", "/.well-known", "/Identity", "/connect", "/ApplyDatabaseMigrations", "/_framework", "/api/file", "/company", "/userinfo", "/package", "/api/registeredit"];
 
 module.exports = function (app) {
 	const appProxy = createProxyMiddleware(context, {

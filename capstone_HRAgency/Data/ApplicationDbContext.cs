@@ -99,14 +99,18 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
       entity.Property(e => e.PackageID).HasColumnType("int(11)").HasColumnName("PackageID").ValueGeneratedOnAdd();
       entity.Property(e => e.CompanyID).HasColumnType("int(11)").HasColumnName("CompanyID");
       entity.Property(e => e.PackageName).HasColumnType("varchar(30)").HasColumnName("PackageName").HasMaxLength(30);
-      entity.HasOne(Package => Package.Company).WithMany(Company => Company.Packages).HasForeignKey(package => package.PackageID);
-      entity.HasData(new Package[]
+      entity.HasOne(Package => Package.Company)
+            .WithMany(Company => Company.Packages)
+            .HasForeignKey(Package => Package.CompanyID)
+            .OnDelete(DeleteBehavior.Restrict);
+      
+        entity.HasData(new Package[]
          {
-                new Package() {PackageID = 1, CompanyID = 2, PackageName="Micro Company" },
-                new Package() {PackageID = 2, CompanyID = 3, PackageName="Small Company" },
-                new Package() {PackageID = 3, CompanyID = 4, PackageName="Medium Company" },
-                new Package() {PackageID = 4, CompanyID = 5, PackageName="Large Company" },
-                new Package() {PackageID = 5, CompanyID = 6, PackageName="Small Company" },
+                new Package() {PackageID = 1, CompanyID = 1, PackageName="Micro Company" },
+                new Package() {PackageID = 2, CompanyID = 2, PackageName="Small Company" },
+                new Package() {PackageID = 3, CompanyID = 3, PackageName="Medium Company" },
+                new Package() {PackageID = 4, CompanyID = 4, PackageName="Large Company" },
+                new Package() {PackageID = 5, CompanyID = 5, PackageName="Small Company" },
 
        });
 

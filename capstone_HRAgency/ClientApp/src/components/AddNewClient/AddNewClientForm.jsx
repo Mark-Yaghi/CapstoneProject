@@ -7,7 +7,7 @@ import "./AddNewClient-Style.css";
 export const AddNewClientForm = () => {
 	
 	const formInputValue = {
-		CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", PackageType:"", PermissionLevel:""
+		CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", PackageName:"", PermissionLevel:""
 			};
 	const [inputValue, setInputValue] = useState(formInputValue);
 
@@ -16,17 +16,7 @@ export const AddNewClientForm = () => {
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		console.log("Inside the submit handler routine. " + inputValue);
-		// try {
-		// 	const token = await authService.getAccessToken();
-		// const res = await axios("company/list", { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-		// const resp = await axios("/package/list", { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-		// const resu = await axios("userinfo/", { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-		// console.log(res.data);
-		// console.log(resp.data);
-		// console.log(resu.data);
-		// } catch (error) {
-		// console.log(error.response);
-		// }
+	
 
 		var tempDate = new Date();
 		tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate();
@@ -42,18 +32,17 @@ export const AddNewClientForm = () => {
 			alert("Please enter a name for the company.");
 			document.getElementById("CompanyName").focus();
 		}
-		
+
 		else if ((inputValue.Address).trim() === "") {
 			alert("Please enter an address for the company.");
 			document.getElementById("address").focus();
 		}
-	
+
 		else if ((inputValue.Address).length <= 10) {
 			alert("Please enter an address with at least 10 characters for the company.");
 			document.getElementById("address").focus();
 		}
-		else if((inputValue.Phone).trim() === "")
-		{
+		else if ((inputValue.Phone).trim() === "") {
 			alert("Please enter a 10 digit phone number for the company.");
 			document.getElementById("phoneNumber").focus();
 		}
@@ -77,8 +66,8 @@ export const AddNewClientForm = () => {
 			alert("Please enter an email with at least 6 characters, and includes the '@' symbol.");
 			document.getElementById("CPEmail").focus();
 		}
-		
-		else if ((inputValue.PackageType.length) == 0) {
+
+		else if ((inputValue.PackageName.length) == 0) {
 			alert("Please select a Package Type for the company");
 			document.getElementById("PackageType").focus();
 		}
@@ -94,8 +83,8 @@ export const AddNewClientForm = () => {
 			alert("Please enter an end date that is AFTER the start date.");
 			document.getElementById("EndDate").focus();
 		}
-		else if (inputValue.StartDate > tempDate) {
-			alert("Please select a Start Date equal to or later than today's date of " + tempDate );
+		else if (inputValue.StartDate < tempDate) {
+			alert("Please select a Start Date equal to or later than today's date of " + tempDate);
 			document.getElementById("StartDate").focus();
 		}
 		else if (inputValue.StartDate > futureDate) {
@@ -110,20 +99,38 @@ export const AddNewClientForm = () => {
 			alert("Please select a Permission Level for the company");
 			document.getElementById("PermissionLevel").focus();
 		}
-
-		setInputValue({ CompanyName: inputValue.CompanyName, Address: inputValue.Address, Phone: inputValue.Phone, CPFirstName: inputValue.CPFirstName, CPLastName: inputValue.CPLastName, CPEMail: inputValue.CPEMail, StartDate: inputValue.StartDate, EndDate: inputValue.EndDate, SubscriptionStatus: inputValue.SubscriptionStatus, PackageType: inputValue.PackageType, PermissionLevel: inputValue.PermissionLevel });
-		// setInputValue({ companyName: "", firstName: "", lastName: "", clientEmail: "", phoneNumber: "", packageType: "", startDate: "", endDate: "", subStatus: "", permissionLevel: "" });
-		console.log(setInputValue);
-		try {
-		 	const token = await authService.getAccessToken();
-		 	//const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-		  const resp = await fetch(`api/registeredit/?` + new URLSearchParams(inputValue), { method: "POST" });
-		 	console.log(resp);
-		 	console.log(resp.data);
-		 } catch (error) {
-		 	console.log(error.response);
-		 }
+		else
+		{ 
+			console.log(setInputValue);
+			try
+			{
+				let urlParams =
+				{
+					newCompanyName: inputValue.CompanyName,
+					newAddress: inputValue.Address,
+					newPhone: inputValue.Phone,
+					newCPFirstName: inputValue.CPFirstName,
+					newCPLastName: inputValue.CPLastName,
+					newCPEMail: inputValue.CPEMail,
+					newStartDate: inputValue.StartDate,
+					newEndDate: inputValue.EndDate,
+					newSubscriptionStatus: inputValue.SubscriptionStatus,
+					newPackageName: inputValue.PackageName,
+					newPermissionLevel: inputValue.PermissionLevel
+				};
 		
+		 const token = await authService.getAccessToken();
+		 
+		  const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
+			  method: "POST" });
+			       console.log(await resp.text());
+				alert("The new company has been successfully added to the database.");
+			}
+			catch (error)
+			{
+		 	    console.log(error.response);
+		    }
+		}
 	};
 	const handleChange = (e) => {
 		// console.log(`${e.target.name}: ${e.target.value}`);
@@ -152,7 +159,7 @@ export const AddNewClientForm = () => {
 					<input type="text" name="CompanyName" id="CompanyName" placeholder="Company Name" value={inputValue.CompanyName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="address">Address *</label>
+					<label htmlFor="Address">Address *</label>
 					<input type="text" name="Address" id="address" placeholder="Address" value={inputValue.Address} onChange={handleChange} />
 				</div>
 				<div>
@@ -174,7 +181,7 @@ export const AddNewClientForm = () => {
 				
 				 <div>
 					<label htmlFor="PackageType">Package Type *</label>
-					<select name="PackageType" id="PackageType" value={inputValue.PackageType} onChange={handleChange}>
+					<select name="PackageName" id="PackageType" value={inputValue.PackageName} onChange={handleChange}>
 						<option value="">Please select a Package Type</option>
 						<option value="Micro Company (1-9)">Micro Company (1-9)</option>
 						<option value="Small Company (10-49)">Small Company (10-49)</option>
