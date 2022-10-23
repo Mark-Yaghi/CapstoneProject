@@ -12,8 +12,6 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using capstone_HRAgency.Controllers;
 using Microsoft.Net.Http.Headers;
-using capstone_HRAgency.Areas.Identity.Data;
-
 
 var builder = WebApplication.CreateBuilder(args);
 

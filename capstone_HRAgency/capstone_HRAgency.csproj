@@ -45,6 +45,7 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Identity\Data\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\images\thumbnails\" />
   </ItemGroup>
