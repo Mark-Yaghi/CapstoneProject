@@ -32,18 +32,17 @@ export const AddNewClientForm = () => {
 			alert("Please enter a name for the company.");
 			document.getElementById("CompanyName").focus();
 		}
-		
+
 		else if ((inputValue.Address).trim() === "") {
 			alert("Please enter an address for the company.");
 			document.getElementById("address").focus();
 		}
-	
+
 		else if ((inputValue.Address).length <= 10) {
 			alert("Please enter an address with at least 10 characters for the company.");
 			document.getElementById("address").focus();
 		}
-		else if ((inputValue.Phone).trim() === "")
-		{
+		else if ((inputValue.Phone).trim() === "") {
 			alert("Please enter a 10 digit phone number for the company.");
 			document.getElementById("phoneNumber").focus();
 		}
@@ -67,7 +66,7 @@ export const AddNewClientForm = () => {
 			alert("Please enter an email with at least 6 characters, and includes the '@' symbol.");
 			document.getElementById("CPEmail").focus();
 		}
-		
+
 		else if ((inputValue.PackageName.length) == 0) {
 			alert("Please select a Package Type for the company");
 			document.getElementById("PackageType").focus();
@@ -85,7 +84,7 @@ export const AddNewClientForm = () => {
 			document.getElementById("EndDate").focus();
 		}
 		else if (inputValue.StartDate < tempDate) {
-			alert("Please select a Start Date equal to or later than today's date of " + tempDate );
+			alert("Please select a Start Date equal to or later than today's date of " + tempDate);
 			document.getElementById("StartDate").focus();
 		}
 		else if (inputValue.StartDate > futureDate) {
@@ -100,36 +99,38 @@ export const AddNewClientForm = () => {
 			alert("Please select a Permission Level for the company");
 			document.getElementById("PermissionLevel").focus();
 		}
-
-
-	
-		console.log(setInputValue);
-		try {
-			let urlParams = {
-				newCompanyName: inputValue.CompanyName,
-				newAddress: inputValue.Address,
-				newPhone: inputValue.Phone,
-				newCPFirstName: inputValue.CPFirstName,
-				newCPLastName: inputValue.CPLastName,
-				newCPEMail: inputValue.CPEMail,
-				newStartDate: inputValue.StartDate,
-				newEndDate: inputValue.EndDate,
-				newSubscriptionStatus: inputValue.SubscriptionStatus,
-				newPackageName: inputValue.PackageName,
-				newPermissionLevel: inputValue.PermissionLevel
-			};
-
+		else
+		{ 
+			console.log(setInputValue);
+			try
+			{
+				let urlParams =
+				{
+					newCompanyName: inputValue.CompanyName,
+					newAddress: inputValue.Address,
+					newPhone: inputValue.Phone,
+					newCPFirstName: inputValue.CPFirstName,
+					newCPLastName: inputValue.CPLastName,
+					newCPEMail: inputValue.CPEMail,
+					newStartDate: inputValue.StartDate,
+					newEndDate: inputValue.EndDate,
+					newSubscriptionStatus: inputValue.SubscriptionStatus,
+					newPackageName: inputValue.PackageName,
+					newPermissionLevel: inputValue.PermissionLevel
+				};
 		
-		 	const token = await authService.getAccessToken();
-		 	//const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-		  const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), { method: "POST" });
-			
-			console.log(await resp.text());
-
-		 } catch (error) {
-		 	console.log(error.response);
-		 }
-		
+		 const token = await authService.getAccessToken();
+		 
+		  const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
+			  method: "POST" });
+			       console.log(await resp.text());
+				alert("The new company has been successfully added to the database.");
+			}
+			catch (error)
+			{
+		 	    console.log(error.response);
+		    }
+		}
 	};
 	const handleChange = (e) => {
 		// console.log(`${e.target.name}: ${e.target.value}`);
