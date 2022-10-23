@@ -3,7 +3,6 @@
 import { LoginMenu } from "../components/api-authorization/LoginMenu";
 import AddNewClient from "./AddNewClient/AddNewClient";
 
-
 export class AddNewClient extends Component {
 	static displayName = AddNewClient.name;
 

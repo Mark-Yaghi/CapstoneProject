@@ -151,3 +151,8 @@ button a:hover {
 	color: #d21f3c;
 	margin-bottom: 80px;
 }
+
+.nav-spec-but {
+	text-align: center;
+	width: 150px
+}
