@@ -135,7 +135,7 @@ export const AddNewClientForm = () => {
 
 	const checkEmail = (emailInput) => {
 		let validEmail = false;
-		for (var i = 0; i <= emailInput.length(); i++) {
+		for (var i = 0; i <= emailInput.length; i++) {
 			if (emailInput.charAt(i) == "@") { validEmail = true; }
 
 		}

@@ -24,7 +24,7 @@ export const EditClientForm = () => {
 	//alert("This is Date.now: " + Date.now()); //returns milliseconds
 
 	//alert("This is inputvalue.startdate: "+ inputValue.StartDate+ " ; this is tempdate: "+ tempDate); //returns date
-	alert("Today's date plus one year: " + todaysDate + " Start Year: " + inputValue.StartDate);
+	//alert("Today's date plus one year: " + todaysDate + " Start Year: " + inputValue.StartDate);
 	if ((inputValue.CompanyName).trim() === "") {
 		alert("Please enter a name for the company.");
 		document.getElementById("CompanyName").focus();
@@ -125,7 +125,7 @@ export const EditClientForm = () => {
 	const checkEmail = (emailInput)=>
 	{
 		let validEmail = false;
-		for (var i = 0; i <= emailInput.length(); i++)
+		for (var i = 0; i <= emailInput.length; i++)
 		{
 			if (emailInput.charAt(i) == "@")
 			{ validEmail = true; }
