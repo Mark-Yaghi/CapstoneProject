@@ -202,7 +202,7 @@ export const EditClientForm = () => {
 				<button className="but-general but-col-prim">Accept Changes</button>
 				<br></br>
 				<br></br>
-				<button className="but-back but-col-sec">Back</button>
+				<NavLink className="but-general but-col-sec nav-spec-but" to="/company">Back</NavLink>
 			</form>
 		</section>
 	);

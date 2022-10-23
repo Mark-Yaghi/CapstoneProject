@@ -2,7 +2,6 @@
 import authService from "./api-authorization/AuthorizeService";
 import { NavLink } from "react-router-dom";
 import "../custom.css";
-import ButtonLink from "./Button/ButtonLink";
 
 const Company = () => {
 	const [companiesList, setCompaniesList] = useState([]);
@@ -34,7 +33,6 @@ const Company = () => {
 	}, []);
 	return (
 		<div>
-			<ButtonLink />
 			<div className="main-container">
 				<p>There are currently {companyCount} companies in the database. </p>
 				<table className="table table-striped " aria-labelledby="tabelLabel">

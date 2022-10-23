@@ -33,12 +33,12 @@ const Commendation = () => {
 			<section className="main-container flex-center flex-option">
 				<h3>Welcome, userName</h3>
 				<div className="flex-center">
-					<NavLink className="but-general but-col-prim" to="/authentication/register">
+					{/* <NavLink className="but-general but-col-prim" to="/authentication/register">
 						Register
-					</NavLink>
-					{/* <NavLink className="but-general but-col-prim" to="/authentication/login">
+					</NavLink>*/}
+					{/*<NavLink className="but-general but-col-prim" to="/authentication/login">
 						Login
-					</NavLink> */}
+					</NavLink>*/}
 					<button className="but-general but-col-prim marg-left">
 						<LoginMenu></LoginMenu>
 					</button>

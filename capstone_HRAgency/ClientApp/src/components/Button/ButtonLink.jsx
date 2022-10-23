@@ -13,11 +13,11 @@ const ButtonLink = () => {
 					Add New Client
 				</NavLink>
 				
-				{/* <button className="but-general but-col-prim marg-left">
+				{ <button className="but-general but-col-prim marg-left">
 					<LoginMenu></LoginMenu>
-				</button>*/}
+				</button>}
 			</div>
-		</section>
+		</section >
 	);
 };
 

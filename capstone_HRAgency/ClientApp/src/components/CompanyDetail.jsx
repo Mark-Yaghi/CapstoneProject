@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, NavLink } from "react-router-dom";
 import authService from "./api-authorization/AuthorizeService";
-import ButtonLink from "./Button/ButtonLink";
 import "../custom.css";
 
 const CompanyDetail = () => {
@@ -28,7 +27,6 @@ const CompanyDetail = () => {
 
 	return (
 		<section className="main-container">
-			<ButtonLink />
 			<section className="cd-container-but-grp ">
 				<div className="flex-center flex-xtra-option">
 					
