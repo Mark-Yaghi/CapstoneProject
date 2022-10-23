@@ -7,7 +7,7 @@ import "./AddNewClient-Style.css";
 export const AddNewClientForm = () => {
 	
 	const formInputValue = {
-		newCompanyName: "", newAddress: "", newPhone: "", newCPFirstName: "", newCPLastName: "", newCPEMail: "", newStartDate: "", newEndDate: "", newSubscriptionStatus: "", newPackageName:"", newPermissionLevel:""
+		CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", PackageName:"", PermissionLevel:""
 			};
 	const [inputValue, setInputValue] = useState(formInputValue);
 
@@ -101,16 +101,30 @@ export const AddNewClientForm = () => {
 			document.getElementById("PermissionLevel").focus();
 		}
 
-		setInputValue({ newCompanyName: inputValue.CompanyName, newAddress: inputValue.Address, newPhone: inputValue.Phone, newCPFirstName: inputValue.CPFirstName, newCPLastName: inputValue.CPLastName, newCPEMail: inputValue.CPEMail, newStartDate: inputValue.StartDate, newEndDate: inputValue.EndDate, newSubscriptionStatus: inputValue.SubscriptionStatus, newPackageName: inputValue.PackageName, newPermissionLevel: inputValue.PermissionLevel });
+
 	
 		console.log(setInputValue);
 		try {
+			let urlParams = {
+				newCompanyName: inputValue.CompanyName,
+				newAddress: inputValue.Address,
+				newPhone: inputValue.Phone,
+				newCPFirstName: inputValue.CPFirstName,
+				newCPLastName: inputValue.CPLastName,
+				newCPEMail: inputValue.CPEMail,
+				newStartDate: inputValue.StartDate,
+				newEndDate: inputValue.EndDate,
+				newSubscriptionStatus: inputValue.SubscriptionStatus,
+				newPackageName: inputValue.PackageName,
+				newPermissionLevel: inputValue.PermissionLevel
+			};
+
+		
 		 	const token = await authService.getAccessToken();
 		 	//const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-		  const resp = await fetch(`api/registeredit?` + new URLSearchParams(inputValue), { method: "POST" });
+		  const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), { method: "POST" });
 			
 			console.log(await resp.text());
-			console.log(resp.data);
 
 		 } catch (error) {
 		 	console.log(error.response);
