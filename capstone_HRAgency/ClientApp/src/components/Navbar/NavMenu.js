@@ -23,7 +23,6 @@ export const NavMenu = () => {
 									<a href='/'>Appreciations</a>
 									<a href='/fileupload'>Card Upload</a>
 									<a href='/addClient'>Add New Client</a>
-									<a href='/editClient'>Edit Client</a>
 									<NavLink to="/company">Client Info</NavLink>
 									<a href='/authentication/register'>Register</a>
 									<LoginMenu></LoginMenu>
