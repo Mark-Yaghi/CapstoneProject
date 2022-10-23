@@ -21,6 +21,7 @@ namespace capstone_HRAgency.Controllers
         }
 
         [HttpPost]
+        [Route("POST")]
         public ActionResult Post(string newCompanyName, string newAddress, string newPhone, string newCPFirstName, string newCPLastName, string newCPEmail, string newStartDate, string newEndDate, string newSubscriptionStatus, string newPackageName, int newPermissionLevel)
         {
 
@@ -63,11 +64,11 @@ namespace capstone_HRAgency.Controllers
                 {
                     return BadRequest("Please enter a contact person last name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
-               // else if (!IsValid(newCPEmail))
-                // else if (!new Regex(@"^[@ .]{1}$").IsMatch(newCPEmail.Trim()))
-               // {
-                  //  return BadRequest("Please enter a proper email address.");
-               // }
+                else if (!IsValid(newCPEmail))
+                 //else if (!new Regex(@"^[@ .]{1}$").IsMatch(newCPEmail.Trim()))
+                {
+                    return BadRequest("Please enter a proper email address.");
+                }
 
 
                 else
@@ -88,9 +89,6 @@ namespace capstone_HRAgency.Controllers
                     _context.SaveChanges();
                     // return Ok("The new company was successfully added to the database.");
                 }
-
-
-
 
                 //select the id from the company just added
                 Company found = _context.Companies.Where(x => x.CompanyName == newCompanyName).Single();

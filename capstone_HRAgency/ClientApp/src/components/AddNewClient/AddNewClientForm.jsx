@@ -5,20 +5,13 @@ import axios from "axios";
 import "./AddNewClient-Style.css";
 
 export const AddNewClientForm = () => {
-	// const formInputValue = { companyName: "", firstName: "", lastName: "", clientEmail: "", phoneNumber: "", packageType: "", startDate: "", endDate: "", subStatus: "", permissionLevel: "" };
+	
 	const formInputValue = {
 		CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", PackageType:"", PermissionLevel:""
 			};
 	const [inputValue, setInputValue] = useState(formInputValue);
 
-	// const fetchData = async () => {
-	// 	try {
-	// 		const res = await axios.post("company/list", { inputValue });
-	// 		console.log(res);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
+
 	console.log(inputValue);
 	const submitHandler = async (e) => {
 		e.preventDefault();
@@ -38,12 +31,13 @@ export const AddNewClientForm = () => {
 		var tempDate = new Date();
 		tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate();
 
-		var todaysDate = new Date();
-		todaysDate = (todaysDate.getFullYear() + 1) + "-" + (todaysDate.getMonth() + 1) + "-" + todaysDate.getDate();
+		var futureDate = new Date();
+		futureDate = (futureDate.getFullYear() + 1) + "-" + (futureDate.getMonth() + 1) + "-" + futureDate.getDate();
 		//alert("This is Date.now: " + Date.now()); //returns milliseconds
 
 		//alert("This is inputvalue.startdate: "+ inputValue.StartDate+ " ; this is tempdate: "+ tempDate); //returns date
-		//alert("Future year: " + todaysDate + " Start Year: " + inputValue.StartDate);
+		//alert("Today's date plus one year: " + futureDate + " Start Year: " + inputValue.StartDate);
+
 		if ((inputValue.CompanyName).trim() === "") {
 			alert("Please enter a name for the company.");
 			document.getElementById("CompanyName").focus();
@@ -79,6 +73,10 @@ export const AddNewClientForm = () => {
 			alert("Please enter a Contact Person email for the company.");
 			document.getElementById("CPEMail").focus();
 		}
+		else if (!checkEmail(inputValue.CPEMail)) {
+			alert("Please enter an email with at least 6 characters, and includes the '@' symbol.");
+			document.getElementById("CPEmail").focus();
+		}
 		
 		else if ((inputValue.PackageType.length) == 0) {
 			alert("Please select a Package Type for the company");
@@ -96,11 +94,11 @@ export const AddNewClientForm = () => {
 			alert("Please enter an end date that is AFTER the start date.");
 			document.getElementById("EndDate").focus();
 		}
-		else if ((inputValue.StartDate) < tempDate) {
+		else if (inputValue.StartDate > tempDate) {
 			alert("Please select a Start Date equal to or later than today's date of " + tempDate );
 			document.getElementById("StartDate").focus();
 		}
-		else if ((inputValue.StartDate) > todaysDate) {
+		else if (inputValue.StartDate > futureDate) {
 			alert("Please select a Start Date no more than 1 year into the future from today's date of " + tempDate);
 			document.getElementById("StartDate").focus();
 		}
@@ -119,7 +117,7 @@ export const AddNewClientForm = () => {
 		try {
 		 	const token = await authService.getAccessToken();
 		 	//const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-		  const resp = await fetch(`registeredit/?` + new URLSearchParams(inputValue), { method: "POST" });
+		  const resp = await fetch(`api/registeredit/?` + new URLSearchParams(inputValue), { method: "POST" });
 		 	console.log(resp);
 		 	console.log(resp.data);
 		 } catch (error) {
@@ -134,6 +132,16 @@ export const AddNewClientForm = () => {
 			[e.target.name]: e.target.value,
 		}));
 	};
+
+	const checkEmail = (emailInput) => {
+		let validEmail = false;
+		for (var i = 0; i <= emailInput.length(); i++) {
+			if (emailInput.charAt(i) == "@") { validEmail = true; }
+
+		}
+		return validEmail;
+
+	}
 	return (
 		<section className="main-container">
 			{/* <h1 className="heading-card">Add New Client Form</h1> */}
@@ -149,14 +157,14 @@ export const AddNewClientForm = () => {
 				</div>
 				<div>
 					<label htmlFor="phoneNumber">Phone Number *</label>
-					<input type="phone" name="Phone" id="phoneNumber" maxlength="10" placeholder="0000000000" value={inputValue.Phone} onChange={handleChange} />
+					<input type="phone" name="Phone" id="phoneNumber" maxlength="10" placeholder="Phone" value={inputValue.Phone} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="firstName">Contacts First Name *</label>
 					<input type="text" name="CPFirstName" id="firstName" placeholder="First Name" value={inputValue.CPFirstName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="lastName">Contacts Last Name *</label>
+					<label htmlFor="lastName">Contact Last Name *</label>
 					<input type="text" name="CPLastName" id="lastName" placeholder="Last Name" value={inputValue.CPLastName} onChange={handleChange} />
 				</div>
 				<div>
