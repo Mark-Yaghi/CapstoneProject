@@ -6,11 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace capstone_HRAgency.Migrations
 {
-<<<<<<<< HEAD:capstone_HRAgency/Migrations/20221023220753_InitialMigration.cs
     public partial class InitialMigration : Migration
-========
-    public partial class initialMigration : Migration
->>>>>>>> Mark3:capstone_HRAgency/Migrations/20221023204007_initialMigration.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

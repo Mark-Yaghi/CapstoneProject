@@ -11,13 +11,8 @@ using capstone_HRAgency.Data;
 namespace capstone_HRAgency.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:capstone_HRAgency/Migrations/20221023220753_InitialMigration.Designer.cs
-    [Migration("20221023220753_InitialMigration")]
+    [Migration("20221024001037_InitialMigration")]
     partial class InitialMigration
-========
-    [Migration("20221023204007_initialMigration")]
-    partial class initialMigration
->>>>>>>> Mark3:capstone_HRAgency/Migrations/20221023204007_initialMigration.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
