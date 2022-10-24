@@ -150,3 +150,11 @@ button a:hover {
 .form-container .but-general {
 	margin-inline: auto;
 }
+
+.invisible {
+	display: none;
+}
+
+.visible {
+	display: block;
+}

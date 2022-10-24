@@ -60,7 +60,7 @@ namespace capstone_HRAgency.Controllers
             email.From.Add( MailboxAddress.Parse( "knowna700@gmail.com" ) );
             email.To.Add( MailboxAddress.Parse( RecipManagerEmail ) );
             email.Cc.Add( MailboxAddress.Parse( RecipientEmail ) );
-            email.Subject = $"Commendation is for {RecipientName}";
+            email.Subject = $"Commendation is for {RecipientName} from Email {SenderEmail}";
             email.Body = new TextPart( TextFormat.Html ) { Text = Comment };
             email.Importance = MessageImportance.High;
             //email.Sender.Name = SenderName;
