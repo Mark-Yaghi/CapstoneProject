@@ -20,8 +20,8 @@ namespace capstone_HRAgency.Controllers
             _context = context;
         }
 
-        [HttpPost]
-       // [Route("POST")]
+        [HttpPost]   //"Post" route to add new companies to the db.
+       
         public ActionResult Post(string newCompanyName, string newAddress, string newPhone, string newCPFirstName, string newCPLastName, string newCPEmail, string newStartDate, string newEndDate, string newSubscriptionStatus, string newPackageName, int newPermissionLevel)
         {
 
@@ -44,15 +44,10 @@ namespace capstone_HRAgency.Controllers
                 }
                 else if (!newPhone.Any(x => char.IsNumber(x)) || newPhone.Length != 10)
                 {
-                    return BadRequest("Please enter only 10 digits for the phone number");
-                }
+                    return BadRequest("Please enter only 10 numbers for the phone number");
+                }             
 
-                // else if (parentRec == 0)
-                // {
-                //    return BadRequest("Sorry, that Manufacturer ID is not in the database. Please enter the correct ID or //create a new manufacturer.");
-                // }
-
-                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(newCompanyName.Trim()))
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(newCompanyName.Trim())) 
                 {
                     return BadRequest("Please enter a Company name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
@@ -71,7 +66,7 @@ namespace capstone_HRAgency.Controllers
                 }
 
 
-                else
+                else  // if the information sent to the server has passed front-end and back-end checks, add to db.
                 {
                     _context.Companies.Add(new Company()
                     {
@@ -87,16 +82,16 @@ namespace capstone_HRAgency.Controllers
 
                     });
                     _context.SaveChanges();
-                    // return Ok("The new company was successfully added to the database.");
+                   
                 }
 
                 //select the id from the company just added
                 Company found = _context.Companies.Where(x => x.CompanyName == newCompanyName).Single();
-                if (found != null)
+                if (found != null)  //if we find the company name we just added, get its CompanyID number to use for the next two adds.
                 {
                     int tempCompanyID = found.CompanyID;
 
-                    _context.Packages.Add(new Package()
+                    _context.Packages.Add(new Package()   //add to the Packages table
                     {
                         CompanyID = tempCompanyID,
                         PackageName = newPackageName
@@ -105,19 +100,21 @@ namespace capstone_HRAgency.Controllers
                     _context.SaveChanges();
 
 
-                    _context.UserInfos.Add(new UserInfo()
+                    _context.UserInfos.Add(new UserInfo() //add to the user info table.
                     {
                         CompanyID = tempCompanyID,
                         PermissionLevel = newPermissionLevel
 
                     });
+                    _context.SaveChanges();
+
                     return Ok("The new company was successfully added to the database.");
                 }
                 else { return NotFound("Sorry, that Company ID Number wasn't found in the database. "); }
 
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return StatusCode(500);
@@ -125,7 +122,7 @@ namespace capstone_HRAgency.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet]        //this endpoint return the count (number of companies in the db at a given point in time. It supplies the "Company.js" page.
         [Route("count")]
 
         public int GetCount()
@@ -134,8 +131,8 @@ namespace capstone_HRAgency.Controllers
             return _context.Companies.Count();
         }
 
-        [HttpGet]
-        [Route("list")]
+        [HttpGet]  //this endpoint returns a list of all the companies in the db
+        [Route("list")]   //it supplies the "Company.js" page.
         public IEnumerable<Company> GetCompanies()
         {
             return _context.Companies.ToList();
@@ -145,7 +142,7 @@ namespace capstone_HRAgency.Controllers
             // return roles;
         }
 
-        public bool IsValid(string emailaddress)
+        public bool IsValid(string emailaddress)  //built in function to verify emails. Need "using System.Net.Mail;" at the top of the page for it to function properly.
         {
             try
             {

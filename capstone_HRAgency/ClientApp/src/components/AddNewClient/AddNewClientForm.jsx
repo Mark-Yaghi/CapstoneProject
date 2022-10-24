@@ -4,6 +4,7 @@ import authService from "../api-authorization/AuthorizeService";
 import axios from "axios";
 import "./AddNewClient-Style.css";
 
+
 export const AddNewClientForm = () => {
 	
 	const formInputValue = {
@@ -15,8 +16,7 @@ export const AddNewClientForm = () => {
 	console.log(inputValue);
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		console.log("Inside the submit handler routine. " + inputValue);
-	
+			
 
 		var tempDate = new Date();
 		tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate();
@@ -95,7 +95,8 @@ export const AddNewClientForm = () => {
 			alert("Please select a Subscription Status for the company");
 			document.getElementById("SubscriptionStatus").focus();
 		}
-		else if ((inputValue.PermissionLevel).trim() === "") {
+		else if ((inputValue.PermissionLevel).trim() === "")
+		{
 			alert("Please select a Permission Level for the company");
 			document.getElementById("PermissionLevel").focus();
 		}
@@ -123,13 +124,36 @@ export const AddNewClientForm = () => {
 		 
 		  const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
 			  method: "POST" });
-			       console.log(await resp.text());
-				alert("The new company has been successfully added to the database.");
+				console.log(await resp.text());
+
+				if (resp.ok)    //if we get a good response, send out a message letting the user know.
+				{
+					alert("The new company has been successfully added to the database.");
+
+					//reset input fields to empty to prepare to accept another add.
+					{
+			
+
+				/*setInputValue(inputValue.CompanyName,
+					inputValue.Address,
+					inputValue.Phone ,
+					inputValue.CPFirstName ,
+					inputValue.CPLastName,
+					inputValue.CPEMail,
+					inputValue.StartDate ,
+					inputValue.EndDate,
+					inputValue.SubscriptionStatus,
+					inputValue.PackageName,
+					inputValue.PermissionLevel)="";*/
+						
+					}
+				};				
 			}
 			catch (error)
 			{
 		 	    console.log(error.response);
-		    }
+			}
+
 		}
 	};
 	const handleChange = (e) => {
