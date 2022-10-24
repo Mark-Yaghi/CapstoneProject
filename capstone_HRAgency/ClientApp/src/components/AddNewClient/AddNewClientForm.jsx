@@ -131,22 +131,22 @@ export const AddNewClientForm = () => {
 					alert("The new company has been successfully added to the database.");
 
 					//reset input fields to empty to prepare to accept another add.
-					{
-			
+				
+					setInputValue({
+						CompanyName: "",
+						Address: "",
+						Phone: "",
+						CPFirstName: "",
+						CPLastName: "",
+						CPEMail: "",
+						StartDate: "",
+						EndDate: "",
+						SubscriptionStatus: "",
+						PackageName: "",
+						PermissionLevel: "",
+					});
 
-				/*setInputValue(inputValue.CompanyName,
-					inputValue.Address,
-					inputValue.Phone ,
-					inputValue.CPFirstName ,
-					inputValue.CPLastName,
-					inputValue.CPEMail,
-					inputValue.StartDate ,
-					inputValue.EndDate,
-					inputValue.SubscriptionStatus,
-					inputValue.PackageName,
-					inputValue.PermissionLevel)="";*/
-						
-					}
+
 				};				
 			}
 			catch (error)
