@@ -5,7 +5,6 @@ import authService from "../api-authorization/AuthorizeService";
 
 export const EditClientForm = () => {
 	const { companyID } = useParams();
-	// console.log(companyID);
 	const formInputValue = {
 		CompanyName: "",
 		Address: "",
@@ -21,9 +20,8 @@ export const EditClientForm = () => {
 	};
 	const [inputValue, setInputValue] = useState(formInputValue);
 	const [singleCompanyData, setSingleCompanyData] = useState({});
-	console.log(singleCompanyData);
 	const { companyName, address, phone, cpFirstName, cpLastName, cpEmail, startDate, endDate, subscriptionStatus, packages, userInfos } = singleCompanyData;
-	console.log(userInfos);
+
 	useEffect(() => {
 		const populateRoles = async () => {
 			const token = await authService.getAccessToken();
@@ -206,7 +204,7 @@ export const EditClientForm = () => {
 				<button className="but-general but-col-prim">Accept Changes</button>
 				<br></br>
 				<br></br>
-				<NavLink className="but-general but-col-sec nav-spec-but" to="/company">
+				<NavLink className="but-general but-col-sec nav-spec-but" to={`/companyDetail/${companyID}`}>
 					Back
 				</NavLink>
 			</form>
