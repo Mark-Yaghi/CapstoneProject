@@ -33,8 +33,6 @@ const CompanyDetail = () => {
 						Back
 					</NavLink>
 					<NavLink className="but-general but-col-sec" to={`/EditClient/${companyID}`}>
-					
-					<NavLink className="but-general but-col-sec" to={`/editClient/${companyID}`}>
 						Edit
 					</NavLink>
 					<NavLink className="but-general but-col-sec" to="/">
