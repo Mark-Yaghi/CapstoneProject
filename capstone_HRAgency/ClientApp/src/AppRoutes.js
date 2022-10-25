@@ -39,6 +39,11 @@ const AppRoutes = [
 		requireAuth: true,
 		element: <AddNewClient />,
 	},
+	// {
+	// 	path: "/editClient/:companyID",
+	// 	requireAuth: true,
+	// 	element: <EditClient />,
+	// },
 	{
 		path: "/editClient/:companyID",
 		requireAuth: true,

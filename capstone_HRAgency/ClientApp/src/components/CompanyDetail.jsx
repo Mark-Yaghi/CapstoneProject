@@ -29,6 +29,10 @@ const CompanyDetail = () => {
 		<section className="main-container">
 			<section className="cd-container-but-grp ">
 				<div className="flex-center flex-xtra-option">
+					<NavLink className="but-general but-col-sec" to="/company">
+						Back
+					</NavLink>
+					<NavLink className="but-general but-col-sec" to={`/EditClient/${companyID}`}>
 					
 					<NavLink className="but-general but-col-sec" to={`/editClient/${companyID}`}>
 						Edit

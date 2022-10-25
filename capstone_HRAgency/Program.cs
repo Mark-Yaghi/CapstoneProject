@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using capstone_HRAgency.Controllers;
 using Microsoft.Net.Http.Headers;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,14 +28,14 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>().AddProfileService<ProfileService>();
 
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Policy1", builder => 
-    {
-        builder.WithOrigins("http://localhost:3000")
-        .WithMethods("POST", "GET", "PUT", "DELETE")
-        .WithHeaders(HeaderNames.ContentType);
-    });
+  options.AddPolicy("Policy1", builder =>
+  {
+    builder.WithOrigins("http://localhost:3000")
+      .WithMethods("POST", "GET", "PUT", "DELETE")
+      .WithHeaders(HeaderNames.ContentType);
+  });
 
 });
 
@@ -46,7 +47,7 @@ builder.Services
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+      options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
     });
 
 
@@ -60,23 +61,29 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("RequireAdministratorRole",
-         policy => policy.RequireRole("admin"));
+  options.AddPolicy("RequireAdministratorRole",
+       policy => policy.RequireRole("admin"));
 });
 
 var app = builder.Build();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+  FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "ClientApp/public/ImagesUpload")),
+  RequestPath = "/ImagesUpload"
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
-    app.UseDeveloperExceptionPage();
+  app.UseMigrationsEndPoint();
+  app.UseDeveloperExceptionPage();
 }
 else
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-    app.UseCors("Policy1");
+  // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+  app.UseHsts();
+  app.UseCors("Policy1");
 }
 
 app.UseHttpsRedirection();
@@ -92,6 +99,6 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html");;
+app.MapFallbackToFile("index.html"); ;
 
 app.Run();

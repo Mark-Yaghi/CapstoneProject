@@ -17,19 +17,18 @@ export const NavMenu = () => {
 				<div className="flex-center nav-link">
 					<ul>
 						<li>
-							<div class="dropdown">
-								<button class="dropbtn">Admin Panel</button>
-								<div class="dropdown-content">
-									<a href='/'>Appreciations</a>
-									<a href='/fileupload'>Card Upload</a>
-									<a href='/addClient'>Add New Client</a>
+							<div className="dropdown">
+								<button className="dropbtn">Admin Panel</button>
+								<div className="dropdown-content">
+									<a href="/">Appreciations</a>
+									<a href="/fileupload">Card Upload</a>
+									<a href="/addClient">Add New Client</a>
 									<NavLink to="/company">Client Info</NavLink>
-									<a href='/authentication/register'>Register</a>
+									<a href="/authentication/register">Register</a>
 									<LoginMenu></LoginMenu>
 								</div>
 							</div>
 						</li>
-
 					</ul>
 
 					<ul>
