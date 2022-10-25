@@ -23,7 +23,7 @@ const AppRoutes = [
 		path: "/companyDetail/:companyID",
 		requireAuth: true,
 		element: <CompanyDetail />,
-	},
+	},	
 	{
 		path: "/fileupload",
 		requireAuth: true,

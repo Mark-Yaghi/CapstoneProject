@@ -20,7 +20,7 @@ export const EditClientForm = () => {
 	};
 	const [inputValue, setInputValue] = useState(formInputValue);
 	const [singleCompanyData, setSingleCompanyData] = useState({});
-	const { companyName, address, phone, cpFirstName, cpLastName, cpEmail, startDate, endDate, subscriptionStatus, packages, userInfos } = singleCompanyData;
+	const { companyName, address, phone, cpFirstName, cpLastName, cpEmail, startDate, endDate, subscriptionStatus, packages, PermissionLevel } = singleCompanyData;
 
 	useEffect(() => {
 		const populateRoles = async () => {
@@ -106,7 +106,19 @@ export const EditClientForm = () => {
 			document.getElementById("PermissionLevel").focus();
 		}
 
-		setInputValue({ CompanyName: inputValue.CompanyName, Address: inputValue.Address, Phone: inputValue.Phone, CPFirstName: inputValue.CPFirstName, CPLastName: inputValue.CPLastName, CPEMail: inputValue.CPEMail, StartDate: inputValue.StartDate, EndDate: inputValue.EndDate, SubscriptionStatus: inputValue.SubscriptionStatus, PackageType: inputValue.PackageType, PermissionLevel: inputValue.PermissionLevel });
+		setInputValue({
+			CompanyName: inputValue.CompanyName,
+			Address: inputValue.Address,
+			Phone: inputValue.Phone,
+			CPFirstName: inputValue.CPFirstName,
+			CPLastName: inputValue.CPLastName,
+			CPEMail: inputValue.CPEMail,
+			StartDate: inputValue.StartDate,
+			EndDate: inputValue.EndDate,
+			SubscriptionStatus: inputValue.SubscriptionStatus,
+			PackageType: inputValue.PackageType,
+			PermissionLevel: ((inputValue.PermissionLevel) === 1 ? "Full Admin Access" : "Client Level Access")
+		});
 
 		console.log(setInputValue);
 		try {

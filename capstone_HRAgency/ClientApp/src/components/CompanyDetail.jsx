@@ -4,14 +4,29 @@ import authService from "./api-authorization/AuthorizeService";
 import "../custom.css";
 
 const CompanyDetail = () => {
-	const [singleCompnayDetail, setSingleCompanyDetail] = useState([]);
+	/*--the code below deals with declaring variables to get data from the company table.---*/
 	const { companyID } = useParams();
+
+	const [singleCompnayDetail, setSingleCompanyDetail] = useState([]);	
 	const { address, companyName, cpEmail, cpFirstName, cpLastName, startDate, endDate, phone, subscriptionStatus } = singleCompnayDetail;
+
+	/*--the code below deals with declaring variables to get data from the package table.---*/
+	const [singlePackageDetail, setSinglePackageDetail] = useState([]);
+	const { packageName } = singlePackageDetail;
+
+	/*--the code below deals with declaring variables to get data from the userinfo table.---*/
+	const [singlePermissionDetail, setSinglePermissionDetail] = useState([]);
+	const { permissionLevel } = singlePermissionDetail;
+
+
 	console.log(singleCompnayDetail);
 	useEffect(() => {
 		const populateRoles = async () => {
 			const token = await authService.getAccessToken();
 			// console.log(token);
+
+			/*--the code below deals with getting data from the company table.---*/
+
 			const responseList = await fetch(`company/${companyID}`, {
 				headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
 			});
@@ -21,9 +36,58 @@ const CompanyDetail = () => {
 			} else {
 				console.log(await responseList.text());
 			}
+
+			/*--the code below deals with getting data from the package table.---*/
+
+			const responseListPackage = await fetch(`package/${companyID}`, {
+				headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+			});
+			if (responseListPackage.ok) {
+				const dataListPackage = await responseListPackage.json();
+				setSinglePackageDetail(dataListPackage);
+				
+			} else {
+				console.log(await responseListPackage.text());
+				
+			}
+
+			/*--the code below deals with getting data from the userinfo table.---*/
+
+			const responseListPermission = await fetch(`userinfo/${companyID}`, {
+				headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+			});
+			if (responseListPermission.ok) {
+				const dataListPermission = await responseListPermission.json();
+				setSinglePermissionDetail(dataListPermission);
+			} else {
+				console.log(await responseListPermission.text());
+			}
+
 		};
+				
 		populateRoles();
 	}, []);
+
+	/*useEffect(() => {
+		const populateRoles = async () => {
+
+			const token = await authService.getAccessToken();
+			const responseListPackage = await fetch(`package/${companyID}`, {
+				headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+			});
+			if (responseListPackage.ok) {
+				const dataListPackage = await responseListPackage.json();
+				setSinglePackageDetail(dataListPackage);
+
+			} else {
+				console.log(await responseListPackage.text());
+				//console.log("line 50, dataListPackage: " + dataListPackage.text());
+			}
+
+		};
+
+		populateRoles();
+	}, []);*/
 
 	return (
 		<section className="main-container">
@@ -32,7 +96,6 @@ const CompanyDetail = () => {
 					<NavLink className="but-general but-col-sec" to="/company">
 						Back
 					</NavLink>
-					<NavLink className="but-general but-col-sec" to={`/EditClient/${companyID}`}>
 					
 					<NavLink className="but-general but-col-sec" to={`/editClient/${companyID}`}>
 						Edit
@@ -70,9 +133,9 @@ const CompanyDetail = () => {
 					<li>{`${cpFirstName} ${cpLastName}`}</li>
 					<li>{startDate}</li>
 					<li>{endDate}</li>
-					<li>{subscriptionStatus}</li>
-					{/*<li>packageName</li>
-					<li>permissionLevel</li> */}
+					<li>{subscriptionStatus === false ? "Account Inactive" : "Account Active"}</li>
+					<li>{packageName}</li>
+					<li>{permissionLevel === 1 ? "Full Admin Access" : "Client Level Access"}</li> {/**/}
 				</ul>
 			</div>
 		</section>
