@@ -7,6 +7,13 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	const [inputValue, setInputValue] = useState(formInputValue);
 	const [isVisible, setIsVisible] = useState(false);
 	const { id, image } = userImage;
+
+	// console.log(image, id);
+	// console.log(inputValue);
+	// if (!id) {
+	// 	alert("Image is not selected.");
+	// }
+	const imageStyle = {};
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		console.log(inputValue);

@@ -22,7 +22,7 @@ const CardSelect = ({ onSelectImage }) => {
 		// formData.append("fileName", fileName);
 		try {
 			const res = await axios("api/Image/");
-
+			console.log(res.data);
 			setImagesData(res.data);
 			// alert("Your file has been successfully uploaded to the database.");
 			// document.getElementById("fileUpload").value = "";
