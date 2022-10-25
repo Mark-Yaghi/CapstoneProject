@@ -5,6 +5,9 @@ using System.Text.RegularExpressions;
 using System.Net.Mail;
 using capstone_HRAgency.Controllers;
 using System.ComponentModel.Design;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using MimeKit.Cryptography;
+using System.Globalization;
 
 namespace capstone_HRAgency.Controllers
 {
@@ -19,6 +22,7 @@ namespace capstone_HRAgency.Controllers
         {
             _context = context;
         }
+/* ------------------THE CODE BELOW DEALS WITH ADDING A NEW COMPANY TO THE 3 TABLES IN THE DB. IT IS FED BY INFO FROM THE AddNewClientForm.jsx----------------- */
 
         [HttpPost]   //"Post" route to add new companies to the db.
        
@@ -32,8 +36,7 @@ namespace capstone_HRAgency.Controllers
 
             try
             {
-                // int parentRec = _context.VehicleManufacturer.Where(x => x.ID == tempManuID).Count();
-
+                
                 if (_context.Companies.Any(x => x.CompanyName.ToUpper() == newCompanyName.ToUpper()))
                 {
                     return BadRequest("Sorry, that company is already in the database.");
@@ -81,9 +84,10 @@ namespace capstone_HRAgency.Controllers
                         SubscriptionStatus =  newSubscriptionStatus == "1" //if value returned is a one->true; anything else is a false
 
                     });
-                    _context.SaveChanges();
-                   
+                    _context.SaveChanges();                   
                 }
+
+                /*------------------------------------------------------------------------- */
 
                 //select the id from the company just added
                 Company found = _context.Companies.Where(x => x.CompanyName == newCompanyName).Single();
@@ -98,7 +102,8 @@ namespace capstone_HRAgency.Controllers
 
                     });
                     _context.SaveChanges();
-
+                
+                    /*------------------------------------------------------------------------- */
 
                     _context.UserInfos.Add(new UserInfo() //add to the user info table.
                     {
@@ -107,6 +112,8 @@ namespace capstone_HRAgency.Controllers
 
                     });
                     _context.SaveChanges();
+
+                    /*------------------------------------------------------------------------- */
 
                     return Ok("The new company was successfully added to the database.");
                 }
@@ -121,8 +128,9 @@ namespace capstone_HRAgency.Controllers
             }
         }
 
+/*----------------------- This endpoint return the count (number of companies in the db at a given point in time. It supplies the "Company.js" page.*/
 
-        [HttpGet]        //this endpoint return the count (number of companies in the db at a given point in time. It supplies the "Company.js" page.
+        [HttpGet]        
         [Route("count")]
 
         public int GetCount()
@@ -130,31 +138,128 @@ namespace capstone_HRAgency.Controllers
             Console.WriteLine(_context.Companies.Count());
             return _context.Companies.Count();
         }
-
-        [HttpGet]  //this endpoint returns a list of all the companies in the db
-        [Route("list")]   //it supplies the "Company.js" page.
+/*---------------------------- This endpoint returns a list of all the companies in the db-it supplies the "Company.js" page.---------------------------------------*/
+        [HttpGet]  
+        [Route("list")]   
         public IEnumerable<Company> GetCompanies()
         {
             return _context.Companies.ToList();
 
-            //var roleStore = new RoleStore<IdentityRole>(_context);
-            //List<IdentityRole> roles = roleStore.Roles.ToList();
-            // return roles;
         }
+/*---------------THE CODE BELOW DEALS WITH UPDATING THE 3 TABLES, FED BY DATA FROM THE EditClientForm.JSX------------------------------*/
 
-        public bool IsValid(string emailaddress)  //built in function to verify emails. Need "using System.Net.Mail;" at the top of the page for it to function properly.
+        [HttpPut("{id}")]
+        public ActionResult Put(int id, string editCompanyName, string editAddress, string editPhone, string editCPFirstName, string editCPLastName, string editCPEmail, string editStartDate, string editEndDate, string editSubscriptionStatus, string editPackageName, int editPermissionLevel)
         {
+
+            Company found;
+            found = _context.Companies.Where(x => x.CompanyID == id).Single();
+
+            if (string.IsNullOrWhiteSpace(editCompanyName.Trim()) || string.IsNullOrWhiteSpace(editAddress.Trim()) || string.IsNullOrWhiteSpace(editPhone.Trim()) || string.IsNullOrWhiteSpace(editCPFirstName.Trim()) || string.IsNullOrWhiteSpace(editCPLastName.Trim()) || string.IsNullOrWhiteSpace(editCPEmail.Trim()) || string.IsNullOrWhiteSpace(editStartDate.Trim()) || string.IsNullOrWhiteSpace(editEndDate.Trim()) || string.IsNullOrWhiteSpace(editSubscriptionStatus.Trim()) || string.IsNullOrWhiteSpace(editPackageName.Trim()))
+            {
+                return BadRequest("Please ensure that all fields have all been entered.");
+            }
+
             try
             {
-                MailAddress m = new(emailaddress);
+                if (!editPhone.Any(x => char.IsNumber(x)) || editPhone.Length != 10)
+                {
+                    return BadRequest("Please enter only 10 numbers for the phone number");
+                }
 
-                return true;
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(editCompanyName.Trim()))
+                {
+                    return BadRequest("Please enter a Company name using only letters, numbers, a hyphen, comma, apostrophe or period.");
+                }
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(editCPFirstName.Trim()))
+                {
+                    return BadRequest("Please enter a contact person first name using only letters, numbers, a hyphen, comma, apostrophe or period.");
+                }
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(editCPLastName.Trim()))
+                {
+                    return BadRequest("Please enter a contact person last name using only letters, numbers, a hyphen, comma, apostrophe or period.");
+                }
+                else if (!IsValid(editCPEmail))
+                //else if (!new Regex(@"^[@ .]{1}$").IsMatch(newCPEmail.Trim()))
+                {
+                    return BadRequest("Please enter a proper email address.");
+                }
+
+
+                else  // if the information sent to the server has passed front-end and back-end checks, update the db.
+                {
+
+                    found.CompanyName = editCompanyName;
+                    found.Address = editAddress;
+                    found.Phone = editPhone;
+                    found.CPFirstName = editCPFirstName;
+                    found.CPLastName = editCPLastName;
+                    found.CPEmail = editCPEmail;
+                    found.StartDate = DateOnly.Parse(editStartDate);
+                    found.EndDate = DateOnly.Parse(editEndDate);
+                    found.SubscriptionStatus = editSubscriptionStatus == "1";//if value returned is a one->true; anything else is a false
+
+                   
+                    _context.SaveChanges();
+
+                }
+
+                //select the id from the company just added
+                found = _context.Companies.Where(x => x.CompanyName == editCompanyName).Single();
+                if (found != null)  //if we find the company name we just added, get its CompanyID number to use for the next two adds.
+                {
+                    int tempCompanyID = found.CompanyID;
+
+                    /*------------------------------------------------------------------------- */
+
+                 //   _context.Packages.Update(new Package()   //add to the Packages table
+                  //  {   
+
+
+                   //     found.PackageName = editPackageName
+
+                  //  }) ;
+                 //   _context.SaveChanges();
+                    /*------------------------------------------------------------------------- */
+
+                    _context.UserInfos.Update(new UserInfo() //add to the user info table.
+                    {
+                        
+                        PermissionLevel = editPermissionLevel
+
+                    });
+                    _context.SaveChanges();
+
+                    /*------------------------------------------------------------------------- */
+
+                    return Ok("The company's information was successfully updated.");
+                }
+
+                else { return NotFound("Sorry, that Company ID Number wasn't found in the database. "); }           
+
             }
-            catch (FormatException)
+
+
+             catch (Exception)
             {
-                return false;
+
+                return StatusCode(500);
             }
+
         }
+            public bool IsValid(string emailaddress)  //built in function to verify emails. Need "using System.Net.Mail;" at the top of the page for it to function properly.
+            {
+                try
+                {
+                    MailAddress m = new(emailaddress);
+
+                    return true;
+                }
+                catch (FormatException)
+                {
+                    return false;
+                }
+            }
 
 
     }

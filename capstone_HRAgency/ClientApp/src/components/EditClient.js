@@ -1,17 +1,29 @@
-﻿import React, { Component } from "react";
+﻿import React from "react";
 // import { LoginMenu } from "../api-authorization/LoginMenu";
 import { LoginMenu } from "../components/api-authorization/LoginMenu";
-import EditClient from './EditClient/EditClient';
+import { EditClientForm } from './EditClient/EditClientForm';
 
-
-export class EditClient extends Component {
-	static displayName = EditClient.name;
-
-	render() {
-		return (
+const EditClient = () => {
+	return (
+		<>
 			<>
-				<EditClientform />
+			</>
+			<EditClientForm />
+		</>
+	);
+};
+
+export default EditClient;
+
+
+/*export class EditClient extends Component {
+//	static displayName = EditClient.name;
+
+	//render() {
+	//	return (
+	//		<>
+				<EditClientForm />
 			</>
 		);
 	}
-}
+} */

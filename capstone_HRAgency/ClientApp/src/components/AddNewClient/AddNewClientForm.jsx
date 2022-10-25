@@ -13,7 +13,7 @@ export const AddNewClientForm = () => {
 	const [inputValue, setInputValue] = useState(formInputValue);
 
 
-	console.log(inputValue);
+	
 	const submitHandler = async (e) => {
 		e.preventDefault();
 			
@@ -42,7 +42,7 @@ export const AddNewClientForm = () => {
 			alert("Please enter an address with at least 10 characters for the company.");
 			document.getElementById("address").focus();
 		}
-		else if ((inputValue.Phone).trim() === "") {
+		else if ((inputValue.Phone).trim() === "" || (inputValue.Phone).length !=10) {
 			alert("Please enter a 10 digit phone number for the company.");
 			document.getElementById("phoneNumber").focus();
 		}
@@ -149,11 +149,8 @@ export const AddNewClientForm = () => {
 
 				};				
 			}
-			catch (error)
-			{
-		 	    console.log(error.response);
-			}
-
+			catch (error){console.log(error.response);}
+			
 		}
 	};
 	const handleChange = (e) => {

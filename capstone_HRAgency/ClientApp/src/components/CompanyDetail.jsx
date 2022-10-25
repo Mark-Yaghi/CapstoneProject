@@ -6,7 +6,7 @@ import "../custom.css";
 const CompanyDetail = () => {
 	const [singleCompnayDetail, setSingleCompanyDetail] = useState([]);
 	const { companyID } = useParams();
-	const { address, companyName, cpEmail, cpFirstName, cpLastName, startDate, endDate, phone } = singleCompnayDetail;
+	const { address, companyName, cpEmail, cpFirstName, cpLastName, startDate, endDate, phone, subscriptionStatus } = singleCompnayDetail;
 	console.log(singleCompnayDetail);
 	useEffect(() => {
 		const populateRoles = async () => {
@@ -30,7 +30,7 @@ const CompanyDetail = () => {
 			<section className="cd-container-but-grp ">
 				<div className="flex-center flex-xtra-option">
 					
-					<NavLink className="but-general but-col-sec" to="/editClient">
+					<NavLink className="but-general but-col-sec" to={`/editClient/${companyID}`}>
 						Edit
 					</NavLink>
 					<NavLink className="but-general but-col-sec" to="/">
@@ -66,9 +66,9 @@ const CompanyDetail = () => {
 					<li>{`${cpFirstName} ${cpLastName}`}</li>
 					<li>{startDate}</li>
 					<li>{endDate}</li>
-					{/* <li></li>
-					<li></li>
-					<li></li> */}
+					<li>{subscriptionStatus}</li>
+					{/*<li>packageName</li>
+					<li>permissionLevel</li> */}
 				</ul>
 			</div>
 		</section>
