@@ -68,27 +68,7 @@ const CompanyDetail = () => {
 		populateRoles();
 	}, []);
 
-	/*useEffect(() => {
-		const populateRoles = async () => {
-
-			const token = await authService.getAccessToken();
-			const responseListPackage = await fetch(`package/${companyID}`, {
-				headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
-			});
-			if (responseListPackage.ok) {
-				const dataListPackage = await responseListPackage.json();
-				setSinglePackageDetail(dataListPackage);
-
-			} else {
-				console.log(await responseListPackage.text());
-				//console.log("line 50, dataListPackage: " + dataListPackage.text());
-			}
-
-		};
-
-		populateRoles();
-	}, []);*/
-
+	
 	return (
 		<section className="main-container">
 			<section className="cd-container-but-grp ">
