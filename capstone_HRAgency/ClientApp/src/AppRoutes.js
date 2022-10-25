@@ -6,6 +6,7 @@ import ExpertSolution from "./components/ExpertSolution";
 import AddNewClient from "./components/AddNewClient/AddNewClient";
 import CompanyDetail from "./components/CompanyDetail";
 import EditClient from "./components/EditClient/EditClient";
+import { EditClientForm } from "./components/EditClient/EditClientForm";
 
 const AppRoutes = [
 	{
@@ -38,10 +39,15 @@ const AppRoutes = [
 		requireAuth: true,
 		element: <AddNewClient />,
 	},
+	// {
+	// 	path: "/editClient/:companyID",
+	// 	requireAuth: true,
+	// 	element: <EditClient />,
+	// },
 	{
-		path: "/editClient",
+		path: "/editClient/:companyID",
 		requireAuth: true,
-		element: <EditClient />,
+		element: <EditClientForm />,
 	},
 
 	...ApiAuthorzationRoutes,
