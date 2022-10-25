@@ -47,8 +47,8 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 			<div className="form-container">
 				<section className={`${isVisible ? "visible" : "invisible"}`}>
 					<div style={{ backgroundImage: `url(${inputValue.image})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", maxWidth: "100%", height: "800px", marginInline: "auto", display: "flex", justifyContent: "space-between", flexDirection: "column", maxHeight: "auto" }}>
-						<h3 style={{ fontWeight: "bolder", padding: "2rem" }}>To: {inputValue.recipientName}</h3>
-						<h3 style={{ fontWeight: "bolder", padding: "2rem", alignSelf: "flex-end" }}>From {inputValue.senderName}</h3>
+						<h3 style={{ backgroundColor: "#1a281fad", color: "whitesmoke", fontWeight: "bolder", padding: "0.5em", margin: "1rem", borderRadius: "10px", alignSelf: "flex-start" }}>To: {inputValue.recipientName}</h3>
+						<h3 style={{ backgroundColor: "#1a281fad", color: "whitesmoke", fontWeight: "bolder", padding: "0.5em", margin: "1rem", borderRadius: "10px", alignSelf: "flex-end" }}>From {inputValue.senderName}</h3>
 					</div>
 					{/* <p>To, {inputValue.recipientName}</p> */}
 					<br />
