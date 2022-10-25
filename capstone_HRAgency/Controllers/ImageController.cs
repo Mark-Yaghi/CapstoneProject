@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using capstone_HRAgency.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 
 namespace capstone_HRAgency.Controllers
 {
@@ -45,7 +47,7 @@ namespace capstone_HRAgency.Controllers
             return new ImageInfo()
             {
                 Name = name,
-                Path = imageFilePath
+                Path = imageFilePath,
             };
         }
     }

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Images from "../../data";
 import "./Commendation-Style.css";
 
 const CardSelect = ({ onSelectImage }) => {
+	const [imagesData, setImagesData] = useState([]);
 	// const [imgSel, setImgSel] = useState(false);
 
 	// const handleSelect = (e) => {
@@ -12,6 +14,28 @@ const CardSelect = ({ onSelectImage }) => {
 	// 	setImgSel((prev) => !prev);
 	// 	console.log(imgSel);
 	// };
+
+	const fetchImages = async (e) => {
+		// console.log(file);
+		// const formData = new FormData();
+		// formData.append("formFile", file);
+		// formData.append("fileName", fileName);
+		try {
+			const res = await axios("api/Image/");
+			console.log(res);
+			console.log(res.data);
+			setImagesData(res.data);
+			// alert("Your file has been successfully uploaded to the database.");
+			// document.getElementById("fileUpload").value = "";
+		} catch (ex) {
+			console.log(ex);
+			// alert("An error occurred uploading your image." + ex);
+		}
+	};
+
+	useEffect(() => {
+		fetchImages();
+	}, []);
 	return (
 		<div className="main-container">
 			<h1 className="heading-card">Appreciation! Cards</h1>
