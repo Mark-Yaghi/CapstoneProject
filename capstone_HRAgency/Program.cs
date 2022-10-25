@@ -12,42 +12,43 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using capstone_HRAgency.Controllers;
 using Microsoft.Net.Http.Headers;
+using Microsoft.Extensions.FileProviders;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder( args );
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString( "DefaultConnection" );
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>( options => options.SignIn.RequireConfirmedAccount = true )
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>().AddProfileService<ProfileService>();
 
-builder.Services.AddCors(options => 
+builder.Services.AddCors( options =>
 {
-    options.AddPolicy("Policy1", builder => 
+    options.AddPolicy( "Policy1", builder =>
     {
-        builder.WithOrigins("http://localhost:3000")
-        .WithMethods("POST", "GET", "PUT", "DELETE")
-        .WithHeaders(HeaderNames.ContentType);
-    });
+        builder.WithOrigins( "http://localhost:3000" )
+        .WithMethods( "POST", "GET", "PUT", "DELETE" )
+        .WithHeaders( HeaderNames.ContentType );
+    } );
 
-});
+} );
 
 builder.Services
-    .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
-    .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
+    .AddControllers( options => options.UseDateOnlyTimeOnlyStringConverters() )
+    .AddJsonOptions( options => options.UseDateOnlyTimeOnlyStringConverters() );
 
 
 builder.Services.AddControllers()
-    .AddJsonOptions(options =>
+    .AddJsonOptions( options =>
     {
-        options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
-    });
+        options.JsonSerializerOptions.Converters.Add( new DateOnlyJsonConverter() );
+    } );
 
 
 builder.Services.AddScoped<IProfileService, ProfileService>();
@@ -58,16 +59,22 @@ builder.Services.AddAuthentication()
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.AddAuthorization(options =>
+builder.Services.AddAuthorization( options =>
 {
-    options.AddPolicy("RequireAdministratorRole",
-         policy => policy.RequireRole("admin"));
-});
+    options.AddPolicy( "RequireAdministratorRole",
+         policy => policy.RequireRole( "admin" ) );
+} );
 
 var app = builder.Build();
 
+app.UseStaticFiles( new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider( Path.Combine( builder.Environment.ContentRootPath, "Images" ) ),
+    RequestPath = "/Images"
+} );
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if ( app.Environment.IsDevelopment() )
 {
     app.UseMigrationsEndPoint();
     app.UseDeveloperExceptionPage();
@@ -76,7 +83,7 @@ else
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-    app.UseCors("Policy1");
+    app.UseCors( "Policy1" );
 }
 
 app.UseHttpsRedirection();
@@ -89,9 +96,9 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+    pattern: "{controller}/{action=Index}/{id?}" );
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html");;
+app.MapFallbackToFile( "index.html" ); ;
 
 app.Run();
