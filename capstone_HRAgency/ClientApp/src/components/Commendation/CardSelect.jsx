@@ -22,8 +22,7 @@ const CardSelect = ({ onSelectImage }) => {
 		// formData.append("fileName", fileName);
 		try {
 			const res = await axios("api/Image/");
-			// console.log(res);
-			// console.log(res.data);
+
 			setImagesData(res.data);
 			// alert("Your file has been successfully uploaded to the database.");
 			// document.getElementById("fileUpload").value = "";
@@ -41,14 +40,22 @@ const CardSelect = ({ onSelectImage }) => {
 			<h1 className="heading-card">Appreciation! Cards</h1>
 			<div className="img-container">
 				<ul className="flex-center flex-option flex-xtra-option img-container-height ">
-					{Images.map((image) => {
+					{imagesData.map((image) => {
+						return (
+							<li className="position-declare img-hover " key={image.name} onClick={() => onSelectImage({ id: image.name, image: image.imgPath })}>
+								{/* <span className="position-center-align">Image {image.id}</span> */}
+								<img className="img-resize" src={image.imgPath} alt={image.name} />
+							</li>
+						);
+					})}
+					{/* {Images.map((image) => {
 						return (
 							<li className="position-declare img-hover " key={image.id} onClick={() => onSelectImage({ id: image.id, image: image.img })}>
 								<span className="position-center-align">Image {image.id}</span>
 								<img className="img-resize" src={image.img} alt={image.id} />
 							</li>
 						);
-					})}
+					})} */}
 				</ul>
 			</div>
 		</div>
