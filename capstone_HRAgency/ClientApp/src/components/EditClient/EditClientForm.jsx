@@ -173,14 +173,21 @@ export const EditClientForm = () => {
 							PermissionLevel: "",
 						});
 
+						//---ADD CODE HERE TO AUTOMATICALLY REDIRECT BCK TO DETAILS PAGE.------------
+						//Response.AppendHeader("Refresh", "5;url=/editClient");
+						
 					};		
 				}
 				catch (error)
 				{
 					console.log(error.response);
 				}
-		}
 
+			window.location.replace(<NavLink className="but-general but-col-sec" to={`../companyDetail`}>
+				Edit
+			</NavLink>);//'../CompanyDetail.jsx'
+		}
+		
 	};
 
     const handleChange = (e) => {
@@ -206,32 +213,32 @@ export const EditClientForm = () => {
 			<form onSubmit={submitHandler} className="form-container bg-color-prim">
 				<h1 className="heading-form">Edit Client Form</h1>
 				<div>
-					<label htmlFor="CompanyName">Company Name *   Previous: {companyName }</label>
+					<label htmlFor="CompanyName">Company Name * &nbsp; &nbsp;  Previous: {companyName }</label>
 					<input type="text" name="CompanyName" id="CompanyName"  value={inputValue.CompanyName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="address">Company Address *  Previous: {address}</label>
+					<label htmlFor="address">Company Address * &nbsp; &nbsp; Previous: {address}</label>
 					<input type="text" name="Address" id="address"  value={inputValue.Address} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="Phone">Company Phone *</label>
+					<label htmlFor="Phone">Company Phone * &nbsp; &nbsp; Previous: {phone }</label>
 					<input type="phone" name="Phone" id="phoneNumber" maxLength="10" placeholder={phone} value={inputValue.Phone} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="CPFirstName">Contacts First Name *</label>
+					<label htmlFor="CPFirstName">Contacts First Name * &nbsp; &nbsp; Previous: {cpFirstName }</label>
 					<input type="text" name="CPFirstName" id="firstname" placeholder={cpFirstName} value={inputValue.CPFirstName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="lastName">Contact Last Name *</label>
+					<label htmlFor="lastName">Contact Last Name * &nbsp; &nbsp; &nbsp;  Previous: {cpLastName }</label>
 					<input type="text" name="CPLastName" id="lastname" placeholder={cpLastName} value={inputValue.CPLastName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="email">Contacts Email *</label>
+					<label htmlFor="email">Contacts Email * &nbsp; &nbsp; Previous: {cpEmail }</label>
 					<input type="email" name="CPEMail" id="CPEMail" placeholder={cpEmail} value={inputValue.CPEMail} onChange={handleChange} />
 				</div>
 
 				<div>
-					<label htmlFor="PackageType">Package Type *</label>
+					<label htmlFor="PackageType">Package Type *  &nbsp; &nbsp; Previous: {packages }</label>
 					<select name="PackageType" id="PackageType" value={inputValue.PackageType} onChange={handleChange}>
 						<option value="">Please select a Package Type</option>
 						<option value="Micro Company (1-9)">Micro Company (1-9)</option>
@@ -241,15 +248,15 @@ export const EditClientForm = () => {
 					</select>
 				</div>
 				<div>
-					<label htmlFor="Start Date">Start Date *</label>
+					<label htmlFor="Start Date">Start Date *  &nbsp; &nbsp; Previous: {startDate }</label>
 					<input type="date" maxLength="10" name="StartDate" id="StartDate" placeholder={startDate} value={inputValue.StartDate} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="End Date">End Date *</label>
+					<label htmlFor="End Date">End Date *  &nbsp; &nbsp; Previous: {endDate }</label>
 					<input type="date" maxLength="10" name="EndDate" id="EndDate" placeholder={endDate} value={inputValue.EndDate} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="SubscriptionStatus">Subscription Status *</label>
+					<label htmlFor="SubscriptionStatus">Subscription Status *  &nbsp; &nbsp;  Previous: {SubscriptionStatus === false ? "Account Inactive" : "Account Active" }</label>
 					<select name="SubscriptionStatus" id="SubscriptionStatus" value={inputValue.SubscriptionStatus}  onChange={handleChange}>
 						<option value="">Please assign a Subscription Status</option>
 						<option value="0">Inactive</option>
@@ -257,7 +264,7 @@ export const EditClientForm = () => {
 					</select>
 				</div>
 				<div>
-					<label htmlFor="PermissionLevel">Permission Level *</label>
+					<label htmlFor="PermissionLevel">Permission Level * &nbsp; &nbsp;  Previous: {PermissionLevel === 1 ? "Full Admin Access" : "Client Level Access" }</label>
 					<select name="PermissionLevel" id="PermissionLevel" value={inputValue.PermissionLevel} onChange={handleChange}>
 						<option value="">Please assign a Permission Level</option>
 						<option value="1">Full Administrative Access</option>
