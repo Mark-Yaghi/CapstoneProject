@@ -120,7 +120,7 @@ export const AddNewClientForm = () => {
 					newPermissionLevel: inputValue.PermissionLevel
 				};
 		
-		 const token = await authService.getAccessToken();
+		 //const token = await authService.getAccessToken();
 		 
 		  const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
 			  method: "POST" });

@@ -148,12 +148,12 @@ namespace capstone_HRAgency.Controllers
         }
 /*---------------THE CODE BELOW DEALS WITH UPDATING THE 3 TABLES, FED BY DATA FROM THE EditClientForm.JSX------------------------------*/
 
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, string editCompanyName, string editAddress, string editPhone, string editCPFirstName, string editCPLastName, string editCPEmail, string editStartDate, string editEndDate, string editSubscriptionStatus, string editPackageName, int editPermissionLevel)
+        [HttpPut]//("{companyid}")
+        public ActionResult Put(int companyID, string editCompanyName, string editAddress, string editPhone, string editCPFirstName, string editCPLastName, string editCPEmail, string editStartDate, string editEndDate, string editSubscriptionStatus, string editPackageName, int editPermissionLevel)
         {
 
             Company found;
-            found = _context.Companies.Where(x => x.CompanyID == id).Single();
+            found = _context.Companies.Where(x => x.CompanyID == companyID).Single();
 
             if (string.IsNullOrWhiteSpace(editCompanyName.Trim()) || string.IsNullOrWhiteSpace(editAddress.Trim()) || string.IsNullOrWhiteSpace(editPhone.Trim()) || string.IsNullOrWhiteSpace(editCPFirstName.Trim()) || string.IsNullOrWhiteSpace(editCPLastName.Trim()) || string.IsNullOrWhiteSpace(editCPEmail.Trim()) || string.IsNullOrWhiteSpace(editStartDate.Trim()) || string.IsNullOrWhiteSpace(editEndDate.Trim()) || string.IsNullOrWhiteSpace(editSubscriptionStatus.Trim()) || string.IsNullOrWhiteSpace(editPackageName.Trim()))
             {
@@ -188,7 +188,7 @@ namespace capstone_HRAgency.Controllers
 
                 else  // if the information sent to the server has passed front-end and back-end checks, update the db.
                 {
-
+                    Console.WriteLine("Line 191, in the else.");
                     found.CompanyName = editCompanyName;
                     found.Address = editAddress;
                     found.Phone = editPhone;
@@ -199,35 +199,29 @@ namespace capstone_HRAgency.Controllers
                     found.EndDate = DateOnly.Parse(editEndDate);
                     found.SubscriptionStatus = editSubscriptionStatus == "1";//if value returned is a one->true; anything else is a false
 
-                   
+                    _context.SaveChanges();
+                }
+                /*------------------------------------------------------------------------- */
+
+                Package found1;                // update Package table
+
+                found1 = _context.Packages.Where(x => x.CompanyID == companyID).Single();
+                if (found1 != null)
+                {
+                    found1.PackageName = editPackageName;
+
                     _context.SaveChanges();
 
                 }
+                /*----------------------------------------------------------------------- */
 
-                //select the id from the company just added
-                found = _context.Companies.Where(x => x.CompanyName == editCompanyName).Single();
-                if (found != null)  //if we find the company name we just added, get its CompanyID number to use for the next two adds.
+                 UserInfo found2;              //update Userinfo table
+
+                 found2 = _context.UserInfos.Where(x => x.CompanyID == companyID).Single();
+                if (found2 != null)
                 {
-                    int tempCompanyID = found.CompanyID;
+                    found2.PermissionLevel = editPermissionLevel;
 
-                    /*------------------------------------------------------------------------- */
-
-                 //   _context.Packages.Update(new Package()   //add to the Packages table
-                  //  {   
-
-
-                   //     found.PackageName = editPackageName
-
-                  //  }) ;
-                 //   _context.SaveChanges();
-                    /*------------------------------------------------------------------------- */
-
-                    _context.UserInfos.Update(new UserInfo() //add to the user info table.
-                    {
-                        
-                        PermissionLevel = editPermissionLevel
-
-                    });
                     _context.SaveChanges();
 
                     /*------------------------------------------------------------------------- */
@@ -242,7 +236,6 @@ namespace capstone_HRAgency.Controllers
 
              catch (Exception)
             {
-
                 return StatusCode(500);
             }
 

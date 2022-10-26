@@ -115,7 +115,7 @@ const CompanyDetail = () => {
 					<li>{endDate}</li>
 					<li>{subscriptionStatus === false ? "Account Inactive" : "Account Active"}</li>
 					<li>{packageName}</li>
-					<li>{permissionLevel === 1 ? "Full Admin Access" : "Client Level Access"}</li> {/**/}
+					<li>{permissionLevel === 1 ? "Full Admin Access" : "Client Level Access"}</li> 
 				</ul>
 			</div>
 		</section>

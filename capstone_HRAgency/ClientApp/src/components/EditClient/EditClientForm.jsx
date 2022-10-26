@@ -20,7 +20,7 @@ export const EditClientForm = () => {
 	};
 	const [inputValue, setInputValue] = useState(formInputValue);
 	const [singleCompanyData, setSingleCompanyData] = useState({});
-	const { companyName, address, phone, cpFirstName, cpLastName, cpEmail, startDate, endDate, subscriptionStatus, packages, PermissionLevel } = singleCompanyData;
+	const { companyName, address, phone, cpFirstName, cpLastName, cpEmail, startDate, endDate, SubscriptionStatus, packages, PermissionLevel } = singleCompanyData;
 
 	useEffect(() => {
 		const populateRoles = async () => {
@@ -37,8 +37,26 @@ export const EditClientForm = () => {
 				console.log(await responseList.text());
 			}
 		};
+
+		setInputValue({
+			companyID,
+			CompanyName: inputValue.CompanyName,
+			Address: inputValue.Address,
+			Phone: inputValue.Phone,
+			CPFirstName: inputValue.CPFirstName,
+			CPLastName: inputValue.CPLastName,
+			CPEMail: inputValue.CPEMail,
+			StartDate: inputValue.StartDate,
+			EndDate: inputValue.EndDate,
+			SubscriptionStatus: inputValue.SubscriptionStatus,
+			PackageType: inputValue.PackageType,
+			PermissionLevel: ((inputValue.PermissionLevel) === 1 ? "Full Admin Access" : "Client Level Access")
+		});
+
 		populateRoles();
 	}, []);
+
+	
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
@@ -53,7 +71,8 @@ export const EditClientForm = () => {
 
 		//alert("This is inputvalue.startdate: "+ inputValue.StartDate+ " ; this is tempdate: "+ tempDate); //returns date
 		//alert("Today's date plus one year: " + todaysDate + " Start Year: " + inputValue.StartDate);
-		if (inputValue.CompanyName.trim() === "") {
+		if (inputValue.CompanyName.trim() === "")
+		{
 			alert("Please enter a name for the company.");
 			document.getElementById("CompanyName").focus();
 		} else if (inputValue.Address.trim() === "") {
@@ -92,7 +111,7 @@ export const EditClientForm = () => {
 		} else if (inputValue.StartDate.trim() >= inputValue.EndDate.trim()) {
 			alert("Please enter an end date that is AFTER the start date.");
 			document.getElementById("EndDate").focus();
-		} else if (inputValue.StartDate > tempDate) {
+		} else if (inputValue.StartDate < tempDate) {
 			alert("Please select a Start Date equal to or later than today's date of " + tempDate);
 			document.getElementById("StartDate").focus();
 		} else if (inputValue.StartDate > todaysDate) {
@@ -106,33 +125,63 @@ export const EditClientForm = () => {
 			document.getElementById("PermissionLevel").focus();
 		}
 
-		setInputValue({
-			CompanyName: inputValue.CompanyName,
-			Address: inputValue.Address,
-			Phone: inputValue.Phone,
-			CPFirstName: inputValue.CPFirstName,
-			CPLastName: inputValue.CPLastName,
-			CPEMail: inputValue.CPEMail,
-			StartDate: inputValue.StartDate,
-			EndDate: inputValue.EndDate,
-			SubscriptionStatus: inputValue.SubscriptionStatus,
-			PackageType: inputValue.PackageType,
-			PermissionLevel: ((inputValue.PermissionLevel) === 1 ? "Full Admin Access" : "Client Level Access")
-		});
+			
+		else
+		{
 
-		console.log(setInputValue);
-		try {
-			const token = await authService.getAccessToken();
-			//const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
-			const resp = await fetch(`registeredit/?` + new URLSearchParams(inputValue), { method: "POST" });
-			console.log(resp);
-			console.log(resp.data);
-		} catch (error) {
-			console.log(error.response);
+		     console.log("line 132:setInputvalue "+setInputValue);
+				try
+				{
+					let urlParams =
+					{
+						companyID,
+						editCompanyName: inputValue.CompanyName,
+						editAddress: inputValue.Address,
+						editPhone: inputValue.Phone,
+						editCPFirstName: inputValue.CPFirstName,
+						editCPLastName: inputValue.CPLastName,
+						editCPEMail: inputValue.CPEMail,
+						editStartDate: inputValue.StartDate,
+						editEndDate: inputValue.EndDate,
+						editSubscriptionStatus: inputValue.SubscriptionStatus,
+						editPackageName: inputValue.PackageType,
+						editPermissionLevel: inputValue.PermissionLevel
+					};
+		
+
+					//const token = await authService.getAccessToken();
+					//const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
+					const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), { method: "PUT" });
+
+					if (resp.ok)    //if we get a good response, send out a message letting the user know.
+					{
+						alert("The database has been successfully updated.");
+
+						//reset input fields to empty to prepare to accept another update.
+
+						setInputValue({
+							CompanyName: "",
+							Address: "",
+							Phone: "",
+							CPFirstName: "",
+							CPLastName: "",
+							CPEMail: "",
+							StartDate: "",
+							EndDate: "",
+							SubscriptionStatus: "",
+							PackageType: "",
+							PermissionLevel: "",
+						});
+
+					};		
+				}
+				catch (error)
+				{
+					console.log(error.response);
+				}
 		}
+
 	};
-
-
 
     const handleChange = (e) => {
         //console.log(`${e.target.name}: ${e.target.value}`);
@@ -157,12 +206,12 @@ export const EditClientForm = () => {
 			<form onSubmit={submitHandler} className="form-container bg-color-prim">
 				<h1 className="heading-form">Edit Client Form</h1>
 				<div>
-					<label htmlFor="CompanyName">Company Name *</label>
-					<input type="text" name="CompanyName" id="CompanyName" placeholder={companyName} value={inputValue.CompanyName} onChange={handleChange} />
+					<label htmlFor="CompanyName">Company Name *   Previous: {companyName }</label>
+					<input type="text" name="CompanyName" id="CompanyName"  value={inputValue.CompanyName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="address">Company Address *</label>
-					<input type="text" name="Address" id="address" placeholder={address} value={inputValue.Address} onChange={handleChange} />
+					<label htmlFor="address">Company Address *  Previous: {address}</label>
+					<input type="text" name="Address" id="address"  value={inputValue.Address} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="Phone">Company Phone *</label>
@@ -201,7 +250,7 @@ export const EditClientForm = () => {
 				</div>
 				<div>
 					<label htmlFor="SubscriptionStatus">Subscription Status *</label>
-					<select name="SubscriptionStatus" id="SubscriptionStatus" value={inputValue.SubscriptionStatus} onChange={handleChange}>
+					<select name="SubscriptionStatus" id="SubscriptionStatus" value={inputValue.SubscriptionStatus}  onChange={handleChange}>
 						<option value="">Please assign a Subscription Status</option>
 						<option value="0">Inactive</option>
 						<option value="1">Active</option>
