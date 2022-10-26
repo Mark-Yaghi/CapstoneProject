@@ -140,10 +140,10 @@ export const EditClientForm = () => {
 		} else if (inputValue.StartDate > todaysDate) {
 			alert("Please select a Start Date no more than 1 year into the future from today's date of " + todaysDate);
 			document.getElementById("StartDate").focus();
-		} else if (inputValue.SubscriptionStatus.trim() === "") {
+		} else if (inputValue.SubscriptionStatus.toString().trim() === "") {
 			alert("Please select a Subscription Status for the company");
 			document.getElementById("SubscriptionStatus").focus();
-		} else if (inputValue.PermissionLevel.trim() === "") {
+		} else if (inputValue.PermissionLevel.toString().trim() === "") {
 			alert("Please select a Permission Level for the company");
 			document.getElementById("PermissionLevel").scrollIntoView({ behavior: "smooth" });
 			document.getElementById("PermissionLevel").focus();
@@ -203,7 +203,8 @@ export const EditClientForm = () => {
 				catch (error)
 				{
 					console.log(error.response);
-			    } 
+			} 
+			
 
 		}
 		
@@ -234,7 +235,7 @@ export const EditClientForm = () => {
 				<div>
 					<label htmlFor="CompanyName">Company Name * &nbsp; &nbsp;</label>
 					 <input type="text" name="CompanyName" id="CompanyName" value={inputValue.CompanyName} onChange={handleChange} /> 
-				{/*<input type="text" name="CompanyName" id="CompanyName" value={CompanyName} onChange={(e) => setCompanyName(e.target.value)} />*/}
+			
 					
 				</div>
 				<div>
