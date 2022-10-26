@@ -52,7 +52,6 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 		setInputValue((prevState) => ({
 			...prevState,
 			[name]: value,
-			image,
 		}));
 		setIsVisible(true);
 	};
@@ -61,13 +60,19 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 			<div className="form-container">
 				<section className={`${isVisible || id ? "visible" : "invisible"}`}>
 					<br />
-					<p> {inputValue.comment}</p>
+					<p> Hello, {inputValue.recipientName}</p>
 					<br />
-					<br />
+					<p>{inputValue.comment}</p>
 					<br />
 					<div style={{ backgroundImage: `url(${inputValue.image})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", maxWidth: "100%", height: "800px", marginInline: "auto", display: "flex", justifyContent: "space-between", flexDirection: "column", maxHeight: "auto" }}>
 						<h3 style={{ backgroundColor: "#1a281fad", color: "whitesmoke", fontWeight: "bolder", padding: "0.5em", margin: "1rem", borderRadius: "10px", alignSelf: "flex-start" }}>To: {inputValue.recipientName}</h3>
 						<h3 style={{ backgroundColor: "#1a281fad", color: "whitesmoke", fontWeight: "bolder", padding: "0.5em", margin: "1rem", borderRadius: "10px", alignSelf: "flex-end" }}>From {inputValue.senderName}</h3>
+						<br />
+						<br />
+						<p>Thank you,</p>
+						<br />
+						<p>{inputValue.senderName}</p>
+						<p>{inputValue.senderEmail}</p>
 					</div>
 				</section>
 			</div>
