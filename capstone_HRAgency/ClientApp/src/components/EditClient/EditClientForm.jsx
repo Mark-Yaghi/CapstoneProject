@@ -18,9 +18,12 @@ export const EditClientForm = () => {
 		PackageType: "",
 		PermissionLevel: "",
 	};
+	
+
 	const [inputValue, setInputValue] = useState(formInputValue);
 	const [singleCompanyData, setSingleCompanyData] = useState({});
 	const { companyName, address, phone, cpFirstName, cpLastName, cpEmail, startDate, endDate, SubscriptionStatus, packages, PermissionLevel } = singleCompanyData;
+	//const [CompanyName, setCompanyName] = useState(singleCompanyData.companyName);
 
 	useEffect(() => {
 		const populateRoles = async () => {
@@ -37,7 +40,7 @@ export const EditClientForm = () => {
 				console.log(await responseList.text());
 			}
 		};
-
+        
 		setInputValue({
 			companyID,
 			CompanyName: inputValue.CompanyName,
@@ -53,9 +56,11 @@ export const EditClientForm = () => {
 			PermissionLevel: ((inputValue.PermissionLevel) === 1 ? "Full Admin Access" : "Client Level Access")
 		});
 
+		// setCompanyName({ CompanyName: singleCompanyData.companyName });
+
 		populateRoles();
 	}, []);
-
+     
 	
 
 	const submitHandler = async (e) => {
@@ -73,8 +78,10 @@ export const EditClientForm = () => {
 		//alert("Today's date plus one year: " + todaysDate + " Start Year: " + inputValue.StartDate);
 		if (inputValue.CompanyName.trim() === "")
 		{
-			alert("Please enter a name for the company.");
+			alert("Please enter a name for the company.");			
 			document.getElementById("CompanyName").focus();
+			document.getElementById("CompanyName").scrollIntoView({ behavior: "smooth" });
+
 		} else if (inputValue.Address.trim() === "") {
 			alert("Please enter an address for the company.");
 			document.getElementById("address").focus();
@@ -122,14 +129,12 @@ export const EditClientForm = () => {
 			document.getElementById("SubscriptionStatus").focus();
 		} else if (inputValue.PermissionLevel.trim() === "") {
 			alert("Please select a Permission Level for the company");
+			document.getElementById("PermissionLevel").scrollIntoView({ behavior: "smooth" });
 			document.getElementById("PermissionLevel").focus();
 		}
-
 			
 		else
 		{
-
-		     console.log("line 132:setInputvalue "+setInputValue);
 				try
 				{
 					let urlParams =
@@ -176,16 +181,14 @@ export const EditClientForm = () => {
 						//---ADD CODE HERE TO AUTOMATICALLY REDIRECT BCK TO DETAILS PAGE.------------
 						//Response.AppendHeader("Refresh", "5;url=/editClient");
 						
-					};		
+					}
+					else { alert("An error occurred during the update. The record was not updated."); }
 				}
 				catch (error)
 				{
 					console.log(error.response);
-				}
+			    } 
 
-			window.location.replace(<NavLink className="but-general but-col-sec" to={`../companyDetail`}>
-				Edit
-			</NavLink>);//'../CompanyDetail.jsx'
 		}
 		
 	};
@@ -214,7 +217,9 @@ export const EditClientForm = () => {
 				<h1 className="heading-form">Edit Client Form</h1>
 				<div>
 					<label htmlFor="CompanyName">Company Name * &nbsp; &nbsp;  Previous: {companyName }</label>
-					<input type="text" name="CompanyName" id="CompanyName"  value={inputValue.CompanyName} onChange={handleChange} />
+					 <input type="text" name="CompanyName" id="CompanyName" value={inputValue.CompanyName} onChange={handleChange} /> 
+				{/*<input type="text" name="CompanyName" id="CompanyName" value={CompanyName} onChange={(e) => setCompanyName(e.target.value)} />*/}
+					
 				</div>
 				<div>
 					<label htmlFor="address">Company Address * &nbsp; &nbsp; Previous: {address}</label>
