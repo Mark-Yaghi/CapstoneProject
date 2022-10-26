@@ -61,7 +61,10 @@ namespace capstone_HRAgency.Controllers
             email.To.Add( MailboxAddress.Parse( RecipManagerEmail ) );
             email.Cc.Add( MailboxAddress.Parse( RecipientEmail ) );
             email.Subject = $"Commendation is for {RecipientName} from Email {SenderEmail}";
-            email.Body = new TextPart( TextFormat.Html ) { Text = $"<p>To, {RecipientName}</p><br /><p> {Comment}</p><br /><img src={Image} width=\"400\" /><br /><br /><p>From {SenderName}</p>" };
+            email.Body = new TextPart( TextFormat.Html )
+            {
+                Text = $"<p>Hello, {RecipientName}</p><br /><p> {Comment}</p><br /><img src={Image} width=\"400\" /><br /><br /><p>From {SenderName}</p>"
+            };
             email.Importance = MessageImportance.High;
             //email.Sender.Name = SenderName;
 
@@ -76,3 +79,4 @@ namespace capstone_HRAgency.Controllers
     }
 }
 
+// { Text = $"<p>Hello, {RecipientName}</p><br /><p> {Comment}</p><br /><img src={Image} width=\"400\" /><br /><br /><p>From {SenderName}</p>" };
