@@ -97,6 +97,7 @@ button a:hover {
 .position-center-align {
 	position: absolute;
 	border: 1px solid black;
+	/* color: #1a281fad; */
 	padding-inline: 2em;
 	padding-block: 1em;
 	background-color: rgba(255, 210, 210, 0.8);
