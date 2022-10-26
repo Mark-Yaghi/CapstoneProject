@@ -18,6 +18,12 @@ const CompanyDetail = () => {
 	const [singlePermissionDetail, setSinglePermissionDetail] = useState([]);
 	const { permissionLevel } = singlePermissionDetail;
 
+	/*--the code below deals with the Activate/Deactivate button state change.---*/
+	const [isActive, setIsActive] = useState(false);
+
+	function handleClick() {
+		setIsActive(current => !current);
+	}
 
 	console.log(singleCompnayDetail);
 	useEffect(() => {
@@ -76,19 +82,18 @@ const CompanyDetail = () => {
 					<NavLink className="but-general but-col-sec" to="/company">
 						Back
 					</NavLink>
-					
 					<NavLink className="but-general but-col-sec" to={`/editClient/${companyID}`}>
 						Edit
 					</NavLink>
-					<NavLink className="but-general but-col-sec" to="/">
-						Deactivate
-					</NavLink>
+					<div>
+						<button className="but-general" style={{
+							backgroundColor: isActive ? '#d21f3c' : 'green',
+							color: isActive ? 'white' : 'white',
+						}} onClick={handleClick}>{isActive?"Deactivate":"Activate"}</button>
+					</div>
 					<NavLink className="but-general but-col-red" to="/">
 						Delete
 					</NavLink>
-					{/* <button className="but-general but-col-prim marg-left">
-					<LoginMenu></LoginMenu>
-				</button>*/}
 				</div>
 			</section>
 			<div className="cd-flex cd-container">
