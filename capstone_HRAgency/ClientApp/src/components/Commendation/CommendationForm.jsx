@@ -19,6 +19,7 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 			...prevState,
 			image: image,
 		}));
+		setIsVisible(true);
 	}, [id]);
 	console.log(inputValue);
 	const imageStyle = {};
@@ -38,7 +39,13 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 			if (!res.ok) {
 				throw new Error(`${res.status} ${res.statusText}`);
 			}
-			setIsVisible(false);
+			if (res.ok) {
+				setInputValue((prevState) => ({
+					...prevState,
+					image: "",
+				}));
+				setIsVisible(false);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -58,7 +65,7 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	return (
 		<section className="main-container">
 			<div className="form-container">
-				<section className={`${isVisible || id ? "visible" : "invisible"}`}>
+				<section className={`${isVisible ? "visible" : "invisible"}`}>
 					<br />
 					<p> Hello, {inputValue.recipientName}</p>
 					<br />
