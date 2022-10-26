@@ -8,6 +8,7 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	const [isVisible, setIsVisible] = useState(false);
 	const { id, image } = userImage;
 	const inputFocus = useRef();
+	console.log(image);
 
 	// console.log(image, id);
 	// console.log(inputValue);
@@ -15,13 +16,16 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	// 	alert("Image is not selected.");
 	// }
 	useEffect(() => {
-		setInputValue((prevState) => ({
-			...prevState,
-			image: image,
-		}));
-		setIsVisible(true);
-	}, [id]);
-	console.log(inputValue);
+		if (image === "") {
+			setIsVisible(false);
+		} else {
+			setInputValue((prevState) => ({
+				...prevState,
+				image: image,
+			}));
+			setIsVisible(true);
+		}
+	}, [image]);
 	const imageStyle = {};
 	const submitHandler = async (e) => {
 		e.preventDefault();
@@ -52,10 +56,10 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 		setInputValue({ senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "", image: "" });
 		setIsVisible(false);
 	};
-	// console.log(inputValue);
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		console.log(inputValue);
+
 		setInputValue((prevState) => ({
 			...prevState,
 			[name]: value,
