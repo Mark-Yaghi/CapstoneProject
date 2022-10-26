@@ -1,20 +1,19 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, createRef } from "react";
 import "./Commendation-Style.css";
 const url = "https://localhost:7191/api/Email?";
 
 export const CommendationForm = ({ onFormInformation, userImage }) => {
-	const formInputValue = { senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "", image: "" };
-	const [inputValue, setInputValue] = useState(formInputValue);
+	const intialState = { senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "", image: "" };
+	const [inputValue, setInputValue] = useState(intialState);
 	const [isVisible, setIsVisible] = useState(false);
 	const { id, image } = userImage;
-	const inputFocus = useRef();
-	console.log(image);
+	const senderName = useRef();
+	const senderEmail = useRef();
+	const recipientName = useRef();
+	const recipientEmail = useRef();
+	const recipManagerEmail = useRef();
+	const comment = useRef();
 
-	// console.log(image, id);
-	// console.log(inputValue);
-	// if (!id) {
-	// 	alert("Image is not selected.");
-	// }
 	useEffect(() => {
 		if (image === "") {
 			setIsVisible(false);
@@ -26,20 +25,68 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 			setIsVisible(true);
 		}
 	}, [image]);
-	const imageStyle = {};
+
+	// const focusedScroll = (key, inputVal) => {
+	// 	if (key === inputVal) {
+	// 		inputVal.current.focus();
+	// 		inputVal.current.scrollIntoView({
+	// 			behavior: "smooth",
+	// 		});
+	// 	}
+	// };
+
+	const emptyInput = (inputVal) => {
+		for (const [key, value] of Object.entries(inputVal)) {
+			if (value.trim() === "") {
+				if (key === "senderName") {
+					senderName.current.focus();
+					senderName.current.scrollIntoView({
+						behavior: "smooth",
+					});
+				}
+				if (key === "senderEmail") {
+					senderEmail.current.focus();
+					senderEmail.current.scrollIntoView({
+						behavior: "smooth",
+					});
+				}
+				if (key === "recipientName") {
+					recipientName.current.focus();
+					recipientName.current.scrollIntoView({
+						behavior: "smooth",
+					});
+				}
+				if (key === "recipientEmail") {
+					recipientEmail.current.focus();
+					recipientEmail.current.scrollIntoView({
+						behavior: "smooth",
+					});
+				}
+				if (key === "recipManagerEmail") {
+					recipManagerEmail.current.focus();
+					recipManagerEmail.current.scrollIntoView({
+						behavior: "smooth",
+					});
+				}
+				if (key === "comment") {
+					comment.current.focus();
+					comment.current.scrollIntoView({
+						behavior: "smooth",
+					});
+				}
+
+				break;
+			}
+		}
+	};
+
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		if (!inputValue.image) {
-		}
-		if (!inputValue.senderName) {
-			inputFocus.current.focus();
-		}
-		console.log(inputValue);
+		emptyInput(inputValue);
 		try {
 			const res = await fetch(`api/Email?` + new URLSearchParams(inputValue), {
 				method: "POST",
 			});
-			console.log(await res.text());
 			if (!res.ok) {
 				throw new Error(`${res.status} ${res.statusText}`);
 			}
@@ -48,23 +95,25 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 					...prevState,
 					image: "",
 				}));
+				setInputValue(intialState);
 				setIsVisible(false);
 			}
 		} catch (error) {
 			console.log(error);
 		}
-		setInputValue({ senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "", image: "" });
-		setIsVisible(false);
 	};
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-
-		setInputValue((prevState) => ({
-			...prevState,
-			[name]: value,
-		}));
-		setIsVisible(true);
+		if (image) {
+			setInputValue((prevState) => ({
+				...prevState,
+				[name]: value,
+			}));
+			setIsVisible(true);
+		} else {
+			alert("Image is not selected");
+		}
 	};
 	return (
 		<section className="main-container">
@@ -91,21 +140,21 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 			<form onSubmit={submitHandler} className="form-container">
 				<div>
 					<label htmlFor="sender">Sender *</label>
-					<input ref={inputFocus} type="text" name="senderName" id="sender" placeholder="Name" value={inputValue.senderName} onChange={handleChange} />
-					<input type="email" name="senderEmail" id="sender" placeholder="Email" value={inputValue.senderEmail} onChange={handleChange} />
+					<input ref={senderName} type="text" name="senderName" id="sender" placeholder="Name" value={inputValue.senderName} onChange={handleChange} />
+					<input ref={senderEmail} type="email" name="senderEmail" id="sender" placeholder="Email" value={inputValue.senderEmail} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="recipient">Recipient *</label>
-					<input type="text" name="recipientName" id="recipient" placeholder="Name" value={inputValue.recipientName} onChange={handleChange} />
-					<input type="email" name="recipientEmail" id="recipient" placeholder="Email" value={inputValue.recipientEmail} onChange={handleChange} />
+					<input ref={recipientName} type="text" name="recipientName" id="recipient" placeholder="Name" value={inputValue.recipientName} onChange={handleChange} />
+					<input ref={recipientEmail} type="email" name="recipientEmail" id="recipient" placeholder="Email" value={inputValue.recipientEmail} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="recipManager">Recipient’s Manager *</label>
-					<input type="email" name="recipManagerEmail" id="recipManager" placeholder="Email" value={inputValue.recipManagerEmail} onChange={handleChange} />
+					<input ref={recipManagerEmail} type="email" name="recipManagerEmail" id="recipManager" placeholder="Email" value={inputValue.recipManagerEmail} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="comment">Message from Sender to Recipient*</label>
-					<textarea name="comment" id="comment" cols="30" rows="10" placeholder="Comment..." value={inputValue.comment} onChange={handleChange} />
+					<textarea ref={comment} name="comment" id="comment" cols="30" rows="10" placeholder="Comment..." value={inputValue.comment} onChange={handleChange} />
 				</div>
 				<button className="but-general but-col-prim">Send</button>
 			</form>
