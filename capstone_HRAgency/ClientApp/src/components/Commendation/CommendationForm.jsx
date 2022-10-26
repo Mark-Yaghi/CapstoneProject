@@ -67,13 +67,13 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 					<div style={{ backgroundImage: `url(${inputValue.image})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", maxWidth: "100%", height: "800px", marginInline: "auto", display: "flex", justifyContent: "space-between", flexDirection: "column", maxHeight: "auto" }}>
 						<h3 style={{ backgroundColor: "#1a281fad", color: "whitesmoke", fontWeight: "bolder", padding: "0.5em", margin: "1rem", borderRadius: "10px", alignSelf: "flex-start" }}>To: {inputValue.recipientName}</h3>
 						<h3 style={{ backgroundColor: "#1a281fad", color: "whitesmoke", fontWeight: "bolder", padding: "0.5em", margin: "1rem", borderRadius: "10px", alignSelf: "flex-end" }}>From {inputValue.senderName}</h3>
-						<br />
-						<br />
-						<p>Thank you,</p>
-						<br />
-						<p>{inputValue.senderName}</p>
-						<p>{inputValue.senderEmail}</p>
 					</div>
+					<br />
+					<br />
+					<p>Thank you,</p>
+					<br />
+					<p>{inputValue.senderName}</p>
+					<p>{inputValue.senderEmail}</p>
 				</section>
 			</div>
 
