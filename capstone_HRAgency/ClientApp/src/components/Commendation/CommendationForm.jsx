@@ -16,15 +16,6 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	// 	alert("Image is not selected.");
 	// }
 	useEffect(() => {
-<<<<<<< HEAD
-		setInputValue((prevState) => ({
-			...prevState,
-			image: image,
-		}));
-		setIsVisible(true);
-	}, [id]);
-	console.log(inputValue);
-=======
 		if (image === "") {
 			setIsVisible(false);
 		} else {
@@ -35,7 +26,6 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 			setIsVisible(true);
 		}
 	}, [image]);
->>>>>>> Arv-3
 	const imageStyle = {};
 	const submitHandler = async (e) => {
 		e.preventDefault();
