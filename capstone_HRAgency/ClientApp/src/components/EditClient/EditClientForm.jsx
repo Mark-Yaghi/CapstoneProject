@@ -5,7 +5,7 @@ import authService from "../api-authorization/AuthorizeService";
 
 export const EditClientForm = () => {
 	const { companyID } = useParams();
-	const formInputValue = {
+	const [inputValue, setInputValue] = useState({
 		CompanyName: "",
 		Address: "",
 		Phone: "",
@@ -16,48 +16,64 @@ export const EditClientForm = () => {
 		EndDate: "",
 		SubscriptionStatus: "",
 		PackageType: "",
-		PermissionLevel: "",
-	};
-	
-
-	const [inputValue, setInputValue] = useState(formInputValue);
-	const [singleCompanyData, setSingleCompanyData] = useState({});
-	const { companyName, address, phone, cpFirstName, cpLastName, cpEmail, startDate, endDate, SubscriptionStatus, packages, PermissionLevel } = singleCompanyData;
-	//const [CompanyName, setCompanyName] = useState(singleCompanyData.companyName);
-
+		PermissionLevel: ""
+	});
 	useEffect(() => {
 		const populateRoles = async () => {
 			const token = await authService.getAccessToken();
-			// console.log(token);
 			const responseList = await fetch(`company/${companyID}`, {
 				headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
 			});
 			if (responseList.ok) {
 				const dataList = await responseList.json();
-				// console.log(dataList);
-				setSingleCompanyData(dataList);
+				console.log(dataList);
+				setInputValue({
+					CompanyName: dataList.companyName,
+					Address: dataList.address,
+					Phone: dataList.phone,
+					CPFirstName: dataList.cpFirstName,
+					CPLastName: dataList.cpLastName,
+					CPEMail: dataList.cpEmail,
+					StartDate: dataList.startDate,
+					EndDate: dataList.endDate,
+					SubscriptionStatus: dataList.subscriptionStatus,
+				});
+
 			} else {
 				console.log(await responseList.text());
 			}
+
+
+			const responseListPackage = await fetch(`package/${companyID}`, {
+				headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+			});
+			if (responseListPackage.ok) {
+				const dataListPackage = await responseListPackage.json();
+				setInputValue((prevState) => ({
+					...prevState,
+					PackageType: dataListPackage.packageName
+				}));
+
+			} else {
+				console.log(await responseListPackage.text());
+
+			}
+
+			/*--the code below deals with getting data from the userinfo table.---*/
+
+			const responseListPermission = await fetch(`userinfo/${companyID}`, {
+				headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+			});
+			if (responseListPermission.ok) {
+				const dataListPermission = await responseListPermission.json();
+				setInputValue((prevState) => ({
+					...prevState,
+					PermissionLevel: dataListPermission.permissionLevel
+				}));
+			} else {
+				console.log(await responseListPermission.text());
+			}
 		};
-        
-		setInputValue({
-			companyID,
-			CompanyName: inputValue.CompanyName,
-			Address: inputValue.Address,
-			Phone: inputValue.Phone,
-			CPFirstName: inputValue.CPFirstName,
-			CPLastName: inputValue.CPLastName,
-			CPEMail: inputValue.CPEMail,
-			StartDate: inputValue.StartDate,
-			EndDate: inputValue.EndDate,
-			SubscriptionStatus: inputValue.SubscriptionStatus,
-			PackageType: inputValue.PackageType,
-			PermissionLevel: ((inputValue.PermissionLevel) === 1 ? "Full Admin Access" : "Client Level Access")
-		});
-
-		// setCompanyName({ CompanyName: singleCompanyData.companyName });
-
 		populateRoles();
 	}, []);
      
@@ -216,60 +232,60 @@ export const EditClientForm = () => {
 			<form onSubmit={submitHandler} className="form-container bg-color-prim">
 				<h1 className="heading-form">Edit Client Form</h1>
 				<div>
-					<label htmlFor="CompanyName">Company Name * &nbsp; &nbsp;  Previous: {companyName }</label>
+					<label htmlFor="CompanyName">Company Name * &nbsp; &nbsp;</label>
 					 <input type="text" name="CompanyName" id="CompanyName" value={inputValue.CompanyName} onChange={handleChange} /> 
 				{/*<input type="text" name="CompanyName" id="CompanyName" value={CompanyName} onChange={(e) => setCompanyName(e.target.value)} />*/}
 					
 				</div>
 				<div>
-					<label htmlFor="address">Company Address * &nbsp; &nbsp; Previous: {address}</label>
+					<label htmlFor="address">Company Address * &nbsp; &nbsp;</label>
 					<input type="text" name="Address" id="address"  value={inputValue.Address} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="Phone">Company Phone * &nbsp; &nbsp; Previous: {phone }</label>
-					<input type="phone" name="Phone" id="phoneNumber" maxLength="10" placeholder={phone} value={inputValue.Phone} onChange={handleChange} />
+					<label htmlFor="Phone">Company Phone * &nbsp; &nbsp;</label>
+					<input type="phone" name="Phone" id="phoneNumber" maxLength="10" value={inputValue.Phone} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="CPFirstName">Contacts First Name * &nbsp; &nbsp; Previous: {cpFirstName }</label>
-					<input type="text" name="CPFirstName" id="firstname" placeholder={cpFirstName} value={inputValue.CPFirstName} onChange={handleChange} />
+					<label htmlFor="CPFirstName">Contacts First Name * &nbsp; &nbsp;</label>
+					<input type="text" name="CPFirstName" id="firstname" value={inputValue.CPFirstName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="lastName">Contact Last Name * &nbsp; &nbsp; &nbsp;  Previous: {cpLastName }</label>
-					<input type="text" name="CPLastName" id="lastname" placeholder={cpLastName} value={inputValue.CPLastName} onChange={handleChange} />
+					<label htmlFor="lastName">Contact Last Name * &nbsp; &nbsp; &nbsp;</label>
+					<input type="text" name="CPLastName" id="lastname" value={inputValue.CPLastName} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="email">Contacts Email * &nbsp; &nbsp; Previous: {cpEmail }</label>
-					<input type="email" name="CPEMail" id="CPEMail" placeholder={cpEmail} value={inputValue.CPEMail} onChange={handleChange} />
+					<label htmlFor="email">Contacts Email * &nbsp; &nbsp;</label>
+					<input type="email" name="CPEMail" id="CPEMail" value={inputValue.CPEMail} onChange={handleChange} />
 				</div>
 
 				<div>
-					<label htmlFor="PackageType">Package Type *  &nbsp; &nbsp; Previous: {packages }</label>
+					<label htmlFor="PackageType">Package Type *  &nbsp; &nbsp;</label>
 					<select name="PackageType" id="PackageType" value={inputValue.PackageType} onChange={handleChange}>
 						<option value="">Please select a Package Type</option>
-						<option value="Micro Company (1-9)">Micro Company (1-9)</option>
-						<option value="Small Company (10-49)">Small Company (10-49)</option>
-						<option value="Medium Company (50-249)">Medium Company (50-249)</option>
-						<option value="Large Company (250 +)">Large Company (250 +)</option>
+						<option value="Micro Company">Micro Company (1-9)</option>
+						<option value="Small Company">Small Company (10-49)</option>
+						<option value="Medium Company">Medium Company (50-249)</option>
+						<option value="Large Company">Large Company (250 +)</option>
 					</select>
 				</div>
 				<div>
-					<label htmlFor="Start Date">Start Date *  &nbsp; &nbsp; Previous: {startDate }</label>
-					<input type="date" maxLength="10" name="StartDate" id="StartDate" placeholder={startDate} value={inputValue.StartDate} onChange={handleChange} />
+					<label htmlFor="Start Date">Start Date *  &nbsp; &nbsp;</label>
+					<input type="date" maxLength="10" name="StartDate" id="StartDate" value={inputValue.StartDate} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="End Date">End Date *  &nbsp; &nbsp; Previous: {endDate }</label>
-					<input type="date" maxLength="10" name="EndDate" id="EndDate" placeholder={endDate} value={inputValue.EndDate} onChange={handleChange} />
+					<label htmlFor="End Date">End Date *  &nbsp; &nbsp;</label>
+					<input type="date" maxLength="10" name="EndDate" id="EndDate" value={inputValue.EndDate} onChange={handleChange} />
 				</div>
 				<div>
-					<label htmlFor="SubscriptionStatus">Subscription Status *  &nbsp; &nbsp;  Previous: {SubscriptionStatus === false ? "Account Inactive" : "Account Active" }</label>
-					<select name="SubscriptionStatus" id="SubscriptionStatus" value={inputValue.SubscriptionStatus}  onChange={handleChange}>
+					<label htmlFor="SubscriptionStatus">Subscription Status *  &nbsp; &nbsp;</label>
+					<select name="SubscriptionStatus" id="SubscriptionStatus" value={inputValue.SubscriptionStatus?"1":"0"} onChange={handleChange}>
 						<option value="">Please assign a Subscription Status</option>
 						<option value="0">Inactive</option>
 						<option value="1">Active</option>
 					</select>
 				</div>
 				<div>
-					<label htmlFor="PermissionLevel">Permission Level * &nbsp; &nbsp;  Previous: {PermissionLevel === 1 ? "Full Admin Access" : "Client Level Access" }</label>
+					<label htmlFor="PermissionLevel">Permission Level * &nbsp; &nbsp;</label>
 					<select name="PermissionLevel" id="PermissionLevel" value={inputValue.PermissionLevel} onChange={handleChange}>
 						<option value="">Please assign a Permission Level</option>
 						<option value="1">Full Administrative Access</option>
