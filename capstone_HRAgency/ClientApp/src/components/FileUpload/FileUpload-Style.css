@@ -3,7 +3,6 @@
 	margin: auto;
 	padding-inline: 1.5rem;
 	padding-block: 2rem;
-
 }
 
 .but-general {
@@ -47,7 +46,6 @@ button a:hover {
 	padding: 75px;
 	background-color: #eaf6f4;
 	margin-block: 8rem;
-
 }
 
 .form-container > div > input,
@@ -62,16 +60,17 @@ button a:hover {
 .form-container > div > input:focus,
 .form-container > div > select:focus,
 .form-container > div > textarea:focus {
-	border: 1px solid #1f7d6d;
+	border: 1px solid #d21f3c;
 	border-style: dashed;
 }
-	.form-container > div > input:hover,
-	.form-container > div > select:hover,
-	.form-container > div > textarea:hover {
-		border: hsla(170, 60%, 31%, 0.5) 1px solid;
-	}
+.form-container > div > input:hover,
+.form-container > div > select:hover,
+.form-container > div > textarea:hover {
+	border: hsla(170, 60%, 31%, 0.5) 1px solid;
+}
 
-.form-container .but-general, .but-back {
+.form-container .but-general,
+.but-back {
 	margin: auto;
 }
 
