@@ -136,7 +136,7 @@ button a:hover {
 .form-container > div > input:focus,
 .form-container > div > select:focus,
 .form-container > div > textarea:focus {
-	border: 1px solid #1f7d6d;
+	border: 1px solid #d21f3c;
 	border-style: dashed;
 }
 .form-container > div > input:hover,

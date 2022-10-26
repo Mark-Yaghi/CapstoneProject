@@ -67,7 +67,6 @@ button a:hover {
 	padding: 75px;
 	background-color: #eaf6f4;
 	margin-block: 8rem;
-
 }
 .heading-card {
 	color: #d21f3c;
@@ -127,14 +126,14 @@ button a:hover {
 .form-container > div > input:focus,
 .form-container > div > select:focus,
 .form-container > div > textarea:focus {
-	border: 1px solid #1f7d6d;
+	border: 1px solid #d21f3c;
 	border-style: dashed;
 }
-	.form-container > div > input:hover,
-	.form-container > div > select:hover,
-	.form-container > div > textarea:hover {
-		border: hsla(170, 60%, 31%, 0.5) 1px solid;
-	}
+.form-container > div > input:hover,
+.form-container > div > select:hover,
+.form-container > div > textarea:hover {
+	border: hsla(170, 60%, 31%, 0.5) 1px solid;
+}
 
 ::placeholder {
 	color: hsla(170, 60%, 31%, 0.5);
@@ -142,7 +141,8 @@ button a:hover {
 	letter-spacing: 0.5px;
 }
 
-.form-container .but-general, .but-back {
+.form-container .but-general,
+.but-back {
 	margin-inline: auto;
 }
 
@@ -154,5 +154,5 @@ button a:hover {
 
 .nav-spec-but {
 	text-align: center;
-	width: 150px
+	width: 150px;
 }

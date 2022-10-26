@@ -3,6 +3,7 @@ import "./Commendation-Style.css";
 const url = "https://localhost:7191/api/Email?";
 
 export const CommendationForm = ({ onFormInformation, userImage }) => {
+	const emailRegEx = new RegExp('/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/i');
 	const intialState = { senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "", image: "" };
 	const [inputValue, setInputValue] = useState(intialState);
 	const [isVisible, setIsVisible] = useState(false);
@@ -15,7 +16,7 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	const comment = useRef();
 
 	useEffect(() => {
-		if (image === "") {
+		if (!image) {
 			setIsVisible(false);
 		} else {
 			setInputValue((prevState) => ({
@@ -26,57 +27,41 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 		}
 	}, [image]);
 
-	const emptyInput = (inputVal) => {
-		const emptyInputValue = false;
-		for (const [key, value] of Object.entries(inputVal)) {
-			if (value.trim() === "") {
-				if (key === "senderName") {
-					alert("Please Enter Sender Name");
-					senderName.current.focus();
-					senderName.current.scrollIntoView({
-						behavior: "smooth",
-					});
-				} else if (key === "senderEmail") {
-					senderEmail.current.focus();
-					senderEmail.current.scrollIntoView({
-						behavior: "smooth",
-					});
-				}
-				if (key === "recipientName") {
-					recipientName.current.focus();
-					recipientName.current.scrollIntoView({
-						behavior: "smooth",
-					});
-				}
-				if (key === "recipientEmail") {
-					recipientEmail.current.focus();
-					recipientEmail.current.scrollIntoView({
-						behavior: "smooth",
-					});
-				}
-				if (key === "recipManagerEmail") {
-					recipManagerEmail.current.focus();
-					recipManagerEmail.current.scrollIntoView({
-						behavior: "smooth",
-					});
-				}
-				if (key === "comment") {
-					comment.current.focus();
-					comment.current.scrollIntoView({
-						behavior: "smooth",
-					});
-				}
-
-				break;
-			}
-		}
-	};
-
 	const submitHandler = async (e) => {
 		e.preventDefault();
 
-		// emptyInput(inputValue);
-		if (emptyInput(inputValue)) {
+		// emptyInput(inputValue)
+		if (!inputValue.senderName.trim()) {
+			senderName.current.focus();
+			senderName.current.scrollIntoView({
+				behavior: "smooth",
+			});
+		} else if (!inputValue.senderEmail.trim() && !emailRegEx.test(inputValue.senderEmail)) {
+			senderEmail.current.focus();
+			senderEmail.current.scrollIntoView({
+				behavior: "smooth",
+			});
+		} else if (!inputValue.recipientName.trim()) {
+			recipientName.current.focus();
+			recipientName.current.scrollIntoView({
+				behavior: "smooth",
+			});
+		} else if (!inputValue.recipientEmail.trim() && !emailRegEx.test(inputValue.recipientEmail)) {
+			recipientEmail.current.focus();
+			recipientEmail.current.scrollIntoView({
+				behavior: "smooth",
+			});
+		} else if (!inputValue.recipManagerEmail.trim() && !emailRegEx.test(inputValue.recipManagerEmail)) {
+			recipManagerEmail.current.focus();
+			recipManagerEmail.current.scrollIntoView({
+				behavior: "smooth",
+			});
+		} else if (!inputValue.comment.trim()) {
+			comment.current.focus();
+			comment.current.scrollIntoView({
+				behavior: "smooth",
+			});
+		} else {
 			try {
 				const res = await fetch(`api/Email?` + new URLSearchParams(inputValue), {
 					method: "POST",
