@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, createRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./Commendation-Style.css";
 const url = "https://localhost:7191/api/Email?";
 
@@ -26,25 +26,17 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 		}
 	}, [image]);
 
-	// const focusedScroll = (key, inputVal) => {
-	// 	if (key === inputVal) {
-	// 		inputVal.current.focus();
-	// 		inputVal.current.scrollIntoView({
-	// 			behavior: "smooth",
-	// 		});
-	// 	}
-	// };
-
 	const emptyInput = (inputVal) => {
+		const emptyInputValue = false;
 		for (const [key, value] of Object.entries(inputVal)) {
 			if (value.trim() === "") {
 				if (key === "senderName") {
+					alert("Please Enter Sender Name");
 					senderName.current.focus();
 					senderName.current.scrollIntoView({
 						behavior: "smooth",
 					});
-				}
-				if (key === "senderEmail") {
+				} else if (key === "senderEmail") {
 					senderEmail.current.focus();
 					senderEmail.current.scrollIntoView({
 						behavior: "smooth",
@@ -82,24 +74,27 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		emptyInput(inputValue);
-		try {
-			const res = await fetch(`api/Email?` + new URLSearchParams(inputValue), {
-				method: "POST",
-			});
-			if (!res.ok) {
-				throw new Error(`${res.status} ${res.statusText}`);
+
+		// emptyInput(inputValue);
+		if (emptyInput(inputValue)) {
+			try {
+				const res = await fetch(`api/Email?` + new URLSearchParams(inputValue), {
+					method: "POST",
+				});
+				if (!res.ok) {
+					throw new Error(`${res.status} ${res.statusText}`);
+				}
+				if (res.ok) {
+					setInputValue((prevState) => ({
+						...prevState,
+						image: "",
+					}));
+					setInputValue(intialState);
+					setIsVisible(false);
+				}
+			} catch (error) {
+				console.log(error);
 			}
-			if (res.ok) {
-				setInputValue((prevState) => ({
-					...prevState,
-					image: "",
-				}));
-				setInputValue(intialState);
-				setIsVisible(false);
-			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
 
@@ -140,21 +135,21 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 			<form onSubmit={submitHandler} className="form-container">
 				<div>
 					<label htmlFor="sender">Sender *</label>
-					<input ref={senderName} type="text" name="senderName" id="sender" placeholder="Name" value={inputValue.senderName} onChange={handleChange} />
-					<input ref={senderEmail} type="email" name="senderEmail" id="sender" placeholder="Email" value={inputValue.senderEmail} onChange={handleChange} />
+					<input maxLength="30" ref={senderName} type="text" name="senderName" id="sender" placeholder="Name" value={inputValue.senderName} onChange={handleChange} />
+					<input maxLength="30" ref={senderEmail} type="email" name="senderEmail" id="sender" placeholder="Email" value={inputValue.senderEmail} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="recipient">Recipient *</label>
-					<input ref={recipientName} type="text" name="recipientName" id="recipient" placeholder="Name" value={inputValue.recipientName} onChange={handleChange} />
-					<input ref={recipientEmail} type="email" name="recipientEmail" id="recipient" placeholder="Email" value={inputValue.recipientEmail} onChange={handleChange} />
+					<input maxLength="30" ref={recipientName} type="text" name="recipientName" id="recipient" placeholder="Name" value={inputValue.recipientName} onChange={handleChange} />
+					<input maxLength="30" ref={recipientEmail} type="email" name="recipientEmail" id="recipient" placeholder="Email" value={inputValue.recipientEmail} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="recipManager">Recipient’s Manager *</label>
-					<input ref={recipManagerEmail} type="email" name="recipManagerEmail" id="recipManager" placeholder="Email" value={inputValue.recipManagerEmail} onChange={handleChange} />
+					<input maxLength="30" ref={recipManagerEmail} type="email" name="recipManagerEmail" id="recipManager" placeholder="Email" value={inputValue.recipManagerEmail} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="comment">Message from Sender to Recipient*</label>
-					<textarea ref={comment} name="comment" id="comment" cols="30" rows="10" placeholder="Comment..." value={inputValue.comment} onChange={handleChange} />
+					<textarea maxLength="500" ref={comment} name="comment" id="comment" cols="30" rows="10" placeholder="Comment..." value={inputValue.comment} onChange={handleChange} />
 				</div>
 				<button className="but-general but-col-prim">Send</button>
 			</form>
