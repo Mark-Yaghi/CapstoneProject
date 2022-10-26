@@ -1,28 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Images from "../../data";
 import "./Commendation-Style.css";
+import SignleImage from "./SingleImage";
 
 const CardSelect = ({ onSelectImage }) => {
 	const [imagesData, setImagesData] = useState([]);
-	// const [imgSel, setImgSel] = useState(false);
+	const [imgSel, setImgSel] = useState("");
 
-	// const handleSelect = (e) => {
-	// 	const imgId = +e.target.id;
-	// 	const filterImg = Images.filter((image) => imgId == image.id);
+	// useEffect(() => {
+
+	// })
+
+	// const handleClick = (e) => {
+	// 	const filterImg = imagesData.filter((image) => image.name != e.target.alt);
 	// 	console.log(filterImg);
-	// 	setImgSel((prev) => !prev);
-	// 	console.log(imgSel);
+	// 	const [selectedImg] = filterImg;
+	// 	console.log(selectedImg.name);
+	// 	setImgSel(selectedImg.name);
+
+	// 	onSelectImage({id:})
 	// };
 
 	const fetchImages = async (e) => {
-		// console.log(file);
-		// const formData = new FormData();
-		// formData.append("formFile", file);
-		// formData.append("fileName", fileName);
 		try {
 			const res = await axios("api/Image/");
-			console.log(res.data);
+			// console.log(res.data);
 			setImagesData(res.data);
 			// alert("Your file has been successfully uploaded to the database.");
 			// document.getElementById("fileUpload").value = "";
@@ -43,7 +46,6 @@ const CardSelect = ({ onSelectImage }) => {
 					{imagesData.map((image) => {
 						return (
 							<li className="position-declare img-hover " key={image.name} onClick={() => onSelectImage({ id: image.name, image: image.imgPath })}>
-								{/* <span className="position-center-align">Image {image.id}</span> */}
 								<img className="img-resize" src={image.imgPath} alt={image.name} />
 							</li>
 						);
