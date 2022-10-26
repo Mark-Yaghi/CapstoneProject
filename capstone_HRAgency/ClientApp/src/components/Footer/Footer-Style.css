@@ -60,3 +60,16 @@ footer a:hover {
 	outline: 2px solid white;
 	outline-offset: 6px;
 }
+
+.text-a-center {
+	text-align: center;
+}
+
+@media screen and (max-width: 900px) {
+	.footer .flex-center {
+		justify-content: center;
+		/* align-items: center; */
+		flex-wrap: wrap;
+		margin-bottom: 2rem;
+	}
+}
