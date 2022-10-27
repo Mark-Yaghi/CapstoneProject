@@ -148,6 +148,7 @@ namespace capstone_HRAgency.Controllers
 
         [HttpPatch]
         public ActionResult Patch(int companyID, string updateSubscriptionStatus)
+        
         {
             Company found;
             found = _context.Companies.Where(x => x.CompanyID == companyID).Single();
@@ -156,7 +157,7 @@ namespace capstone_HRAgency.Controllers
             {
                 if (found != null)
                 {
-                    found.SubscriptionStatus = updateSubscriptionStatus == "1";
+                    found.SubscriptionStatus = updateSubscriptionStatus == "true";
                     _context.SaveChanges();
 
                     return Ok("The Subscription Status has been successfully updated.");
