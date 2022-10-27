@@ -146,6 +146,38 @@ namespace capstone_HRAgency.Controllers
             return _context.Companies.ToList();
 
         }
+
+
+        [HttpPatch]
+        public ActionResult Patch(int companyID, string updateSubscriptionStatus)
+        {
+            Company found;
+            found = _context.Companies.Where(x => x.CompanyID == companyID).Single();
+
+            try
+            {
+                if (found != null)
+                {
+                    found.SubscriptionStatus = updateSubscriptionStatus == "1";
+                    _context.SaveChanges();
+
+                    return Ok("The Subscription Status has been successfully updated.");
+
+                }
+                else 
+                {
+                    return NotFound("An error occurred during the update.");
+                
+                }
+
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(500);
+            }
+
+        }
 /*---------------THE CODE BELOW DEALS WITH UPDATING THE 3 TABLES, FED BY DATA FROM THE EditClientForm.JSX------------------------------*/
 
         [HttpPut]//("{companyid}")
@@ -188,7 +220,7 @@ namespace capstone_HRAgency.Controllers
 
                 else  // if the information sent to the server has passed front-end and back-end checks, update the db.
                 {
-                    Console.WriteLine("Line 191, in the else.");
+                    
                     found.CompanyName = editCompanyName;
                     found.Address = editAddress;
                     found.Phone = editPhone;

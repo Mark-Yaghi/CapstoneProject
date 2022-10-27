@@ -185,7 +185,7 @@ export const AddNewClientForm = () => {
 				</div>
 				<div>
 					<label htmlFor="phoneNumber">Phone Number *</label>
-					<input type="phone" name="Phone" id="phoneNumber" maxlength="10" placeholder="Phone" value={inputValue.Phone} onChange={handleChange} />
+					<input type="phone" name="Phone" id="phoneNumber" maxLength="10" placeholder="Phone" value={inputValue.Phone} onChange={handleChange} />
 				</div>
 				<div>
 					<label htmlFor="firstName">Contacts First Name *</label>
@@ -237,7 +237,7 @@ export const AddNewClientForm = () => {
 				</div>
 				<button className="but-general but-col-prim">Submit</button>
 				<div className="marg-top">
-					<NavLink to="/companyinfo" className="but-back but-col-sec">
+					<NavLink to="/company" className="but-back but-col-sec">
 						Back
 					</NavLink>
 				</div>
