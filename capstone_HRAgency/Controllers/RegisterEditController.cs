@@ -3,11 +3,8 @@ using capstone_HRAgency.Data;
 using capstone_HRAgency.Models;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
-using capstone_HRAgency.Controllers;
-using System.ComponentModel.Design;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using MimeKit.Cryptography;
-using System.Globalization;
+
+/*---------------This page deals with the additions and edits of companies in the db.-------  */
 
 namespace capstone_HRAgency.Controllers
 {
@@ -144,7 +141,6 @@ namespace capstone_HRAgency.Controllers
         public IEnumerable<Company> GetCompanies()
         {
             return _context.Companies.ToList();
-
         }
 
 
@@ -166,14 +162,12 @@ namespace capstone_HRAgency.Controllers
                 }
                 else 
                 {
-                    return NotFound("An error occurred during the update.");
-                
+                    return NotFound("An error occurred during the update.");                
                 }
 
             }
             catch (Exception)
             {
-
                 return StatusCode(500);
             }
 
@@ -241,9 +235,7 @@ namespace capstone_HRAgency.Controllers
                 if (found1 != null)
                 {
                     found1.PackageName = editPackageName;
-
                     _context.SaveChanges();
-
                 }
                 /*----------------------------------------------------------------------- */
 
@@ -262,9 +254,7 @@ namespace capstone_HRAgency.Controllers
                 }
 
                 else { return NotFound("Sorry, that Company ID Number wasn't found in the database. "); }           
-
             }
-
 
              catch (Exception)
             {
@@ -285,7 +275,6 @@ namespace capstone_HRAgency.Controllers
                     return false;
                 }
             }
-
 
     }
 }

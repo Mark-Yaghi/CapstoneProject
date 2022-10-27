@@ -1,6 +1,7 @@
 ﻿using capstone_HRAgency.Data;
 using capstone_HRAgency.Models;
 using Microsoft.AspNetCore.Mvc;
+/*------This page is used to supply both the CompanyDetail.jsx and EditCLientForm.jsx pages.------*/
 
 namespace capstone_HRAgency.Controllers
 {

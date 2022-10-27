@@ -9,8 +9,6 @@ namespace capstone_HRAgency.Data;
 public partial class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 {
 
-  //public ApplicationDbContext() : base() { }
-
   public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
       : base(options, operationalStoreOptions)
   {
@@ -60,8 +58,7 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
                 new Company(){CompanyID = 5, CompanyName= "Frank's Food Emporium", Address = "8524-99 street, Edmonton, Ab, T6X7Y3", Phone="4032454875", CPFirstName ="Joe", CPLastName="Rogan", CPEmail= "frankF@ffe.com", StartDate=DateOnly.Parse("2021-10-01"), EndDate=DateOnly.Parse("2022-10-01"), SubscriptionStatus = false}
         });
 
-
-    });//.HasRequired(Company => Company.Id).WithRequiredPrincipal(UserInfo => UserInfo.CompanyID);
+    });
 
     modelBuilder.Entity<UserInfo>(entity =>
     {
@@ -71,8 +68,7 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
       entity.Property(e => e.UserID).HasColumnType("int(11)").HasColumnName("UserID").ValueGeneratedOnAdd();
       entity.Property(e => e.CompanyID).HasColumnType("int(11)").HasColumnName("CompanyID");
       entity.Property(e => e.PermissionLevel).HasColumnType("int(1)").HasColumnName("PermissionLevel");
-      // entity.HasOne(userinfo => userinfo.Company).WithOne(Company => Company.UserInfo).HasForeignKey(UserInfo => UserInfo.CompanyID).OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_UserInfo_Company");
-      // entity.HasOne(userinfo => userinfo.Company).WithOne(Company => Company.UserInfo).HasForeignKey<Company>(UserInfo => UserInfo.CompanyID).OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_UserInfo_Company");//
+   
       entity.HasOne(a => a.Company)
                 .WithMany(Company => Company.UserInfos)
                 .HasForeignKey(UserInfo => UserInfo.CompanyID)
@@ -87,7 +83,7 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
                 new UserInfo() {UserID = 4, CompanyID=4,  PermissionLevel=2 },
                 new UserInfo() {UserID = 5, CompanyID=5,  PermissionLevel=2 },
        });
-      //     .OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_Model_Manufacturer");
+    
 
     });
 

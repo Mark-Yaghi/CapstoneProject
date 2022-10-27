@@ -81,10 +81,10 @@ const CompanyDetail = () => {
         populateRoles();
 
     }, []);
-   /* const handleClick = async (e) => {
+   const handleClick = async (e) => {
 
         setIsActive(current => !current);
-        e.PreventDefault();
+       /*  e.PreventDefault();
         try {
             let urlParams =
             {
@@ -108,9 +108,9 @@ const CompanyDetail = () => {
 
             };
         }
-        catch (error) { console.log(error.response); }
+        catch (error) { console.log(error.response); }*/
 
-    }*/
+    }
    
 
     return (
