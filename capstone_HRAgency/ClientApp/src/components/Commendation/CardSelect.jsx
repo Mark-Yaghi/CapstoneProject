@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import Images from "../../data";
+// import Images from "../../data";
 import "./Commendation-Style.css";
 import SignleImage from "./SingleImage";
 
@@ -25,13 +25,9 @@ const CardSelect = ({ onSelectImage }) => {
 	const fetchImages = async (e) => {
 		try {
 			const res = await axios("api/Image/");
-			// console.log(res.data);
 			setImagesData(res.data);
-			// alert("Your file has been successfully uploaded to the database.");
-			// document.getElementById("fileUpload").value = "";
 		} catch (ex) {
 			console.log(ex);
-			// alert("An error occurred uploading your image." + ex);
 		}
 	};
 
@@ -50,14 +46,6 @@ const CardSelect = ({ onSelectImage }) => {
 							</li>
 						);
 					})}
-					{/* {Images.map((image) => {
-						return (
-							<li className="position-declare img-hover " key={image.id} onClick={() => onSelectImage({ id: image.id, image: image.img })}>
-								<span className="position-center-align">Image {image.id}</span>
-								<img className="img-resize" src={image.img} alt={image.id} />
-							</li>
-						);
-					})} */}
 				</ul>
 			</div>
 		</div>

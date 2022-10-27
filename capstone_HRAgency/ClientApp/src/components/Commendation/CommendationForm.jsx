@@ -16,7 +16,7 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	const comment = useRef();
 
 	useEffect(() => {
-		if (!image) {
+		if (image === "") {
 			setIsVisible(false);
 		} else {
 			setInputValue((prevState) => ({
@@ -31,7 +31,9 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 		e.preventDefault();
 
 		// emptyInput(inputValue)
-		if (!inputValue.senderName.trim()) {
+		if (inputValue.image === "") {
+			alert("Please select a Image.");
+		} else if (!inputValue.senderName.trim()) {
 			senderName.current.focus();
 			senderName.current.scrollIntoView({
 				behavior: "smooth",
@@ -81,23 +83,25 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 				console.log(error);
 			}
 		}
+		// setInputValue(intialState);
+		// setIsVisible(false);
 	};
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		if (image) {
+		if (image === "") {
+			alert("Image is not selected");
+		} else {
 			setInputValue((prevState) => ({
 				...prevState,
 				[name]: value,
 			}));
 			setIsVisible(true);
-		} else {
-			alert("Image is not selected");
 		}
 	};
 	return (
 		<section className="main-container">
-			<div className="form-container">
+			<div className="form-container-commen">
 				<section className={`${isVisible ? "visible" : "invisible"}`}>
 					<br />
 					<p> Hello, {inputValue.recipientName}</p>

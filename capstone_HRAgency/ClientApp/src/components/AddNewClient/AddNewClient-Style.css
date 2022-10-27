@@ -118,7 +118,7 @@ button a:hover {
 	flex-direction: column;
 	gap: 1rem;
 	color: #1f7d6d;
-	margin-bottom: 4rem;
+	margin-bottom: 2rem;
 }
 .form-container > div > input {
 	margin-bottom: 0.5rem;
