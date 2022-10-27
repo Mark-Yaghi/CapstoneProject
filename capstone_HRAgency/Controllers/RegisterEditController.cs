@@ -265,7 +265,62 @@ namespace capstone_HRAgency.Controllers
             }
 
         }
-            public bool IsValid(string emailaddress)  //built in function to verify emails. Need "using System.Net.Mail;" at the top of the page for it to function properly.
+
+        [HttpDelete]
+        public ActionResult Delete(int deleteID)
+        {
+           
+            Company found;
+            Package found1;
+            UserInfo found2;
+
+            try
+            {
+                found = _context.Companies.Where(x => x.CompanyID == deleteID).Single();
+            }
+
+            catch
+            {
+                return NotFound("Sorry, that Company ID wasn't found in the database.");
+            }
+
+            try
+            {
+                int childRec = _context.Packages.Where(x => x.CompanyID == deleteID).Count();
+
+                //check to see if there is/are associated record(s) in the package and userinfo tables..
+
+                if (childRec != 0)
+                {
+                    found1 = _context.Packages.Where(x => x.CompanyID == deleteID).Single();
+                    _context.Packages.Remove(found1);         // no child records, then delete.
+                    _context.SaveChanges();
+
+                    found2 = _context.UserInfos.Where(x => x.CompanyID == deleteID).Single();
+                    _context.UserInfos.Remove(found2);         // no child records, then delete.
+                    _context.SaveChanges();
+
+                   // found = _context.Companies.Where(x => x.CompanyID == deleteID).Single();
+                    _context.Companies.Remove(found);         // no child records, then delete.
+                    _context.SaveChanges();
+
+                    return Ok("The record was deleted successfully from the database.");
+
+                }
+
+                else
+                {
+                    return BadRequest("Sorry, an unknown issue occurred deleting the company. ");
+                }
+            }
+
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        public bool IsValid(string emailaddress)  //built in function to verify emails. Need "using System.Net.Mail;" at the top of the page for it to function properly.
             {
                 try
                 {

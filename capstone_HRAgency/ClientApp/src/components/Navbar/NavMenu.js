@@ -5,7 +5,12 @@ import { LoginMenu } from "../api-authorization/LoginMenu";
 
 import "./NavMenu.css";
 
+//@model IEnumerable < Microsoft.AspNet.Identity.EntityFramework.IdentityRole >
+
 export const NavMenu = () => {
+
+	
+
 	return (
 		<header className="navbar">
 			<nav className="flex-center nav-container">

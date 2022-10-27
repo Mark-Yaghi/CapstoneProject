@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
 import authService from "./api-authorization/AuthorizeService";
 import "../custom.css";
-import { FaEllipsisH } from "react-icons/fa";
+
+
 
 const CompanyDetail = () => {
+
+    const navigate = useNavigate();      //declare ReactHook to allow auto redirect after delete is done.
+
     /*--the code below deals with declaring variables to get data from the company table.---*/
     const { companyID } = useParams();
 
@@ -24,7 +28,8 @@ const CompanyDetail = () => {
     //const [buttonSubStatus, setbuttonSubStatus] = useState([]);
     //const { buttonSubStatus } = 
 
-    const populateRoles = async () => {
+    const populateRoles = async () =>
+    {
         const token = await authService.getAccessToken();
         // console.log(token);
 
@@ -63,13 +68,35 @@ const CompanyDetail = () => {
         } else {
             console.log(await responseListPermission.text());
         }
-
-        setIsActive(!subscriptionStatus);            //change the state of isActive, based on value of subascriptionStatus
+                    //setIsActive(!subscriptionStatus); 
+                   //change the state of isActive, based on value of subascriptionStatus
 
         console.log("SubscriptionStatus: " + { subscriptionStatus });
     };
 
+    const deleteCompany = async () =>
+    {         // this function deals with deleting the from the company table
+        try
+        {
+            let urlParams = {  deleteID: companyID };
+           
+            const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
+                method: "DELETE"
+            });           
+
+            if (resp.ok)    //if we get a good response, send out a message letting the user know, then automatically redirect to the company list page.
+            {
+                alert("The company has been successfully deleted");                             
+                navigate("/company", { replace: true });    
+
+            };
+            //else { alert("There was an issue deleting the company."); }
+        }
+        catch (error) { console.log(error.response); }
+    }
+
     console.log(singleCompanyDetail);
+
     useEffect(() => {
 
         populateRoles();
@@ -83,7 +110,6 @@ const CompanyDetail = () => {
                 {
                     companyID: companyID,
                     updateSubscriptionStatus: isActive
-
                 };
 
                 const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
@@ -93,7 +119,7 @@ const CompanyDetail = () => {
 
                 if (resp.ok)    //if we get a good response, send out a message letting the user know.
                 {
-                    alert("The company's Subscription Status has been successfully updated to " + subscriptionStatus === false ? "Account Inactive" : "Account Active");
+                    alert("The company's Subscription Status has been successfully updated");
                     populateRoles();                  
 
                 };
@@ -102,12 +128,15 @@ const CompanyDetail = () => {
         }
         changeSubStatus();
     }, [isActive]);
+  
 
    const handleClick = async (e) => {
 
        setIsActive(current => !current);
+       setIsActive(!subscriptionStatus); 
+
+       // changeSubStatus();
     }
-   
 
     return (
         <section className="main-container">
@@ -125,9 +154,14 @@ const CompanyDetail = () => {
                             color: isActive ? 'white' : 'white',
                         }} onClick={handleClick}>{isActive ? "Deactivate" : "Activate"}</button>
                     </div>
-                    <NavLink className="but-general but-col-red" to="/">
-                        Delete
-                    </NavLink>
+                    <div>
+                        <button className="but-general" onClick={deleteCompany}>Delete</button>
+                    </div>
+
+
+                    {/*  <NavLink className="but-general but-col-red" onClick={deleteCompany} >
+                        Delete  
+                    </NavLink> */}
                 </div>
             </section>
             <div className="cd-flex cd-container">
