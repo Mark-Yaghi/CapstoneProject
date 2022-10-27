@@ -39,7 +39,6 @@ const CompanyDetail = () => {
             console.log(await responseList.text());
         }
 
-
         /*--the code below deals with getting data from the package table.---*/
 
         const responseListPackage = await fetch(`package/${companyID}`, {
@@ -51,7 +50,6 @@ const CompanyDetail = () => {
 
         } else {
             console.log(await responseListPackage.text());
-
         }
 
         /*--the code below deals with getting data from the userinfo table.---*/
@@ -66,9 +64,7 @@ const CompanyDetail = () => {
             console.log(await responseListPermission.text());
         }
 
-        //if ({ subscriptionStatus } === true) setIsActive({ isActive: true });
-        //else setIsActive({ isActive: false });
-        setIsActive(!subscriptionStatus);
+        setIsActive(!subscriptionStatus);            //change the state of isActive, based on value of subascriptionStatus
 
         console.log("SubscriptionStatus: " + { subscriptionStatus });
     };
@@ -81,7 +77,7 @@ const CompanyDetail = () => {
     }, []);
 
     useEffect(() => {
-        const doTheThing = async () => {
+        const changeSubStatus = async () => {         // this function deals with updating the SubscriptionStatus in the company table
             try {
                 let urlParams =
                 {
@@ -104,15 +100,12 @@ const CompanyDetail = () => {
             }
             catch (error) { console.log(error.response); }
         }
-        doTheThing();
+        changeSubStatus();
     }, [isActive]);
+
    const handleClick = async (e) => {
 
        setIsActive(current => !current);
-
-       /*  e.PreventDefault(); */
-        
-
     }
    
 
