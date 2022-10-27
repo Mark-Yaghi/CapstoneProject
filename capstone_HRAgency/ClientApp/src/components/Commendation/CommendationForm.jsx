@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Commendation-Style.css";
-const url = "https://localhost:7191/api/Email?";
 
 export const CommendationForm = ({ onFormInformation, userImage, setIsTrue }) => {
 	const emailRegEx = new RegExp('/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/i');
@@ -31,7 +30,6 @@ export const CommendationForm = ({ onFormInformation, userImage, setIsTrue }) =>
 	const submitHandler = async (e) => {
 		e.preventDefault();
 
-		// emptyInput(inputValue)
 		if (inputValue.image === "") {
 			setIsTrue(true);
 		} else if (!inputValue.senderName.trim()) {
@@ -84,15 +82,12 @@ export const CommendationForm = ({ onFormInformation, userImage, setIsTrue }) =>
 				console.log(error);
 			}
 		}
-		// setInputValue(intialState);
-		// setIsVisible(false);
 	};
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		if (image === "") {
 			setIsTrue(true);
-			// alert("Image is not selected");
 		} else {
 			setInputValue((prevState) => ({
 				...prevState,

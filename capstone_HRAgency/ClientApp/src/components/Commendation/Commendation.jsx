@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { LoginMenu } from "../api-authorization/LoginMenu";
-// import { NavLink } from "react-router-dom";
 import authService from "../api-authorization/AuthorizeService";
 import CardSelect from "./CardSelect";
 import "./Commendation-Style.css";

@@ -26,13 +26,14 @@ namespace capstone_HRAgency.Controllers
     public struct ImageInfo
     {
       public string Name { get; set; }
+      public string Category { get; set; }
       public string Path { get; set; }
       public string ImgPath { get; set; }
     }
 
     // GET: api/ImageApi
     [HttpGet]
-    public IEnumerable<ImageInfo> Get() => System.IO.Directory.GetFiles(Path.Combine(_hostEnvironment.ContentRootPath, "ClientApp/public/ImagesUpload")).Select(x => new ImageInfo { Name = System.IO.Path.GetFileName(x).Split('.')[0], Path = x, ImgPath = String.Format("{0}://{1}{2}/ImagesUpload/{3}", Request.Scheme, Request.Host, Request.PathBase, System.IO.Path.GetFileName(x).Split('.')[0] + ".jpg") });
+    public IEnumerable<ImageInfo> Get() => System.IO.Directory.GetFiles(Path.Combine(_hostEnvironment.ContentRootPath, "ClientApp/public/ImagesUpload")).Select(x => new ImageInfo { Name = System.IO.Path.GetFileName(x).Split('.')[0].Trim(), Category = System.IO.Path.GetFileName(x).Split('-')[1].Trim(), Path = x, ImgPath = String.Format("{0}://{1}{2}/ImagesUpload/{3}", Request.Scheme, Request.Host, Request.PathBase, System.IO.Path.GetFileName(x).Split('.')[0] + ".jpg") });
 
 
 
