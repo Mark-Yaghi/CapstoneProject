@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, NavLink } from "react-router-dom";
 import authService from "./api-authorization/AuthorizeService";
 import "../custom.css";
+import { FaEllipsisH } from "react-icons/fa";
 
 const CompanyDetail = () => {
     /*--the code below deals with declaring variables to get data from the company table.---*/
@@ -23,92 +24,99 @@ const CompanyDetail = () => {
     //const [buttonSubStatus, setbuttonSubStatus] = useState([]);
     //const { buttonSubStatus } = 
 
-   
+    const populateRoles = async () => {
+        const token = await authService.getAccessToken();
+        // console.log(token);
+
+        /*--the code below deals with getting data from the company table.---*/
+        const responseList = await fetch(`company/${companyID}`, {
+            headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+        });
+        if (responseList.ok) {
+            const dataList = await responseList.json();
+            setSingleCompanyDetail(dataList);
+        } else {
+            console.log(await responseList.text());
+        }
+
+
+        /*--the code below deals with getting data from the package table.---*/
+
+        const responseListPackage = await fetch(`package/${companyID}`, {
+            headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+        });
+        if (responseListPackage.ok) {
+            const dataListPackage = await responseListPackage.json();
+            setSinglePackageDetail(dataListPackage);
+
+        } else {
+            console.log(await responseListPackage.text());
+
+        }
+
+        /*--the code below deals with getting data from the userinfo table.---*/
+
+        const responseListPermission = await fetch(`userinfo/${companyID}`, {
+            headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+        });
+        if (responseListPermission.ok) {
+            const dataListPermission = await responseListPermission.json();
+            setSinglePermissionDetail(dataListPermission);
+        } else {
+            console.log(await responseListPermission.text());
+        }
+
+        //if ({ subscriptionStatus } === true) setIsActive({ isActive: true });
+        //else setIsActive({ isActive: false });
+        setIsActive(!subscriptionStatus);
+
+        console.log("SubscriptionStatus: " + { subscriptionStatus });
+    };
 
     console.log(singleCompnayDetail);
     useEffect(() => {
 
 
-        const populateRoles = async () => {
-            const token = await authService.getAccessToken();
-            // console.log(token);
-
-            /*--the code below deals with getting data from the company table.---*/
-
-            const responseList = await fetch(`company/${companyID}`, {
-                headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
-            });
-            if (responseList.ok) {
-                const dataList = await responseList.json();
-                setSingleCompanyDetail(dataList);
-            } else {
-                console.log(await responseList.text());
-            }
-
-            /*--the code below deals with getting data from the package table.---*/
-
-            const responseListPackage = await fetch(`package/${companyID}`, {
-                headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
-            });
-            if (responseListPackage.ok) {
-                const dataListPackage = await responseListPackage.json();
-                setSinglePackageDetail(dataListPackage);
-
-            } else {
-                console.log(await responseListPackage.text());
-
-            }
-
-            /*--the code below deals with getting data from the userinfo table.---*/
-
-            const responseListPermission = await fetch(`userinfo/${companyID}`, {
-                headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
-            });
-            if (responseListPermission.ok) {
-                const dataListPermission = await responseListPermission.json();
-                setSinglePermissionDetail(dataListPermission);
-            } else {
-                console.log(await responseListPermission.text());
-            }
-
-            //if ({ subscriptionStatus } === true) setIsActive({ isActive: true });
-            //else setIsActive({ isActive: false });
-            setIsActive(!subscriptionStatus);
-
-            console.log("SubscriptionStatus: " + { subscriptionStatus });
-        };
+        
 
         populateRoles();
 
     }, []);
+    useEffect(() => {
+        const doTheThing = async () => {
+            try {
+                let urlParams =
+                {
+                    companyID: companyID,
+                    updateSubscriptionStatus: isActive
+
+                };
+
+                const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
+                    method: "PATCH"
+                });
+                console.log(await resp.text());
+
+                if (resp.ok)    //if we get a good response, send out a message letting the user know.
+                {
+                    alert("The company's status has been successfully to " + subscriptionStatus === false ? "Account Inactive" : "Account Active");
+                    populateRoles();
+                    //reset input fields to empty to prepare to accept another add.
+
+                    //setInputValue({ SubscriptionStatus: "" });
+
+                };
+            }
+            catch (error) { console.log(error.response); }
+        }
+        doTheThing();
+    }, [isActive]);
    const handleClick = async (e) => {
 
-        setIsActive(current => !current);
-       /*  e.PreventDefault();
-        try {
-            let urlParams =
-            {
-                companyID,
-                changeSubscriptionStatus: inputValue.SubscriptionStatus
+       setIsActive(current => !current);
 
-            };
-
-            const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
-                method: "PATCH"
-            });
-            console.log(await resp.text());
-
-            if (resp.ok)    //if we get a good response, send out a message letting the user know.
-            {
-                alert("The company's status has been successfully to " + subscriptionStatus === false ? "Account Inactive" : "Account Active");
-
-                //reset input fields to empty to prepare to accept another add.
-
-                setInputValue({ SubscriptionStatus: "" });
-
-            };
-        }
-        catch (error) { console.log(error.response); }*/
+       /*  e.PreventDefault(); */
+        
 
     }
    
