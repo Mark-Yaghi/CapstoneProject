@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { LoginMenu } from "../api-authorization/LoginMenu";
 // import { NavLink } from "react-router-dom";
 import authService from "../api-authorization/AuthorizeService";
@@ -8,7 +8,9 @@ import { CommendationForm } from "./CommendationForm";
 
 const Commendation = () => {
 	const [userSelImg, setUserSelImg] = useState({ id: "", image: "" });
+	const [isTrue, setIsTrue] = useState(false);
 	const [userInfo, setUserInfo] = useState({ userName: null, isAuthenticated: false });
+	const imageRef = useRef();
 
 	// ----- Authentication and UserName ------ //
 
@@ -19,6 +21,14 @@ const Commendation = () => {
 		};
 		userInfomation();
 	}, []);
+
+	useEffect(() => {
+		if (isTrue) {
+			imageRef.current.scrollIntoView({
+				behavior: "smooth",
+			});
+		}
+	}, [isTrue]);
 
 	const imageSelectInfo = (selectedImage) => {
 		const { id, image } = selectedImage;
@@ -42,9 +52,12 @@ const Commendation = () => {
 				</div>
 			</section>
 			<section className="bg-color-prim">
+				<h4 ref={imageRef} className="img-sel-scroll">
+					{isTrue && "Please Select an Image"}
+				</h4>
 				<CardSelect onSelectImage={imageSelectInfo} />
 			</section>
-			<CommendationForm onFormInformation={formValues} userImage={userSelImg} />
+			<CommendationForm onFormInformation={formValues} userImage={userSelImg} setIsTrue={setIsTrue} />
 		</>
 	);
 };

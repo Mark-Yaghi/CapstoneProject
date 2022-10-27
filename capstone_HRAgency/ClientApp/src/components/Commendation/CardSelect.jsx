@@ -4,10 +4,9 @@ import axios from "axios";
 import "./Commendation-Style.css";
 import SignleImage from "./SingleImage";
 
-const CardSelect = ({ onSelectImage }) => {
+const CardSelect = ({ onSelectImage, isVisible }) => {
 	const [imagesData, setImagesData] = useState([]);
-	const [imgSel, setImgSel] = useState("");
-
+	// const [imgSel, setImgSel] = useState("");
 	// useEffect(() => {
 
 	// })

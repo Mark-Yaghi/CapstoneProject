@@ -72,10 +72,6 @@ button a:hover {
 	color: #d21f3c;
 	font-weight: 300;
 }
-.img-container {
-	max-width: 1200px;
-	margin: 8rem auto;
-}
 
 .img-container-height {
 	padding-block: 2rem;

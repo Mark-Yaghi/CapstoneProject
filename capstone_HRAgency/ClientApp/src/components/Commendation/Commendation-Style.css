@@ -58,9 +58,18 @@ button a:hover {
 	color: #d21f3c;
 	font-weight: 300;
 }
+
+.img-sel-scroll {
+	color: #d21f3c;
+	font-weight: 500;
+	font-size: 1.8rem;
+	padding-top: 2rem;
+	margin-inline: auto;
+	text-align: center;
+}
 .img-container {
 	max-width: 1200px;
-	margin: 8rem auto;
+	margin: 4rem auto;
 }
 
 /* .img-container ul li {
