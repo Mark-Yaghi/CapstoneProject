@@ -76,12 +76,10 @@ const CompanyDetail = () => {
     console.log(singleCompanyDetail);
     useEffect(() => {
 
-
-        
-
         populateRoles();
 
     }, []);
+
     useEffect(() => {
         const doTheThing = async () => {
             try {
@@ -99,11 +97,8 @@ const CompanyDetail = () => {
 
                 if (resp.ok)    //if we get a good response, send out a message letting the user know.
                 {
-                    alert("The company's status has been successfully to " + subscriptionStatus === false ? "Account Inactive" : "Account Active");
-                    populateRoles();
-                    //reset input fields to empty to prepare to accept another add.
-
-                    //setInputValue({ SubscriptionStatus: "" });
+                    alert("The company's Subscription Status has been successfully updated to " + subscriptionStatus === false ? "Account Inactive" : "Account Active");
+                    populateRoles();                  
 
                 };
             }
