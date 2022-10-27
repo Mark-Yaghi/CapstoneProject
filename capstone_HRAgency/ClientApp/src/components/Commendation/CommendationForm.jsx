@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Commendation-Style.css";
-const url = "https://localhost:7191/api/Email?";
 
-export const CommendationForm = ({ onFormInformation, userImage }) => {
+export const CommendationForm = ({ onFormInformation, userImage, setIsTrue, resetMethod }) => {
 	const emailRegEx = new RegExp('/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/i');
 	const intialState = { senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "", image: "" };
 	const [inputValue, setInputValue] = useState(intialState);
@@ -24,15 +23,15 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 				image: image,
 			}));
 			setIsVisible(true);
+			setIsTrue(false);
 		}
 	}, [image]);
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
 
-		// emptyInput(inputValue)
 		if (inputValue.image === "") {
-			alert("Please select a Image.");
+			setIsTrue(true);
 		} else if (!inputValue.senderName.trim()) {
 			senderName.current.focus();
 			senderName.current.scrollIntoView({
@@ -78,19 +77,18 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 					}));
 					setInputValue(intialState);
 					setIsVisible(false);
+					resetMethod();
 				}
 			} catch (error) {
 				console.log(error);
 			}
 		}
-		// setInputValue(intialState);
-		// setIsVisible(false);
 	};
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		if (image === "") {
-			alert("Image is not selected");
+			setIsTrue(true);
 		} else {
 			setInputValue((prevState) => ({
 				...prevState,

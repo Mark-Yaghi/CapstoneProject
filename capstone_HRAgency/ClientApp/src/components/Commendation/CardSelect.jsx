@@ -1,25 +1,28 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-// import Images from "../../data";
 import "./Commendation-Style.css";
-import SignleImage from "./SingleImage";
+// import SignleImage from "./SingleImage";
 
 const CardSelect = ({ onSelectImage }) => {
 	const [imagesData, setImagesData] = useState([]);
-	const [imgSel, setImgSel] = useState("");
+	// const [filteredImgData, setFilteredImgData] = useState([]);
+	// const [categories, setCategories] = useState([]);
 
 	// useEffect(() => {
+	// 	const allCategories = ["Total Cards", ...new Set(imagesData.map((category) => category.category))];
+	// 	setCategories(allCategories);
+	// }, [imagesData]);
 
-	// })
+	// console.log(imagesData);
 
-	// const handleClick = (e) => {
-	// 	const filterImg = imagesData.filter((image) => image.name != e.target.alt);
-	// 	console.log(filterImg);
-	// 	const [selectedImg] = filterImg;
-	// 	console.log(selectedImg.name);
-	// 	setImgSel(selectedImg.name);
-
-	// 	onSelectImage({id:})
+	// const filterClick = (category) => {
+	// 	if (category === "Total Cards") {
+	// 		setFilteredImgData(imagesData);
+	// 	} else {
+	// 		const filterImg = imagesData.filter((image) => image.category === category);
+	// 		setFilteredImgData(filterImg);
+	// 		console.log(filterImg);
+	// 	}
 	// };
 
 	const fetchImages = async (e) => {
@@ -38,6 +41,15 @@ const CardSelect = ({ onSelectImage }) => {
 		<div className="main-container">
 			<h1 className="heading-card">Appreciation! Cards</h1>
 			<div className="img-container">
+				{/* <section>
+					{categories.map((category, index) => {
+						return (
+							<button key={index} onClick={() => filterClick(category)}>
+								{category}
+							</button>
+						);
+					})}
+				</section> */}
 				<ul className="flex-center flex-option flex-xtra-option img-container-height ">
 					{imagesData.map((image) => {
 						return (
@@ -53,7 +65,3 @@ const CardSelect = ({ onSelectImage }) => {
 };
 
 export default CardSelect;
-
-{
-	/* <li className="position-declare img-hover " key={image.id} onClick={() => onSelectImage({ id: image.id, image: image.img })}> */
-}
