@@ -41,7 +41,6 @@ const Commendation = () => {
 	const resetImage = () => {
 		setUserSelImg({ id: "", image: "" });
 	};
-
 	return (
 		<>
 			<section className="main-container flex-center flex-option">
