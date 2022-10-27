@@ -58,12 +58,12 @@ namespace capstone_HRAgency.Controllers
 
       var email = new MimeMessage();
       email.From.Add(MailboxAddress.Parse("knowna700@gmail.com"));
-      email.To.Add(MailboxAddress.Parse(RecipManagerEmail));
-      email.Cc.Add(MailboxAddress.Parse(RecipientEmail));
+      email.To.Add(MailboxAddress.Parse(RecipientEmail));
+      email.Cc.Add(MailboxAddress.Parse(RecipManagerEmail));
       email.Subject = $"Commendation is for {RecipientName} from Email {SenderEmail}";
       email.Body = new TextPart(TextFormat.Html)
       {
-        Text = $"<div id='0' style='position:relative; width: 800px;' ><div style=' z-index:1; position: absolute; width:100%; height: 800px; margin-inline: auto; max-height: auto;'><h3 id='2' style ='background-color: #1a281fad; position: absolute; top: 18px; left: 18px; color: whitesmoke; font-weight: bolder; padding: 0.5em; margin: 1rem; border-radius: 10px; align-self: flex-start'> To: {RecipientName}</h3><h3 id='3' style ='background-color: #1a281fad; position: absolute; bottom: 18px; right: 18px; color: whitesmoke; font-weight: bolder; padding: 0.5em; margin: 1rem; border-radius: 10px; align-self: flex-end'> From {SenderName}</h3><img src={Image} style='z-index:-1; width: 800px;  position: absolute; top:50%; left: 50%; transform:translate(-50%,-50%); ' /></div>"
+        Text = $"<section><p>{Comment}</p><p>Thanks,</p><p>{SenderName}</p><p>{SenderEmail}</p><br/><br/><br/><div style='width:100%; height: 100%; margin-inline: auto; max-height: auto;'><h3 style ='background-color: #1a281fad; color: whitesmoke; font-weight: bolder; padding: 0.5em 0 0.5em 1.4em; margin-top: 1rem;margin-inline: auto; border-radius: 10px; width:800px '> To: {RecipientName}</h3><img src={Image} style='display: block; auto-fit: cover; max-width: 800px; margin-inline: auto;' /><h3  style ='background-color: #1a281fad; color: whitesmoke; text-align: right; font-weight: bolder; padding: 0.5em 1.4em 0.5em 0; margin-bottom: 1rem;margin-inline: auto; border-radius: 10px; max-width: 800px;'> From {SenderName}</h3></div><br/><br/><br/></section>"
       };
       email.Importance = MessageImportance.High;
       //email.Sender.Name = SenderName;
@@ -80,3 +80,4 @@ namespace capstone_HRAgency.Controllers
 }
 
 // { Text = $"<p>Hello, {RecipientName}</p><br /><p> {Comment}</p><br /><img src={Image} width=\"400\" /><br /><br /><p>From {SenderName}</p>" };
+
