@@ -7,8 +7,8 @@ const CompanyDetail = () => {
     /*--the code below deals with declaring variables to get data from the company table.---*/
     const { companyID } = useParams();
 
-    const [singleCompnayDetail, setSingleCompanyDetail] = useState([]);
-    const { address, companyName, cpEmail, cpFirstName, cpLastName, startDate, endDate, phone, subscriptionStatus } = singleCompnayDetail;
+    const [singleCompanyDetail, setSingleCompanyDetail] = useState([]);
+    const { address, companyName, cpEmail, cpFirstName, cpLastName, startDate, endDate, phone, subscriptionStatus } = singleCompanyDetail;
 
     /*--the code below deals with declaring variables to get data from the package table.---*/
     const [singlePackageDetail, setSinglePackageDetail] = useState([]);
@@ -25,7 +25,7 @@ const CompanyDetail = () => {
 
    
 
-    console.log(singleCompnayDetail);
+    console.log(singleCompanyDetail);
     useEffect(() => {
 
 

@@ -143,6 +143,8 @@ namespace capstone_HRAgency.Controllers
             return _context.Companies.ToList();
         }
 
+        /*---------------------------- This PATCH endpoint is  activated by the CompanyDetail.jsx page; it updates a company's SubscriptionStatus from Active to Inactive or vice-versa.---------------------------------------*/
+
 
         [HttpPatch]
         public ActionResult Patch(int companyID, string updateSubscriptionStatus)

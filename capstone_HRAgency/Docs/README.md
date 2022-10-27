@@ -10,7 +10,7 @@ Several other pages were designed and built to facilitate the operation of the s
 
 These pages are connected to a mySQL database which supports/runs the front end of the site, which was built using HTTP, JavaScript, CSS, and React Components.
 
-Regrettably, the one aspect that we could not complete due to time constraints was the security/validation aspect. WHile there ARE login requirements, and a user must be registered to use the system (registration completed ONLY by the HR Agency), it's not quite as robust as we had envisioned. This was mainly due to the complexities of learning and utilising the built-in ASP security setups which were created automatically. 
+Regrettably, the one aspect that we could not complete due to time constraints was the security/validation aspect. While there ARE login requirements, and a user must be registered to use the system (registration completed ONLY by the HR Agency), it's not quite as robust as we had envisioned. This was mainly due to the complexities of learning and utilising the built-in ASP security setups which were created automatically. 
 
 Otherwise, the system works very well, with robust input validation and error checking on both the client side and server side, in a n effort to ensure that any data entered into the system is valid information.
 
