@@ -101,7 +101,7 @@ export const CommendationForm = ({ onFormInformation, userImage }) => {
 	};
 	return (
 		<section className="main-container">
-			<div className="form-container">
+			<div className="form-container-commen">
 				<section className={`${isVisible ? "visible" : "invisible"}`}>
 					<br />
 					<p> Hello, {inputValue.recipientName}</p>

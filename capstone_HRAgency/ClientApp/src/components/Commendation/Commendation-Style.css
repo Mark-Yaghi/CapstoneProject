@@ -40,7 +40,7 @@
 	margin-left: 2rem;
 }
 .marg-top {
-	margin-top: 3rem;
+	margin-top: 1.4rem;
 }
 
 button a {
@@ -113,27 +113,27 @@ button a:hover {
 	margin-bottom: 8rem;
 }
 
-.form-container > div {
+.form-container-commen > div {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 	color: #1f7d6d;
 	margin-bottom: 4rem;
 }
-.form-container > div > input {
+.form-container-commen > div > input {
 	margin-bottom: 0.5rem;
 }
 
-.form-container > div > input,
-.form-container > div > textarea {
+.form-container-commen > div > input,
+.form-container-commen > div > textarea {
 	padding: 0.8rem 1.8rem;
 	border: #1f7d6d 1px solid;
 	outline: none;
 	transition: all 0.3s ease-in-out;
 }
 
-.form-container > div > input:focus,
-.form-container > div > textarea:focus {
+.form-container-commen > div > input:focus,
+.form-container-commen > div > textarea:focus {
 	border: 1px solid #d21f3c;
 	border-style: dashed;
 }
@@ -142,8 +142,8 @@ button a:hover {
 	border: 1px solid #1f7d6d;
 	border-style: dashed;
 } */
-.form-container > div > input:hover,
-.form-container > div > textarea:hover {
+.form-container-commen > div > input:hover,
+.form-container-commen > div > textarea:hover {
 	border: hsla(170, 60%, 31%, 0.5) 1px solid;
 }
 
@@ -153,7 +153,7 @@ button a:hover {
 	letter-spacing: 0.5px;
 }
 
-.form-container .but-general {
+.form-container-commen .but-general {
 	margin-inline: auto;
 }
 
