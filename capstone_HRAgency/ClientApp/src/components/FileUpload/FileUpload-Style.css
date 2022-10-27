@@ -79,8 +79,12 @@ button a:hover {
 	justify-content: center;
 	align-items: center;
 }
-
-.file-upload {
+input[type="file"],
+small {
+	/* display: none; */
+	margin-inline: auto;
+}
+/* .file-upload {
 	padding-top: 60px;
 	padding-left: 90px;
-}
+} */
