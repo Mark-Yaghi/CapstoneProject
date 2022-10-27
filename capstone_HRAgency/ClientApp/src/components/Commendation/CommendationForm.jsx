@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Commendation-Style.css";
 
-export const CommendationForm = ({ onFormInformation, userImage, setIsTrue }) => {
+export const CommendationForm = ({ onFormInformation, userImage, setIsTrue, resetMethod }) => {
 	const emailRegEx = new RegExp('/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/i');
 	const intialState = { senderName: "", senderEmail: "", recipientName: "", recipientEmail: "", recipManagerEmail: "", comment: "", image: "" };
 	const [inputValue, setInputValue] = useState(intialState);
@@ -77,6 +77,7 @@ export const CommendationForm = ({ onFormInformation, userImage, setIsTrue }) =>
 					}));
 					setInputValue(intialState);
 					setIsVisible(false);
+					resetMethod();
 				}
 			} catch (error) {
 				console.log(error);

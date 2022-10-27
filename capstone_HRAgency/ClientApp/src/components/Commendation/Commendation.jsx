@@ -38,6 +38,10 @@ const Commendation = () => {
 		console.log(inputValues);
 	};
 
+	const resetImage = () => {
+		setUserSelImg({ id: "", image: "" });
+	};
+
 	return (
 		<>
 			<section className="main-container flex-center flex-option">
@@ -56,7 +60,7 @@ const Commendation = () => {
 				</h4>
 				<CardSelect onSelectImage={imageSelectInfo} />
 			</section>
-			<CommendationForm onFormInformation={formValues} userImage={userSelImg} setIsTrue={setIsTrue} />
+			<CommendationForm onFormInformation={formValues} userImage={userSelImg} setIsTrue={setIsTrue} resetMethod={resetImage} />
 		</>
 	);
 };
