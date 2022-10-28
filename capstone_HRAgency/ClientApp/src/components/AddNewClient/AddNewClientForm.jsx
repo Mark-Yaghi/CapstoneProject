@@ -31,6 +31,7 @@ export const AddNewClientForm = () => {
 		if ((inputValue.CompanyName).trim() === "") {
 			alert("Please enter a name for the company.");
 			document.getElementById("CompanyName").focus();
+			document.getElementById("CompanyName").scrollIntoView({behaviour: "smooth"});
 		}
 
 		else if ((inputValue.Address).trim() === "") {

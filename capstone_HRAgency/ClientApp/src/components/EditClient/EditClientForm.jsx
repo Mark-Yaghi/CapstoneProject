@@ -1,10 +1,13 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect, useRef, useReducer } from "react";
 import "./EditClient-Style.css";
 import { useParams, NavLink } from "react-router-dom";
 import authService from "../api-authorization/AuthorizeService";
 
 export const EditClientForm = () => {
 	const { companyID } = useParams();
+	
+
+
 	const [inputValue, setInputValue] = useState({
 		CompanyName: "",
 		Address: "",
@@ -18,6 +21,7 @@ export const EditClientForm = () => {
 		PackageType: "",
 		PermissionLevel: ""
 	});
+
 	useEffect(() => {
 		const populateRoles = async () => {
 			const token = await authService.getAccessToken();
@@ -54,10 +58,7 @@ export const EditClientForm = () => {
 					PackageType: dataListPackage.packageName
 				}));
 
-			} else {
-				console.log(await responseListPackage.text());
-
-			}
+			} else {console.log(await responseListPackage.text());	}
 
 			/*--the code below deals with getting data from the userinfo table.---*/
 
@@ -81,22 +82,19 @@ export const EditClientForm = () => {
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		console.log(inputValue);
+	
 
 		var tempDate = new Date();
 		tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth() + 1) + "-" + tempDate.getDate();
 
 		var todaysDate = new Date();
 		todaysDate = todaysDate.getFullYear() + 1 + "-" + (todaysDate.getMonth() + 1) + "-" + todaysDate.getDate();
-		//alert("This is Date.now: " + Date.now()); //returns milliseconds
-
-		//alert("This is inputvalue.startdate: "+ inputValue.StartDate+ " ; this is tempdate: "+ tempDate); //returns date
-		//alert("Today's date plus one year: " + todaysDate + " Start Year: " + inputValue.StartDate);
+	
 		if (inputValue.CompanyName.trim() === "")
 		{
 			alert("Please enter a name for the company.");			
-			document.getElementById("CompanyName").focus();
-			document.getElementById("CompanyName").scrollIntoView({ behavior: "smooth" });
+			document.getElementById("CompanyName").focus();// document.getElementById("CompanyName").focus();
+			document.getElementById("compLabel").scrollIntoView({ behavior: "smooth", });
 
 		} else if (inputValue.Address.trim() === "") {
 			alert("Please enter an address for the company.");
@@ -169,7 +167,6 @@ export const EditClientForm = () => {
 						editPermissionLevel: inputValue.PermissionLevel
 					};
 		
-
 					//const token = await authService.getAccessToken();
 					//const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
 					const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), { method: "PUT" });
@@ -233,8 +230,8 @@ export const EditClientForm = () => {
 			<form onSubmit={submitHandler} className="form-container bg-color-prim">
 				<h1 className="heading-form">Edit Client Form</h1>
 				<div>
-					<label htmlFor="CompanyName">Company Name * &nbsp; &nbsp;</label>
-					 <input type="text" name="CompanyName" id="CompanyName" value={inputValue.CompanyName} onChange={handleChange} /> 
+					<label id="compLabel" htmlFor="CompanyName">Company Name * &nbsp; &nbsp;</label>
+					<input type="text"  name="CompanyName" id="CompanyName" value={inputValue.CompanyName} onChange={handleChange} /> 
 			
 					
 				</div>
