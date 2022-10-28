@@ -155,7 +155,8 @@ const CompanyDetail = () => {
                         }} onClick={handleClick}>{isActive ? "Deactivate" : "Activate"}</button>
                     </div>
                     <div>
-                        <button className="but-general" onClick={deleteCompany}>Delete</button>
+                        <button className="but-general" style={{ backgroundColor: '#d21f3c', color: 'white' }}
+                            onClick={deleteCompany}>Delete</button>
                     </div>
 
 
