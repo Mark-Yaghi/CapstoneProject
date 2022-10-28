@@ -33,7 +33,7 @@ export const NavMenu = () => {
 
 					<ul>
 						<li>
-							<a href="https://ca.linkedin.com" target="_blank" rel="noreferrer">
+							<a href="https://www.linkedin.com/company/uniquely-you-hr/" target="_blank" rel="noreferrer">
 								<img src="./images/LinkedInLogo.png" alt="Logo" />
 							</a>
 						</li>
