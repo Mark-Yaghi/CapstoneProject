@@ -9,14 +9,15 @@ const CardSelect = ({ onSelectImage }) => {
 	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
-		const allCategories = ["Total Cards", ...new Set(imagesData.map((category) => category.category.split(/(?=[A-Z])/).join(" ")))];
+		const allCategories = ["TotalCards", ...new Set(imagesData.map((category) => category.category))];
 		setCategories(allCategories);
 	}, [imagesData]);
 
 	// console.log(imagesData);
+	// category.category.split(/(?=[A-Z])/).join(" ")
 
 	const filterClick = (category) => {
-		if (category === "Total Cards") {
+		if (category === "TotalCards") {
 			setFilteredImgData(imagesData);
 		} else {
 			const filterImg = imagesData.filter((image) => image.category === category);
