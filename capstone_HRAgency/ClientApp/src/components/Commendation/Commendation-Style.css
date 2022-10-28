@@ -36,6 +36,30 @@
 	color: white;
 }
 
+.sec-but-container {
+	margin-bottom: 2rem;
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.but-general-sec {
+	display: inline-block;
+	border: none;
+	border-radius: 10rem;
+	background-color: rgba(23, 94, 82, 0.78);
+	color: whitesmoke;
+	padding: 0.35em 0.5em;
+	/* margin-block: 0.5rem; */
+	letter-spacing: 0.07rem;
+	cursor: pointer;
+}
+
+.but-general-sec:hover {
+	background-color: #175e52e7;
+}
+
 .marg-left {
 	margin-left: 2rem;
 }
