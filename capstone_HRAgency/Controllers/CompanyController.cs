@@ -64,7 +64,6 @@ namespace capstone_HRAgency.Controllers
       }
     }
 
-
         [HttpPost]
         public ActionResult Post(string newCompanyName, string newAddress, string newPhone, string newCPFirstName, string newCPLastName, string newCPEmail, string newStartDate, string newEndDate, string newSubscriptionStatus)
         {
@@ -213,8 +212,6 @@ namespace capstone_HRAgency.Controllers
         return StatusCode(500);
       }
     }
-
-
 
     [HttpDelete]
     public ActionResult Delete(int id)

@@ -31,7 +31,7 @@ const CompanyDetail = () => {
     const populateRoles = async () =>
     {
         const token = await authService.getAccessToken();
-        // console.log(token);
+        
 
         /*--the code below deals with getting data from the company table.---*/
         const responseList = await fetch(`company/${companyID}`, {
@@ -40,9 +40,8 @@ const CompanyDetail = () => {
         if (responseList.ok) {
             const dataList = await responseList.json();
             setSingleCompanyDetail(dataList);
-        } else {
-            console.log(await responseList.text());
         }
+        else { alert("There was an error retrieving the records from the database."); }
 
         /*--the code below deals with getting data from the package table.---*/
 
@@ -53,9 +52,8 @@ const CompanyDetail = () => {
             const dataListPackage = await responseListPackage.json();
             setSinglePackageDetail(dataListPackage);
 
-        } else {
-            console.log(await responseListPackage.text());
         }
+        else { alert("There was an error retrieving the records from the database."); }
 
         /*--the code below deals with getting data from the userinfo table.---*/
 
@@ -65,37 +63,36 @@ const CompanyDetail = () => {
         if (responseListPermission.ok) {
             const dataListPermission = await responseListPermission.json();
             setSinglePermissionDetail(dataListPermission);
-        } else {
-            console.log(await responseListPermission.text());
         }
+        else { alert("There was an error retrieving the records from the database."); }
                     //setIsActive(!subscriptionStatus); 
                    //change the state of isActive, based on value of subascriptionStatus
-
-        console.log("SubscriptionStatus: " + { subscriptionStatus });
+                
     };
 
     const deleteCompany = async () =>
     {         // this function deals with deleting the from the company table
-        try
+
+        if (window.confirm("Are you sure you want to permanently delete this company?")== true)
         {
-            let urlParams = {  deleteID: companyID };
-           
-            const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
-                method: "DELETE"
-            });           
+            try {
+                let urlParams = { deleteID: companyID };
 
-            if (resp.ok)    //if we get a good response, send out a message letting the user know, then automatically redirect to the company list page.
-            {
-                alert("The company has been successfully deleted");                             
-                navigate("/company", { replace: true });    
+                const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
+                    method: "DELETE"
+                });
 
-            };
-            //else { alert("There was an issue deleting the company."); }
+                if (resp.ok)    //if we get a good response, send out a message letting the user know, then automatically redirect to the company list page.
+                {
+                    alert("The company has been successfully deleted");
+                    navigate("/company", { replace: true });
+
+                };
+                //else { alert("There was an issue deleting the company."); }
+            }
+            catch (error) { console.log(error.response); }
         }
-        catch (error) { console.log(error.response); }
     }
-
-    console.log(singleCompanyDetail);
 
     useEffect(() => {
 
@@ -115,12 +112,11 @@ const CompanyDetail = () => {
                 const resp = await fetch(`api/registeredit?` + new URLSearchParams(urlParams), {
                     method: "PATCH"
                 });
-                console.log(await resp.text());
 
                 if (resp.ok)    //if we get a good response, send out a message letting the user know.
                 {
                     alert("The company's Subscription Status has been successfully updated");
-                    populateRoles();                  
+                    populateRoles();                 
 
                 };
             }
@@ -159,10 +155,7 @@ const CompanyDetail = () => {
                             onClick={deleteCompany}>Delete</button>
                     </div>
 
-
-                    {/*  <NavLink className="but-general but-col-red" onClick={deleteCompany} >
-                        Delete  
-                    </NavLink> */}
+                   
                 </div>
             </section>
             <div className="cd-flex cd-container">
@@ -195,5 +188,4 @@ const CompanyDetail = () => {
         </section>
     );
 };
-
 export default CompanyDetail;
