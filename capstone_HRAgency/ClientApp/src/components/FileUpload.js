@@ -10,9 +10,13 @@ export const FileUpload = () => {
 	const [isMsgTrue, setIsMsgTrue] = useState(false);
 
 	const saveFile = (e) => {
-		console.log(e.target.files[0]);
-		console.log(e.target.files[0].type);
-		if (e.target.files[0].type !== "image/jpeg") {
+		// console.log(e.target.files[0]);
+		// console.log(e.target.files[0].type);
+		if (e.target.files[0] === undefined) {
+			setFile(null);
+			setIsDisabled(true);
+			setIsMsgTrue(true);
+		} else if (e.target.files[0].type !== "image/jpeg") {
 			setIsDisabled(true);
 			setIsMsgTrue(true);
 			setRespons("Please upload 'jpeg' image file.");
@@ -37,7 +41,7 @@ export const FileUpload = () => {
 	const uploadFile = async (e) => {
 		e.preventDefault();
 
-		console.log(file);
+		// console.log(file);
 		const formData = new FormData();
 		formData.append("formFile", file);
 		formData.append("fileName", fileName);
