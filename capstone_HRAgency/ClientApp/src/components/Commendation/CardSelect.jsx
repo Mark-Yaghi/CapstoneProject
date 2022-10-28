@@ -9,7 +9,7 @@ const CardSelect = ({ onSelectImage }) => {
 	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
-		const allCategories = ["Total Cards", ...new Set(imagesData.map((category) => category.category))];
+		const allCategories = ["Total Cards", ...new Set(imagesData.map((category) => category.category.split(/(?=[A-Z])/).join(" ")))];
 		setCategories(allCategories);
 	}, [imagesData]);
 
