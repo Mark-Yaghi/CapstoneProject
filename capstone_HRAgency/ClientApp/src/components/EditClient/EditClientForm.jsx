@@ -78,7 +78,9 @@ export const EditClientForm = () => {
         populateRoles();
     }, []);
 
-
+    /*------The submitHandler routine deals with client-side data validation, and creating date objects to use for the validation of the dates selected by the user. After everythihng checks out, the user is prompted for an update confirmation; if true, the db is updated, the screen is cleaned, and the page automatically redirects to the client list (Company.js) screen.
+     * 
+     * */
     const submitHandler = async (e) =>
     {
         e.preventDefault();
@@ -178,7 +180,7 @@ export const EditClientForm = () => {
             document.getElementById("PermissionLevel").focus();
         }
 
-        else
+        else                      //if all the data entered/altered checks out, begin the update process/
         {
             
                 let urlParams =
@@ -227,9 +229,8 @@ export const EditClientForm = () => {
                                 PermissionLevel: "",
                             });
 
-                            //---ADD CODE HERE TO AUTOMATICALLY REDIRECT BCK TO DETAILS PAGE.------------
-                            //Response.AppendHeader("Refresh", "5;url=/editClient");
-                            navigate("/company", { replace: true });
+                          
+                            navigate("/company", { replace: true });        //automatically redirect to company.js (CompanyList)
                         }
                         else { alert("An error occurred during the update. The record was not updated."); }
                     }
@@ -238,12 +239,11 @@ export const EditClientForm = () => {
                         console.log(error.response);
                     }
                 }
-
            
         }
     }
 
-    const handleChange = (e) => {
+    const handleChange = (e) => {                      //this function deals with handling the change of the "Activate/Deactivate" button.
         //console.log(`${e.target.name}: ${e.target.value}`);
         setInputValue((prevState) => ({
             ...prevState,

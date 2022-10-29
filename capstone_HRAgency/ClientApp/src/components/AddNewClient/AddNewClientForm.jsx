@@ -11,8 +11,6 @@ export const AddNewClientForm = () => {
 		CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", PackageName:"", PermissionLevel:""
 			};
 	const [inputValue, setInputValue] = useState(formInputValue);
-
-
 	
 	const submitHandler = async (e) => {
 		e.preventDefault();

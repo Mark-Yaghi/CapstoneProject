@@ -130,7 +130,7 @@ const CompanyDetail = () => {
     {
 
        setIsActive(current => !current);
-      // setIsActive(!subscriptionStatus); 
+       setIsActive(!subscriptionStatus); 
 
         // changeSubStatus();
     }

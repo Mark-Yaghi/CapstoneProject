@@ -3,6 +3,11 @@ import authService from "./api-authorization/AuthorizeService";
 import { NavLink } from "react-router-dom";
 import "../custom.css";
 
+
+/*   This page deals with  gathering the companies' data, then displaying their basic info and a count of companies currently in the db-------------------------*/
+
+
+
 const Company = () => {
 	const [companiesList, setCompaniesList] = useState([]);
 	const [companyCount, setCompanyCount] = useState([]);
@@ -20,7 +25,7 @@ const Company = () => {
 				console.log(await responseList.text());
 			}
 		};
-		const populateCount = async () => {
+		const populateCount = async () => {                                     //Go to the db, get the number of clients currently in the table; display onscreen, line 37
 			const token = await authService.getAccessToken();
 			const responseCount = await fetch('company/count', {
 				headers: !token ? {} : { 'Authorization': `Bearer ${token}` }//Admin
@@ -34,7 +39,7 @@ const Company = () => {
 	return (
 		<div>
 			<div className="main-container">
-				<p>There are currently {companyCount} companies in the database. </p>
+				<p>There are currently {companyCount} companies in the database. </p>                  
 				<table className="table table-striped " aria-labelledby="tabelLabel">
 					<thead>
 						<tr>

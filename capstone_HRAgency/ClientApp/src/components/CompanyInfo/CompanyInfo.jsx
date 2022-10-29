@@ -8,7 +8,7 @@ export class CompanyInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { isAuthenticated: false, user: null, loading: false, Companies: [], CompanyID: "", CompanyName: "", Address: "", Phone: "", CPFirstName: "", CPLastName: "", CPEMail: "", StartDate: "", EndDate: "", SubscriptionStatus: "", CompanyCount: "" };
-		// this.incrementCounter = this.incrementCounter.bind(this);
+		
 		this.populateRoles();
 		this.populateCount();
 	}
@@ -17,7 +17,7 @@ export class CompanyInfo extends Component {
 		const token = await authService.getAccessToken();
 		console.log(token);
 		const responseList = await fetch("company/list", {
-			headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+			headers: !token ? {} : { Authorization: `Bearer ${token}` }, 
 		});
 		console.log(responseList);
 		if (responseList.ok) {
@@ -29,14 +29,14 @@ export class CompanyInfo extends Component {
 			console.log(await responseList.text());
 		}
 	}
-	async populateCount() {
+	async populateCount() {												//Go to the db, get the number of companies currently in the table,
 		const token = await authService.getAccessToken();
 		const responseCount = await fetch("company/count", {
-			headers: !token ? {} : { Authorization: `Bearer ${token}` }, //Admin
+			headers: !token ? {} : { Authorization: `Bearer ${token}` }, 
 		});
 		const dataCount = await responseCount.json();
 		this.setState({ CompanyCount: dataCount, loading: false });
-		console.log("This is the data count; the number of companies: " + { dataCount });
+		console.log("This is the data count; the number of companies: " + { dataCount });           // display it onscreen.
 	}
 
 	static renderCompaniesTable(CompanyList) {

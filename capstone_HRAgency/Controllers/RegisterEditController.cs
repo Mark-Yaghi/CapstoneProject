@@ -144,7 +144,7 @@ namespace capstone_HRAgency.Controllers
             return _context.Companies.ToList();
         }
 
-        //-----------------This Get endpoint is designed to use the incoming email of the current user, and retrieve their company's Subscription Status, to determine whether or not they can access the commendation page.
+        //-----------------This Get endpoint is designed to use the incoming email of the current user, and retrieve their company's Subscription Status, to determine whether or not they can access the commendation(Commendation.jsx) page.
 
      /*   [HttpGet]
         [Route("status")]
@@ -312,9 +312,9 @@ namespace capstone_HRAgency.Controllers
             {
                 int childRec = _context.Packages.Where(x => x.CompanyID == deleteID).Count();
 
-                //check to see if there is/are associated record(s) in the package and userinfo tables..
+                //check to see if there is/are associated record(s) in the package and userinfo tables..if there are no records, it'll skip them. However, the add is set up in such a way that there will ALWAYS be child tables, because the add adds info to all three tables at the same time.
 
-                if (childRec != 0)
+                if (childRec != 0)  //
                 {
                     found1 = _context.Packages.Where(x => x.CompanyID == deleteID).Single();
                     _context.Packages.Remove(found1);         // no child records, then delete.
@@ -329,9 +329,7 @@ namespace capstone_HRAgency.Controllers
                     _context.SaveChanges();
 
                     return Ok("The record was deleted successfully from the database.");
-
                 }
-
                 else
                 {
                     return BadRequest("Sorry, an unknown issue occurred deleting the company. ");
@@ -345,7 +343,7 @@ namespace capstone_HRAgency.Controllers
         }
 
         public bool IsValid(string emailaddress)  //built in function to verify emails. Need "using System.Net.Mail;" at the top of the page for it to function properly.
-            {
+        {
                 try
                 {
                     MailAddress m = new(emailaddress);
@@ -356,7 +354,7 @@ namespace capstone_HRAgency.Controllers
                 {
                     return false;
                 }
-            }
+        }
 
     }
 }

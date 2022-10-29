@@ -34,6 +34,8 @@ const Commendation = () =>
 		}
 	}, [isTrue]);
 
+	//The function below is supposed to query the endpoint "status" and get the company's SubscriptionStatus. If active, allow access to the Appreciation/Commendation page; if not, then either a) redirect to a dead page telling them to contact their company rep; or b), put out an alert, the redirect to the login(?) page. Still under development. 
+
 	/*useEffect(() => {
 
 		const checkStatus = async () =>
