@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect } from "react";
 import "./EditClient-Style.css";
 import { useParams, NavLink , useNavigate} from "react-router-dom";
 import authService from "../api-authorization/AuthorizeService";
@@ -79,11 +79,9 @@ export const EditClientForm = () => {
     }, []);
 
 
-
     const submitHandler = async (e) =>
     {
         e.preventDefault();
-
 
         var tempDate = new Date();
         tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth() + 1) + "-" + tempDate.getDate();
@@ -138,7 +136,7 @@ export const EditClientForm = () => {
             alert("Please enter an email with at least 8 characters, and includes the '@' symbol.");
             document.getElementById("CPEmail").focus();
         }
-        else if (inputValue.PackageType.length == 0)
+        else if (inputValue.PackageType.length === 0)
         {
             alert("Please select a Package Type for the company");
             document.getElementById("PackageType").focus();
@@ -202,7 +200,7 @@ export const EditClientForm = () => {
                 //const token = await authService.getAccessToken();
                 //const res = await axios.post("registeredit/?", new URLSearchParams(inputValue), { headers: !token ? {} : { Authorization: `Bearer ${token}` } });
 
-                if (window.confirm("Are you sure you want to save your changes?") == true)
+                if (window.confirm("Are you sure you want to save your changes?") === true)
                 {
 
                     try
@@ -256,7 +254,7 @@ export const EditClientForm = () => {
     const checkEmail = (emailInput) => {
         let validEmail = false;
         for (var i = 0; i <= emailInput.length; i++) {
-            if (emailInput.charAt(i) == "@") {
+            if (emailInput.charAt(i) === "@") {
                 validEmail = true;
             }
         }

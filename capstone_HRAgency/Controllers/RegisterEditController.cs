@@ -47,15 +47,15 @@ namespace capstone_HRAgency.Controllers
                     return BadRequest("Please enter only 10 numbers for the phone number");
                 }             
 
-                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(newCompanyName.Trim())) 
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,30}$").IsMatch(newCompanyName.Trim())) 
                 {
                     return BadRequest("Please enter a Company name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
-                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(newCPFirstName.Trim()))
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,30}$").IsMatch(newCPFirstName.Trim()))
                 {
                     return BadRequest("Please enter a contact person first name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
-                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(newCPLastName.Trim()))
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,30}$").IsMatch(newCPLastName.Trim()))
                 {
                     return BadRequest("Please enter a contact person last name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
@@ -64,7 +64,6 @@ namespace capstone_HRAgency.Controllers
                 {
                     return BadRequest("Please enter a proper email address.");
                 }
-
 
                 else  // if the information sent to the server has passed front-end and back-end checks, add to db.
                 {
@@ -196,15 +195,15 @@ namespace capstone_HRAgency.Controllers
                     return BadRequest("Please enter only 10 numbers for the phone number");
                 }
 
-                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(editCompanyName.Trim()))
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,30}$").IsMatch(editCompanyName.Trim()))
                 {
                     return BadRequest("Please enter a Company name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
-                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(editCPFirstName.Trim()))
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,30}$").IsMatch(editCPFirstName.Trim()))
                 {
                     return BadRequest("Please enter a contact person first name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
-                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,25}$").IsMatch(editCPLastName.Trim()))
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,30}$").IsMatch(editCPLastName.Trim()))
                 {
                     return BadRequest("Please enter a contact person last name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
