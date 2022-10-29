@@ -4,8 +4,8 @@ import { useParams, NavLink , useNavigate} from "react-router-dom";
 import authService from "../api-authorization/AuthorizeService";
 
 export const EditClientForm = () => {
-    const { companyID } = useParams();
-    const navigate = useNavigate();
+    const { companyID } = useParams();         //brings over the companyID from the CompanyDetail.jsx page, so we can pull the data for that specific ID from the 3 tables and display them onscreen
+    const navigate = useNavigate();    //need to include the import on line 3; then this line allows you to create/use a useNavigate() object, which is used on line 234 to allow for an automatic redirect back to the CompanyDetail.jsx page once the update has been successfully completed.        
 
 
     const [inputValue, setInputValue] = useState({
