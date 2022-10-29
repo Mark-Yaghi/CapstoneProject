@@ -4,12 +4,17 @@ import authService from "../api-authorization/AuthorizeService";
 import CardSelect from "./CardSelect";
 import "./Commendation-Style.css";
 import { CommendationForm } from "./CommendationForm";
+//import { useNavigate } from "react-router-dom";
 
-const Commendation = () => {
+
+const Commendation = () =>
+{
 	const [userSelImg, setUserSelImg] = useState({ id: "", image: "" });
 	const [isTrue, setIsTrue] = useState(false);
 	const [userInfo, setUserInfo] = useState({ userName: null, isAuthenticated: false });
 	const imageRef = useRef();
+
+	//const navigate = useNavigate(); 
 
 	// ----- Authentication and UserName ------ //
 
@@ -28,6 +33,26 @@ const Commendation = () => {
 			});
 		}
 	}, [isTrue]);
+
+	/*useEffect(() => {
+
+		const checkStatus = async () =>
+			{
+
+				let urlParams = { emailVerify: userInfo };
+
+				const resp = await fetch(`api/registeredit/status?` + new URLSearchParams(urlParams), {
+					method: "GET"
+				});
+
+				if (!resp.ok)    //if we get a good response, send out a message letting the user know.
+				{
+					alert("The company's Subscription Status is Inactive.");
+					navigate("/login", { replace: true });
+				};
+			}
+			checkStatus();
+		}, []); 	*/
 
 	const imageSelectInfo = (selectedImage) => {
 		const { id, image } = selectedImage;

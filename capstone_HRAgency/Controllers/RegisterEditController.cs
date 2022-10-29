@@ -3,6 +3,8 @@ using capstone_HRAgency.Data;
 using capstone_HRAgency.Models;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.ComponentModel.Design;
+using Microsoft.AspNetCore.Authorization;
 
 /*---------------This page deals with the additions and edits of companies in the db.-------  */
 
@@ -19,21 +21,21 @@ namespace capstone_HRAgency.Controllers
         {
             _context = context;
         }
-/* ------------------THE CODE BELOW DEALS WITH ADDING A NEW COMPANY TO THE 3 TABLES IN THE DB. IT IS FED BY INFO FROM THE AddNewClientForm.jsx----------------- */
+        /* ------------------THE CODE BELOW DEALS WITH ADDING A NEW COMPANY TO THE 3 TABLES IN THE DB. IT IS FED BY INFO FROM THE AddNewClientForm.jsx----------------- */
 
         [HttpPost]   //"Post" route to add new companies to the db.
-       
+
         public ActionResult Post(string newCompanyName, string newAddress, string newPhone, string newCPFirstName, string newCPLastName, string newCPEmail, string newStartDate, string newEndDate, string newSubscriptionStatus, string newPackageName, int newPermissionLevel)
         {
 
-            if (string.IsNullOrWhiteSpace(newCompanyName.Trim()) || string.IsNullOrWhiteSpace(newAddress.Trim()) || string.IsNullOrWhiteSpace(newPhone.Trim()) || string.IsNullOrWhiteSpace(newCPFirstName.Trim()) || string.IsNullOrWhiteSpace(newCPLastName.Trim()) || string.IsNullOrWhiteSpace(newCPEmail.Trim()) || string.IsNullOrWhiteSpace(newStartDate.Trim()) || string.IsNullOrWhiteSpace(newEndDate.Trim()) || string.IsNullOrWhiteSpace(newSubscriptionStatus.Trim())|| string.IsNullOrWhiteSpace(newPackageName.Trim()))
+            if (string.IsNullOrWhiteSpace(newCompanyName.Trim()) || string.IsNullOrWhiteSpace(newAddress.Trim()) || string.IsNullOrWhiteSpace(newPhone.Trim()) || string.IsNullOrWhiteSpace(newCPFirstName.Trim()) || string.IsNullOrWhiteSpace(newCPLastName.Trim()) || string.IsNullOrWhiteSpace(newCPEmail.Trim()) || string.IsNullOrWhiteSpace(newStartDate.Trim()) || string.IsNullOrWhiteSpace(newEndDate.Trim()) || string.IsNullOrWhiteSpace(newSubscriptionStatus.Trim()) || string.IsNullOrWhiteSpace(newPackageName.Trim()))
             {
                 return BadRequest("Please ensure that all fields have all been entered.");
             }
 
             try
             {
-                
+
                 if (_context.Companies.Any(x => x.CompanyName.ToUpper() == newCompanyName.ToUpper()))
                 {
                     return BadRequest("Sorry, that company is already in the database.");
@@ -45,9 +47,9 @@ namespace capstone_HRAgency.Controllers
                 else if (!newPhone.Any(x => char.IsNumber(x)) || newPhone.Length != 10)
                 {
                     return BadRequest("Please enter only 10 numbers for the phone number");
-                }             
+                }
 
-                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,30}$").IsMatch(newCompanyName.Trim())) 
+                else if (!new Regex(@"^[a-zA-Z0-9.', -]{1,30}$").IsMatch(newCompanyName.Trim()))
                 {
                     return BadRequest("Please enter a Company name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
@@ -60,7 +62,7 @@ namespace capstone_HRAgency.Controllers
                     return BadRequest("Please enter a contact person last name using only letters, numbers, a hyphen, comma, apostrophe or period.");
                 }
                 else if (!IsValid(newCPEmail))
-                 //else if (!new Regex(@"^[@ .]{1}$").IsMatch(newCPEmail.Trim()))
+                //else if (!new Regex(@"^[@ .]{1}$").IsMatch(newCPEmail.Trim()))
                 {
                     return BadRequest("Please enter a proper email address.");
                 }
@@ -77,10 +79,10 @@ namespace capstone_HRAgency.Controllers
                         CPEmail = newCPEmail,
                         StartDate = DateOnly.Parse(newStartDate),
                         EndDate = DateOnly.Parse(newEndDate),
-                        SubscriptionStatus =  newSubscriptionStatus == "1" //if value returned is a one->true; anything else is a false
+                        SubscriptionStatus = newSubscriptionStatus == "1" //if value returned is a one->true; anything else is a false
 
                     });
-                    _context.SaveChanges();                   
+                    _context.SaveChanges();
                 }
 
                 /*------------------------------------------------------------------------- */
@@ -98,7 +100,7 @@ namespace capstone_HRAgency.Controllers
 
                     });
                     _context.SaveChanges();
-                
+
                     /*------------------------------------------------------------------------- */
 
                     _context.UserInfos.Add(new UserInfo() //add to the user info table.
@@ -124,9 +126,9 @@ namespace capstone_HRAgency.Controllers
             }
         }
 
-/*----------------------- This endpoint return the count (number of companies in the db at a given point in time. It supplies the "Company.js" page.*/
+        /*----------------------- This endpoint return the count (number of companies in the db at a given point in time. It supplies the "Company.js" page.*/
 
-        [HttpGet]        
+        [HttpGet]
         [Route("count")]
 
         public int GetCount()
@@ -134,13 +136,36 @@ namespace capstone_HRAgency.Controllers
             Console.WriteLine(_context.Companies.Count());
             return _context.Companies.Count();
         }
-/*---------------------------- This endpoint returns a list of all the companies in the db-it supplies the "Company.js" page.---------------------------------------*/
-        [HttpGet]  
-        [Route("list")]   
+        /*---------------------------- This endpoint returns a list of all the companies in the db-it supplies the "Company.js" page.---------------------------------------*/
+        [HttpGet]
+        [Route("list")]
         public IEnumerable<Company> GetCompanies()
         {
             return _context.Companies.ToList();
         }
+
+        //-----------------This Get endpoint is designed to use the incoming email of the current user, and retrieve their company's Subscription Status, to determine whether or not they can access the commendation page.
+
+     /*   [HttpGet]
+        [Route("status")]
+        public ActionResult Get(string emailVerify)
+        {
+            Company found;
+            found = _context.Companies.Where(x => x.CPEmail == emailVerify).Single();
+
+            if (found != null)
+            { 
+                bool subStatus = found.SubscriptionStatus;
+                if (subStatus == true)
+                {
+                    return Ok("The company's status is set to ACTIVE.");
+
+                }
+                else { return BadRequest("The company's status is set to INACTIVE"); }
+            }
+            return StatusCode(500);
+        }*/
+
 
         /*---------------------------- This PATCH endpoint is  activated by the CompanyDetail.jsx page; it updates a company's SubscriptionStatus from Active to Inactive or vice-versa.---------------------------------------*/
 

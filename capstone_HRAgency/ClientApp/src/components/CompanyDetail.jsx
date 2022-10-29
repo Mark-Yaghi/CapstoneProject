@@ -126,12 +126,13 @@ const CompanyDetail = () => {
     }, [isActive]);
   
 
-   const handleClick = async (e) => {
+    const handleClick = async (e) =>
+    {
 
        setIsActive(current => !current);
-       setIsActive(!subscriptionStatus); 
+      // setIsActive(!subscriptionStatus); 
 
-       // changeSubStatus();
+        // changeSubStatus();
     }
 
     return (
