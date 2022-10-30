@@ -10,12 +10,10 @@ export const FileUpload = () => {
 	const [isMsgTrue, setIsMsgTrue] = useState(false);
 
 	const saveFile = (e) => {
-		// console.log(e.target.files[0]);
-		// console.log(e.target.files[0].type);
 		if (e.target.files[0] === undefined) {
 			setFile(null);
 			setIsDisabled(true);
-			setIsMsgTrue(true);
+			setIsMsgTrue(false);
 		} else if (e.target.files[0].type !== "image/jpeg") {
 			setIsDisabled(true);
 			setIsMsgTrue(true);

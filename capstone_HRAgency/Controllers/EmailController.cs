@@ -18,43 +18,8 @@ namespace capstone_HRAgency.Controllers
     [HttpPost]
     public IActionResult SendEmail(string SenderName, string SenderEmail, string RecipientName,
     string RecipientEmail, string RecipManagerEmail, string Comment, string Image)
-    //public IActionResult SendEmail( string body )
+
     {
-      //var mailMessage = new MailMessage
-      //{
-      //    From = new MailAddress( "email" ),
-      //    Subject = "subject",
-      //    Body = "<h1>Hello</h1>",
-      //    IsBodyHtml = true,
-      //};
-      //mailMessage.To.Add( "recipient" );
-
-      //smtpClient.Send( mailMessage );
-
-
-      //string fromUser = SenderEmail;
-      //string fromPassword = "xlsvunmowsndxgru";
-
-      //MailMessage msg = new MailMessage();
-      //msg.From = new MailAddress( fromUser.Trim() );
-      //msg.To.Add( new MailAddress( RecipientEmail.Trim() ) );
-      //msg.CC.Add( new MailAddress( RecipManagerEmail.Trim() ) );
-      //msg.Subject = $"Commedation Message for {RecipientName.Trim()}";
-      //msg.Body = $"<html><body>To, {RecipientName} {Comment} {Image} From {SenderName} </body></html>";
-      //msg.IsBodyHtml = true;
-
-      //msg.Priority = MailPriority.High;
-
-      //var smtpClient = new SmtpClient( "smtp.gmail.com" )
-      //{
-      //    Port = 587,
-      //    Credentials = new NetworkCredential( "knowna700@gmail.com", fromPassword ),
-      //    EnableSsl = true,
-      //    UseDefaultCredentials = false,
-      //};
-      ////smtpClient.Send( "email", "recipient", "subject", "body" );
-
-      //smtpClient.Send( msg );
 
       var email = new MimeMessage();
       email.From.Add(MailboxAddress.Parse("knowna700@gmail.com"));
@@ -78,6 +43,4 @@ namespace capstone_HRAgency.Controllers
     }
   }
 }
-
-// { Text = $"<p>Hello, {RecipientName}</p><br /><p> {Comment}</p><br /><img src={Image} width=\"400\" /><br /><br /><p>From {SenderName}</p>" };
 
