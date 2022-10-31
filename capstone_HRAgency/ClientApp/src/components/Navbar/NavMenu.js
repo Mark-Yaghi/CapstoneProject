@@ -8,15 +8,12 @@ import "./NavMenu.css";
 //@model IEnumerable < Microsoft.AspNet.Identity.EntityFramework.IdentityRole >
 
 export const NavMenu = () => {
-
-	
-
 	return (
 		<header className="navbar">
 			<nav className="flex-center nav-container">
 				<div>
-					<a href="https://www.thehragency.ca/">
-						<img alt="Go Back to Home Page" src="./images/Logo.png"></img>
+					<a href="https://www.thehragency.ca/" target="_blank">
+						<img alt="Go Back to Home Page" src="./images/Logo.png" />
 					</a>
 				</div>
 				<div className="flex-center nav-link">

@@ -47,8 +47,7 @@ const Commendation = () => {
 				//if we get a good response, send out a message letting the user know.
 				// alert("The company's Subscription Status is Inactive.");
 				setIsAccActive(false);
-				// navigate("/Account/Logout", { replace: true });
-				// navigate("/Identity/Account/Login", { replace: true });
+				// navigate("/authentication/login", { replace: true });
 			} else {
 				alert("Your current status is active.");
 			}
