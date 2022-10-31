@@ -146,12 +146,12 @@ namespace capstone_HRAgency.Controllers
 
         //-----------------This Get endpoint is designed to use the incoming email of the current user, and retrieve their company's Subscription Status, to determine whether or not they can access the commendation(Commendation.jsx) page.
 
-     /*   [HttpGet]
+      [HttpGet]
         [Route("status")]
         public ActionResult Get(string emailVerify)
         {
             Company found;
-            found = _context.Companies.Where(x => x.CPEmail == emailVerify).Single();
+            found = _context.Companies.Where(x => x.CPEmail == emailVerify).SingleOrDefault();
 
             if (found != null)
             { 
@@ -164,7 +164,7 @@ namespace capstone_HRAgency.Controllers
                 else { return BadRequest("The company's status is set to INACTIVE"); }
             }
             return StatusCode(500);
-        }*/
+        } /* */
 
 
         /*---------------------------- This PATCH endpoint is  activated by the CompanyDetail.jsx page; it updates a company's SubscriptionStatus from Active to Inactive or vice-versa.---------------------------------------*/

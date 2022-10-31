@@ -4,7 +4,7 @@ import authService from "../api-authorization/AuthorizeService";
 import CardSelect from "./CardSelect";
 import "./Commendation-Style.css";
 import { CommendationForm } from "./CommendationForm";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const Commendation = () =>
@@ -14,7 +14,7 @@ const Commendation = () =>
 	const [userInfo, setUserInfo] = useState({ userName: null, isAuthenticated: false });
 	const imageRef = useRef();
 
-	//const navigate = useNavigate(); 
+	const navigate = useNavigate(); 
 
 	// ----- Authentication and UserName ------ //
 
@@ -35,14 +35,13 @@ const Commendation = () =>
 	}, [isTrue]);
 
 	//The function below is supposed to query the endpoint "status" and get the company's SubscriptionStatus. If active, allow access to the Appreciation/Commendation page; if not, then either a) redirect to a dead page telling them to contact their company rep; or b), put out an alert, the redirect to the login(?) page. Still under development. 
+useEffect(() => {
 
-	/*useEffect(() => {
+	const checkStatus = async () => {
 
-		const checkStatus = async () =>
-			{
-
-				let urlParams = { emailVerify: userInfo };
-
+		let urlParams = { emailVerify: (await authService.getUser()).email };
+		console.log( urlParams);
+		console.log( await authService.getUser());
 				const resp = await fetch(`api/registeredit/status?` + new URLSearchParams(urlParams), {
 					method: "GET"
 				});
@@ -51,10 +50,13 @@ const Commendation = () =>
 				{
 					alert("The company's Subscription Status is Inactive.");
 					navigate("/login", { replace: true });
-				};
+		}
+		else { alert("Your current status is active."); }
+
 			}
 			checkStatus();
-		}, []); 	*/
+		}, []); 	
+	/**/
 
 	const imageSelectInfo = (selectedImage) => {
 		const { id, image } = selectedImage;
