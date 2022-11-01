@@ -166,6 +166,28 @@ namespace capstone_HRAgency.Controllers
             return StatusCode(500);
         }*/
 
+        [HttpGet]
+        [Route("user")]
+        public ActionResult GetUser(string userVerify)
+        {
+           
+            
+            UserInfo found;
+            found = _context.UserInfos.Where(x => x.CompanyID == 1).SingleOrDefault();
+
+            if (found != null)
+            {
+                int userCompanyID = found.CompanyID;
+                if (userCompanyID == 1 && found.PermissionLevel==1 && userVerify=="Admin")
+                {
+                    return Ok("Welcome.");
+
+                }
+                else { return BadRequest("You do not have permission to access the menu."); }
+            }
+            return StatusCode(500);
+        } /* */
+
 
         /*---------------------------- This PATCH endpoint is  activated by the CompanyDetail.jsx page; it updates a company's SubscriptionStatus from Active to Inactive or vice-versa.---------------------------------------*/
 
