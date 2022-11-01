@@ -34,12 +34,11 @@ export const FileUpload = () => {
 		// return () => {
 		// };
 	}, [file]);
-	console.log(file);
+	
 
 	const uploadFile = async (e) => {
 		e.preventDefault();
-
-		// console.log(file);
+		
 		const formData = new FormData();
 		formData.append("formFile", file);
 		formData.append("fileName", fileName);

@@ -4,7 +4,7 @@ import authService from "../api-authorization/AuthorizeService";
 import CardSelect from "./CardSelect";
 import "./Commendation-Style.css";
 import { CommendationForm } from "./CommendationForm";
-import { useNavigate } from "react-router-dom";
+
 
 const Commendation = () => {
 	const [userSelImg, setUserSelImg] = useState({ id: "", image: "" });
@@ -13,7 +13,7 @@ const Commendation = () => {
 	const [isAccActive, setIsAccActive] = useState(true);
 	const imageRef = useRef();
 
-	// const navigate = useNavigate();
+	
 
 	// ----- Authentication and UserName ------ //
 
@@ -33,12 +33,12 @@ const Commendation = () => {
 		}
 	}, [isTrue]);
 
-	//The function below is supposed to query the endpoint "status" and get the company's SubscriptionStatus. If active, allow access to the Appreciation/Commendation page; if not, then either a) redirect to a dead page telling them to contact their company rep; or b), put out an alert, the redirect to the login(?) page. Still under development.
+	//The function below queries the endpoint "status" and get the company's SubscriptionStatus. If active, allow access to the Appreciation/Commendation page; if not, then telling them to contact their company rep; 
+
 	useEffect(() => {
 		const checkStatus = async () => {
 			let urlParams = { emailVerify: (await authService.getUser()).email };
-			// console.log(urlParams);
-			// console.log(await authService.getUser());
+			
 			const resp = await fetch(`api/registeredit/status?` + new URLSearchParams(urlParams), {
 				method: "GET",
 			});
@@ -47,12 +47,12 @@ const Commendation = () => {
 				//if we get a good response, send out a message letting the user know.
 				// alert("The company's Subscription Status is Inactive.");
 				setIsAccActive(false);
-				// navigate("/authentication/login", { replace: true });
+				
 			}
 		};
 		checkStatus();
 	}, []);
-	/**/
+	
 
 	const imageSelectInfo = (selectedImage) => {
 		const { id, image } = selectedImage;
@@ -60,7 +60,7 @@ const Commendation = () => {
 	};
 
 	const formValues = (inputValues) => {
-		console.log(inputValues);
+		
 	};
 
 	const resetImage = () => {

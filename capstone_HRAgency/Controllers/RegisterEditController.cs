@@ -116,7 +116,6 @@ namespace capstone_HRAgency.Controllers
                     return Ok("The new company was successfully added to the database.");
                 }
                 else { return NotFound("Sorry, that Company ID Number wasn't found in the database. "); }
-
             }
 
             catch (Exception)
@@ -164,21 +163,24 @@ namespace capstone_HRAgency.Controllers
                 else { return BadRequest("The company's status is set to INACTIVE"); }
             }
             return StatusCode(500);
-        } /* */
+        } 
 
         [HttpGet]
         [Route("user")]
-        public ActionResult GetUser(string userVerify)
+        public ActionResult GetUser(string emailVerify, string userRole)
         {
-           
-            
-            UserInfo found;
-            found = _context.UserInfos.Where(x => x.CompanyID == 1).SingleOrDefault();
+            Company found;
+            found = _context.Companies.Where(x => x.CPEmail == emailVerify).SingleOrDefault();
 
-            if (found != null)
+            UserInfo found1;
+            
+            found1 = _context.UserInfos.Where(x => x.CompanyID == 1).SingleOrDefault();
+
+            if (found != null && found1 != null)//
             {
+               
                 int userCompanyID = found.CompanyID;
-                if (userCompanyID == 1 && found.PermissionLevel==1 && userVerify=="Admin")
+                if (userCompanyID == 1  && found1.PermissionLevel==1 && userRole=="Admin")
                 {
                     return Ok("Welcome.");
 
@@ -186,7 +188,7 @@ namespace capstone_HRAgency.Controllers
                 else { return BadRequest("You do not have permission to access the menu."); }
             }
             return StatusCode(500);
-        } /* */
+        }
 
 
         /*---------------------------- This PATCH endpoint is  activated by the CompanyDetail.jsx page; it updates a company's SubscriptionStatus from Active to Inactive or vice-versa.---------------------------------------*/
@@ -205,13 +207,12 @@ namespace capstone_HRAgency.Controllers
                 {
                     found.SubscriptionStatus = updateSubscriptionStatus == "true";
                     _context.SaveChanges();
-
                     return Ok("The Subscription Status has been successfully updated.");
 
                 }
                 else 
                 {
-                    return NotFound("An error occurred during the update.");                
+                    return NotFound("An error occurred during the update.");    
                 }
 
             }
@@ -219,14 +220,13 @@ namespace capstone_HRAgency.Controllers
             {
                 return StatusCode(500);
             }
-
         }
+
 /*---------------THE CODE BELOW DEALS WITH UPDATING THE 3 TABLES, FED BY DATA FROM THE EditClientForm.JSX------------------------------*/
 
         [HttpPut]//("{companyid}")
         public ActionResult Put(int companyID, string editCompanyName, string editAddress, string editPhone, string editCPFirstName, string editCPLastName, string editCPEmail, string editStartDate, string editEndDate, string editSubscriptionStatus, string editPackageName, int editPermissionLevel)
         {
-
             Company found;
             found = _context.Companies.Where(x => x.CompanyID == companyID).Single();
 
@@ -262,8 +262,7 @@ namespace capstone_HRAgency.Controllers
 
 
                 else  // if the information sent to the server has passed front-end and back-end checks, update the db.
-                {
-                    
+                {                    
                     found.CompanyName = editCompanyName;
                     found.Address = editAddress;
                     found.Phone = editPhone;
@@ -297,25 +296,20 @@ namespace capstone_HRAgency.Controllers
 
                     _context.SaveChanges();
 
-                    /*------------------------------------------------------------------------- */
-
                     return Ok("The company's information was successfully updated.");
                 }
-
-                else { return NotFound("Sorry, that Company ID Number wasn't found in the database. "); }           
+                else { return NotFound("Sorry, that Company ID Number wasn't found in the database. "); }          
             }
 
              catch (Exception)
             {
                 return StatusCode(500);
             }
-
         }
 
         [HttpDelete]
         public ActionResult Delete(int deleteID)
         {
-           
             Company found;
             Package found1;
             UserInfo found2;
@@ -369,7 +363,6 @@ namespace capstone_HRAgency.Controllers
                 try
                 {
                     MailAddress m = new(emailaddress);
-
                     return true;
                 }
                 catch (FormatException)

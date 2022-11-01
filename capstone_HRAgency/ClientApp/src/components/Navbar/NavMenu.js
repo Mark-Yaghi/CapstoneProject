@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { LoginMenu } from "../api-authorization/LoginMenu";
 import authService from "../api-authorization/AuthorizeService";
 //import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
-import authService from "../api-authorization/AuthorizeService";
 
 import "./NavMenu.css";
 
@@ -13,10 +12,13 @@ export const NavMenu = () => {
 
 	useEffect(() => {
 		const checkStatus = async () => {
-			let urlParams = { emailVerify: (await authService.getUser()).email };
-			// console.log(urlParams);
-			// console.log(await authService.getUser());
-			const resp = await fetch(`api/registeredit/status?` + new URLSearchParams(urlParams), {
+			let urlParams = {
+				emailVerify: (await authService.getUser()).email,
+				userRole: (await authService.getUser()).role
+			};
+			
+			//Query the db; check the user credentials..if good, make the menu visible. otherwise, hide it.
+			const resp = await fetch(`api/registeredit/user?` + new URLSearchParams(urlParams), {
 				method: "GET",
 			});
 
@@ -24,7 +26,7 @@ export const NavMenu = () => {
 				//if we get a good response, send out a message letting the user know.
 				// alert("The company's Subscription Status is Inactive.");
 				setIsAccActive(false);
-				// navigate("/authentication/login", { replace: true });
+				
 			}
 		};
 		checkStatus();
@@ -34,7 +36,7 @@ export const NavMenu = () => {
 		<header className="navbar">
 			<nav className="flex-center nav-container">
 				<div>
-					<a href="https://www.thehragency.ca/" target="_blank">
+					<a href="https://www.thehragency.ca/" target="_blank" rel="noreferrer">
 						<img alt="Go Back to Home Page" src="./images/Logo.png" />
 					</a>
 				</div>
@@ -50,7 +52,7 @@ export const NavMenu = () => {
 										<a href="/addClient">Add New Client</a>
 										<NavLink to="/company">Client Info</NavLink>
 										<a href="/authentication/register">Register</a>
-										{/* <LoginMenu></LoginMenu> */}
+										 <LoginMenu></LoginMenu> 
 									</div>
 								</div>
 							)}
@@ -68,4 +70,4 @@ export const NavMenu = () => {
     </nav>
 </header>
 );
-};*/
+};

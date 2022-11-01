@@ -5,7 +5,7 @@ import { FileUpload } from "./components/FileUpload";
 import ExpertSolution from "./components/ExpertSolution";
 import AddNewClient from "./components/AddNewClient/AddNewClient";
 import CompanyDetail from "./components/CompanyDetail";
-import EditClient from "./components/EditClient/EditClient";
+//import EditClient from "./components/EditClient/EditClient";
 import { EditClientForm } from "./components/EditClient/EditClientForm";
 
 const AppRoutes = [
