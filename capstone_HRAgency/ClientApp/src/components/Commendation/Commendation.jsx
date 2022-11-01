@@ -4,17 +4,16 @@ import authService from "../api-authorization/AuthorizeService";
 import CardSelect from "./CardSelect";
 import "./Commendation-Style.css";
 import { CommendationForm } from "./CommendationForm";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-
-const Commendation = () =>
-{
+const Commendation = () => {
 	const [userSelImg, setUserSelImg] = useState({ id: "", image: "" });
 	const [isTrue, setIsTrue] = useState(false);
 	const [userInfo, setUserInfo] = useState({ userName: null, isAuthenticated: false });
+	const [isAccActive, setIsAccActive] = useState(true);
 	const imageRef = useRef();
 
-	//const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	// ----- Authentication and UserName ------ //
 
@@ -34,7 +33,7 @@ const Commendation = () =>
 		}
 	}, [isTrue]);
 
-	//The function below  queries the endpoint "status" and get the company's SubscriptionStatus. If active, allow access to the Appreciation/Commendation page; if not, then put out an alert, and then redirect to the login page. 
+	//The function below is supposed to query the endpoint "status" and get the company's SubscriptionStatus. If active, allow access to the Appreciation/Commendation page; if not, then either a) redirect to a dead page telling them to contact their company rep; or b), put out an alert, the redirect to the login(?) page. Still under development.
 	useEffect(() => {
 		const checkStatus = async () => {
 			let urlParams = { emailVerify: (await authService.getUser()).email };
@@ -47,15 +46,13 @@ const Commendation = () =>
 			if (!resp.ok) {
 				//if we get a good response, send out a message letting the user know.
 				// alert("The company's Subscription Status is Inactive.");
-
-				setIsAccActive(false);       //alert replaced with onscreen text. Better solution.
-
+				setIsAccActive(false);
 				// navigate("/authentication/login", { replace: true });
-			} else {
-				alert("Your current status is active.");
 			}
-			checkStatus();
-		}, []); 	*/
+		};
+		checkStatus();
+	}, []);
+	/**/
 
 	const imageSelectInfo = (selectedImage) => {
 		const { id, image } = selectedImage;
@@ -75,19 +72,34 @@ const Commendation = () =>
 				<h3>
 					Welcome, <span className="heading-card">{userInfo.userName}</span>
 				</h3>
-				<div className="flex-center">
-					<button className="but-general but-col-prim marg-left">
-						<LoginMenu></LoginMenu>
-					</button>
+				{isAccActive && (
+					<div className="flex-center">
+						<button className="but-general but-col-prim marg-left">
+							<LoginMenu></LoginMenu>
+						</button>
+					</div>
+				)}
+			</section>
+			{isAccActive ? (
+				<div>
+					<section className="bg-color-prim">
+						<h4 ref={imageRef} className="img-sel-scroll">
+							{isTrue && "Please Select an Image"}
+						</h4>
+						<CardSelect onSelectImage={imageSelectInfo} />
+					</section>
+					<CommendationForm onFormInformation={formValues} userImage={userSelImg} setIsTrue={setIsTrue} resetMethod={resetImage} />
 				</div>
-			</section>
-			<section className="bg-color-prim">
-				<h4 ref={imageRef} className="img-sel-scroll">
-					{isTrue && "Please Select an Image"}
-				</h4>
-				<CardSelect onSelectImage={imageSelectInfo} />
-			</section>
-			<CommendationForm onFormInformation={formValues} userImage={userSelImg} setIsTrue={setIsTrue} resetMethod={resetImage} />
+			) : (
+				<div className="form-container-commen">
+					<h2 className="img-sel-scroll">Please contact Hr Agency to activate the account.</h2>
+					<div className="flex-center">
+						<button className="but-general but-col-prim marg-top">
+							<LoginMenu></LoginMenu>
+						</button>
+					</div>
+				</div>
+			)}
 		</>
 	);
 };
