@@ -13,7 +13,7 @@ const Commendation = () => {
 	const [isAccActive, setIsAccActive] = useState(true);
 	const imageRef = useRef();
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	// ----- Authentication and UserName ------ //
 
@@ -48,8 +48,6 @@ const Commendation = () => {
 				// alert("The company's Subscription Status is Inactive.");
 				setIsAccActive(false);
 				// navigate("/authentication/login", { replace: true });
-			} else {
-				alert("Your current status is active.");
 			}
 		};
 		checkStatus();

@@ -23,7 +23,7 @@ const AppRoutes = [
 		path: "/companyDetail/:companyID",
 		requireAuth: true,
 		element: <CompanyDetail />,
-	},	
+	},
 	{
 		path: "/fileupload",
 		requireAuth: true,
@@ -48,6 +48,11 @@ const AppRoutes = [
 		path: "/editClient/:companyID",
 		requireAuth: true,
 		element: <EditClientForm />,
+	},
+	{
+		path: "/authentication/logged-out",
+		requireAuth: true,
+		element: <Home />,
 	},
 
 	...ApiAuthorzationRoutes,
