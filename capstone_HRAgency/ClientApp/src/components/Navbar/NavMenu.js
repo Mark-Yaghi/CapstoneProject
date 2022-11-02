@@ -3,10 +3,8 @@ import { NavLink } from "react-router-dom";
 import { LoginMenu } from "../api-authorization/LoginMenu";
 import authService from "../api-authorization/AuthorizeService";
 //import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
-import authService from "../api-authorization/AuthorizeService";
 
 import "./NavMenu.css";
-
 
 export const NavMenu = () => {
 	const [isAccActive, setIsAccActive] = useState(true);
@@ -57,15 +55,15 @@ export const NavMenu = () => {
 						</li>
 					</ul>
 
-            <ul>
-                <li>
-                    <a href="https://www.linkedin.com/company/uniquely-you-hr/" target="_blank" rel="noreferrer">
-                        <img src="./images/LinkedInLogo.png" alt="Logo" />
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-);
-};*/
+					<ul>
+						<li>
+							<a href="https://www.linkedin.com/company/uniquely-you-hr/" target="_blank" rel="noreferrer">
+								<img src="./images/LinkedInLogo.png" alt="Logo" />
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	);
+};
