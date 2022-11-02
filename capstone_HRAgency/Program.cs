@@ -33,11 +33,13 @@ builder.Services.AddCors(options =>
   options.AddPolicy("Policy1", builder =>
   {
     builder.WithOrigins("http://localhost:3000")
-      .WithMethods("POST", "GET", "PUT", "DELETE")
+      .WithMethods("POST", "GET", "PUT", "DELETE", "PATCH")
       .WithHeaders(HeaderNames.ContentType);
   });
 
 });
+
+//these next three controllers (lines 44-53) were added to allow the correct reading/interpretation of the DateOnly function.
 
 builder.Services
     .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())

@@ -163,7 +163,9 @@ namespace capstone_HRAgency.Controllers
                 else { return BadRequest("The company's status is set to INACTIVE"); }
             }
             return StatusCode(500);
-        } 
+        }
+
+        //-----------------This Get endpoint is designed to use the incoming email of the current user, and retrieve a few other items to determine whether or not they can access the admin menu page.
 
         [HttpGet]
         [Route("user")]
