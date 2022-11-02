@@ -6,7 +6,6 @@ import authService from "../api-authorization/AuthorizeService";
 
 import "./NavMenu.css";
 
-
 export const NavMenu = () => {
 	const [isAccActive, setIsAccActive] = useState(true);
 
