@@ -47,7 +47,7 @@ public partial class ApplicationDbContext : ApiAuthorizationDbContext<Applicatio
       entity.Property(e => e.SubscriptionStatus).HasColumnType("int(1)").HasColumnName("SubscriptionStatus");
       entity.HasData(new Company[]
           {
-                new Company(){CompanyID = 1, CompanyName= "The HR Agency", Address = "12345-145 street, Edmonton, Ab, T5X6V8", Phone="7809848855", CPFirstName ="Carol", CPLastName="Clinton", CPEmail= "bClinton@arkansas.com", StartDate=DateOnly.Parse("2022-10-01"), EndDate=DateOnly.Parse("2023-10-01"), SubscriptionStatus = true},
+                new Company(){CompanyID = 1, CompanyName= "The HR Agency", Address = "12345-145 street, Edmonton, Ab, T5X6V8", Phone="7808605000", CPFirstName ="Carol", CPLastName="Warne", CPEmail= "carol.warne@telus.net", StartDate=DateOnly.Parse("2022-10-01"), EndDate=DateOnly.Parse("2023-10-01"), SubscriptionStatus = true},
 
                 new Company(){CompanyID = 2, CompanyName= "Zellers, Inc.", Address = "14545-173 street, Edmonton, Ab, T5X6V8", Phone="8255872233", CPFirstName ="John", CPLastName="Doe", CPEmail= "jdoe@anonymous.com", StartDate=DateOnly.Parse("2021-09-01"), EndDate=DateOnly.Parse("2023-09-01"), SubscriptionStatus = true},
 
