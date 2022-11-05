@@ -1,7 +1,4 @@
-Date: October 27, 2022
-CAPSTONE Project Client Name: The HR Agency
-Group Name: CMA Logistics
-Group Members: Arvind Pandit, Corey Woodcox, Mark Yaghi
+Date: October 27, 2022 CAPSTONE Project Client Name: The HR Agency Group Name: CMA Logistics Group Members: Arvind Pandit, Corey Woodcox, Mark Yaghi
 
 This program was designed, developed and built to allow the client, the HR Agency, to allow users in a business setting to send commendations/appreciations to other colleagues. It is designed to allow a user to sign in,select a "card" from the ones available, write a short recognition/congratulatory message on it, and then email it to the recipient and the recipient's manager. That is the scope of the public interface (aside from the login page, this is essentially the only page the client user will ever interact with).
 
@@ -13,4 +10,12 @@ Regrettably, the one aspect that we could not complete due to time constraints w
 
 Otherwise, the system works very well, with robust input validation and error checking on both the client side and server side, in an effort to ensure that any data entered into the system is valid information.
 
-There is an user manual and high fidelity design PDFs' in the Design directory.
+#############################################################################################################################################################################
+
+NOTES TO DEVELOPER / INSTALLER
+
+The seed data for app has already been added to the ApplicationDbContext.cs page. The program was built with a MySQL backend via XAMPP/phpMyAdmin. Database connection specifics can be viewed/altered in the ApplicationDbContext.cs, line 25.
+
+Please refer to the Appendix in the UserManual.doc for further information on the libraries and commands needed to create / run the system.
+
+################################################################################################################################################################################
