@@ -17,7 +17,12 @@ export const AddNewClientForm = () => {
 			
 
 		var tempDate = new Date();
-		tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate();
+		var tempDay = new Date();
+		if (tempDate.getDate() < 10)
+			tempDay = ("0" + tempDate.getDate());
+		else tempDay = tempDay.getDate();
+
+		tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDay;
 
 		var futureDate = new Date();
 		futureDate = (futureDate.getFullYear() + 1) + "-" + (futureDate.getMonth() + 1) + "-" + futureDate.getDate();
@@ -82,7 +87,7 @@ export const AddNewClientForm = () => {
 			alert("Please enter an end date that is AFTER the start date.");
 			document.getElementById("EndDate").focus();
 		}
-		else if (inputValue.StartDate < tempDate) {
+		else if (inputValue.StartDate < tempDay) {
 			alert("Please select a Start Date equal to or later than today's date of " + tempDate);
 			document.getElementById("StartDate").focus();
 		}
