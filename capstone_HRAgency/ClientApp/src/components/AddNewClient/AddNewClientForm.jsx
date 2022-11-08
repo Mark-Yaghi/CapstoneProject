@@ -18,7 +18,7 @@ export const AddNewClientForm = () => {
 
 		var tempDate = new Date();
 		var tempDay = new Date();
-		if (tempDate.getDate() < 10)
+		if (tempDate.getDate() < 10)    //if the date is laess than the 10th, concatenate a 0 to the date so it does error checking properly.
 			tempDay = ("0" + tempDate.getDate());
 		else tempDay = tempDay.getDate();
 
