@@ -86,10 +86,13 @@ export const EditClientForm = () => {
         e.preventDefault();
 
         var tempDate = new Date();
-        tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth() + 1) + "-" + tempDate.getDate();
+        var tempDay = new Date();
 
-        var todaysDate = new Date();
-        todaysDate = todaysDate.getFullYear() + 1 + "-" + (todaysDate.getMonth() + 1) + "-" + todaysDate.getDate();
+        if (tempDate.getDate() < 10)
+            tempDay = ("0" + tempDate.getDate());
+        else tempDay = tempDay.getDate();
+
+        tempDate = tempDate.getFullYear() + "-" + (tempDate.getMonth() + 1) + "-" + tempDay;
 
         if (inputValue.CompanyName.trim() === "")
         {
