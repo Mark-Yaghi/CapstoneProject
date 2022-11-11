@@ -18,10 +18,9 @@ Otherwise, the system works very well, with robust input validation and error ch
 
 NOTES TO DEVELOPER / INSTALLER
 
-The seed data for The HR Agency has already been added to the ApplicationDbContext.cs page. The CompanyID has been set to one, the email login is her telus email address, and the PermissionLevel in the userInfo seed data has been set to one. THESE MUST NOT BE CHANGED. THESE DATA POINTS ALLOW CAROL TO ENTER AND USE THE SYSTEM. 
+
 The program was built with a MySQL backend via XAMPP/phpMyAdmin. Database connection specifics can be viewed/altered in the ApplicationDbContext.cs, line 25.
- 
-Being the first person to login to the system after installation, she will need to register. If she cannot do so, then the developer/installer can go to the ClientApp/src/components/api-authorization/LoginMenu.js page, and enable lines 69-71. Once she's been registered, those lines will no longer be needed unless the database needs to be dropped and the migrations redone. They can then be commented out again.
+
 
 Please refer to the Appendix in the UserManual.doc for further information on the libraries and commands needed to create / run the system.
 
